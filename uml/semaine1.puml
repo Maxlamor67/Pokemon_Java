@@ -1,0 +1,100 @@
+@startuml
+
+class Pokemon {
++ main(String[] args: String[])
+}
+
+class Jeu {
++ afficherMainJoueur2() : String
++ afficherCartesTerrainJoueur2() : String
++ jouerTour()
++ genererPokemon() : CartePokemon
++ getJoueurAdverse(joueur : Dresseur) : Dresseur
+}
+
+class Dresseur {
+- nom : String
+- main : List<CartePokemon>
+- pioche : List<CartePokemon>
+- defausse : List<CartePokemon>
+- terrain : List<CartePokemon>
++ Dresseur(nom : String)
++ piocher()
++ ajouterCarteAPioche(carte : CartePokemon)
++ ajouterCarte(carte : CartePokemon)
++ placerPokemonSurTerrain(carte : CartePokemon) : boolean
++ defausserPokemon(pokemon : CartePokemon)
++ afficherPioche()
++ afficherDefausse()
++ afficherMain()
++ jouerCarte(carte : CartePokemon)
+}
+
+class CartePokemon {
+- nom : String
+- affinite : String
+- vie : int
+- vieMax : int
+- attaque : int
++ CartePokemon(nom : String, affinite : String, vie : int, vieMax : int, attaque : int)
++ getNom() : String
++ getVie() : int
++ getVieMax() : int
++ getAttaque() : int
++ getAffinite() : String
++ attaquer(pokemonCible : CartePokemon)
++ afficherCarte()
+}
+
+abstract class Type {
+#-m_type : String
++ Type (type : Type)
++ getType() : Type
+}
+
+class Air {
++ «create» Air()
++ getAvantage() : Boolean
+}
+
+class Eau {
++ «create» Eau()
++ getAvantage() : Boolean
+}
+
+class Feu {
++ «create» Feu()
++ getAvantage() : Boolean
+}
+
+class Terre {
++ «create» Terre()
++ getAvantage() : Boolean
+}
+
+class JoueurOrdinateur {
+- nom : String
+- main : List<CartePokemon>
+- pioche : List<CartePokemon>
+- defausse : List<CartePokemon>
+- terrain : List<CartePokemon>
++ JoueurOrdinateur(nom : String)
++ jouerTour(jeu : Jeu)
++ trouverPokemonACibler(adversaire : Dresseur) : CartePokemon
+}
+
+Air " -m_avantage"---|> Type
+Terre " -m_avantage"---|> Type
+Eau " -m_avantage"---|> Type
+Feu " -m_avantage"---|> Type
+Type o--> CartePokemon
+Dresseur o--> CartePokemon
+Pokemon --> Dresseur
+Pokemon --> Jeu
+JoueurOrdinateur o--> CartePokemon
+Dresseur <|-- JoueurOrdinateur
+Jeu "1" -- "0.." CartePokemon
+Dresseur "1" -- "0.." CartePokemon
+JoueurOrdinateur "1" -- "0..*" CartePokemon
+
+@enduml
