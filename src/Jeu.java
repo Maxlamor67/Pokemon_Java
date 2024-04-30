@@ -12,6 +12,7 @@ public class Jeu {
     private Dresseur joueurActuel;
     private int numeroTour;
     private List<String> nomsPokemon;
+    JoueurOrdinateur joueurAdverse = new JoueurOrdinateur("Ordinateur");
 
     public Jeu(Dresseur joueur1, Dresseur joueur2) {
         this.joueur1 = joueur1;
@@ -29,66 +30,130 @@ public class Jeu {
     }
 
     public void jouerTour() {
-
         Dresseur joueurActuel = (numeroTour % 2 == 1) ? joueur1 : joueur2;
-        while (joueur1.getTerrain().size() < 3 && joueur1.getPioche().size() > 0) {
-            CartePokemon carte = joueur1.getPioche().get(0);
-            joueur1.getTerrain().add(carte);
-            joueur1.getPioche().remove(0);
-        }
-        joueur2.piocher();
 
-
-            System.out.println("********************************************************************************");
-            System.out.println("Tour " + numeroTour + ":");
-            System.out.println();
-            System.out.println("                                    " + (joueurActuel == joueur2 ? joueur2.getNom() : joueur1.getNom()));
-            System.out.println();
-            System.out.println("********************************************************************************");
-            System.out.println();
-            System.out.println("                                    " + (joueurActuel == joueur1 ? joueur1.getNom() : joueur2.getNom()));
-            System.out.println();
-
-            joueur1.afficherPioche();
-            joueur1.afficherDefausse();
-
-        for (CartePokemon carte : joueur1.getTerrain()) {
-            carte.afficherCarte();
-        }
-            System.out.println("----------------------------------------------------------------------------------------------------");
-
-            // Afficher les cartes sur le terrain du joueur 2
-            String cartesTerrainJoueur2 = afficherCartesTerrainJoueur2();
-            System.out.println("Cartes sur le terrain : " + cartesTerrainJoueur2);
-
-
-            joueur2.afficherPioche();
-            joueur2.afficherDefausse();
-
-            // Afficher la main du joueur 2
-            String mainJoueur2 = afficherMainJoueur2();
-            System.out.println(mainJoueur2);
-
-            System.out.println();
-            System.out.println();
-            System.out.println("                                    " + joueur2.getNom());
-
-
+        // Vérifier si c'est le premier tour et si le joueur actuel est le joueur 2
+        if (numeroTour == 1 && joueurActuel == joueur2) {
+            // Demander au joueur 2 de choisir 3 cartes à placer sur le terrain
+            System.out.println("Joueur 2, veuillez choisir 3 cartes à placer sur le terrain :");
             Scanner scanner = new Scanner(System.in);
-            System.out.println("Quel pokemon souhaitez-vous placer sur le terrain? (" + afficherCarteMainJoueur2() + "): ");
-            String choixJoueur2 = scanner.nextLine();
-
-            CartePokemon carteChoisie = trouverCarteDansMainJoueur2(choixJoueur2);
-            if (carteChoisie != null) {
-                if (joueur2.placerPokemonSurTerrain(carteChoisie)) {
-                    System.out.println("Le pokemon " + carteChoisie.getNom() + " a été placé sur le terrain.");
+            for (int i = 0; i < 3; i++) {
+                System.out.println("Carte " + (i+1) + " :");
+                String choixJoueur2 = scanner.nextLine();
+                CartePokemon carteChoisie = trouverCarteDansMainJoueur2(choixJoueur2);
+                if (carteChoisie != null) {
+                    if (joueur2.placerPokemonSurTerrain(carteChoisie)) {
+                        System.out.println("Le pokemon " + carteChoisie.getNom() + " a été placé sur le terrain.");
+                    } else {
+                        System.out.println("Le terrain est plein. Vous ne pouvez pas placer plus de Pokémon.");
+                    }
                 } else {
-                    System.out.println("Le terrain est plein. Vous ne pouvez pas placer plus de Pokémon.");
+                    System.out.println("Le pokemon choisi n'est pas dans votre main. Veuillez choisir un pokemon valide.");
+                    i--; // Décrémenter i pour que le joueur puisse choisir à nouveau une carte
+                }
+            }
+        } else {
+            // Code pour les tours suivants
+            while (joueur1.getTerrain().size() < 3 && joueur1.getPioche().size() > 0) {
+                CartePokemon carte = joueur1.getPioche().get(0);
+                joueur1.getTerrain().add(carte);
+                joueur1.getPioche().remove(0);
+            }
+            joueur2.piocher();
+
+            // Vérifier si le joueur 2 a déjà 3 Pokémons sur le terrain
+            if (joueur2.getTerrain().size() == 3) {
+                // Demander au joueur 2 de choisir un Pokémon pour attaquer
+                System.out.println("Joueur 2, veuillez choisir un Pokémon pour attaquer :");
+                Scanner scanner = new Scanner(System.in);
+                String choixAttaque = scanner.nextLine();
+                CartePokemon carteAttaque = trouverCarteDansTerrainJoueur2(choixAttaque);
+                if (carteAttaque != null) {
+                    // Demander au joueur 2 de choisir un Pokémon à attaquer
+                    System.out.println("Joueur 2, veuillez choisir un Pokémon à attaquer :");
+                    String choixCible = scanner.nextLine();
+                    Dresseur joueurAdverse = getJoueurAdverse(joueurActuel);
+                    CartePokemon carteCible = trouverCarteDansTerrainJoueurAdverse(choixCible, joueurAdverse);
+                    if (carteCible != null) {
+                        // Faire attaquer le Pokémon choisi par le joueur 2
+                        carteAttaque.attaquer(carteCible);
+                        System.out.println("Le pokemon " + carteCible.getNom() + " a été attaqué et il lui reste " + carteCible.getVie() + " points de vie.");
+                        if (carteCible.getVie() == 0) {
+                            System.out.println("Le pokemon " + carteCible.getNom() + " a été mis K.O. !");
+                            joueurAdverse.defausserPokemon(carteCible);
+                            joueurAdverse.getTerrain().remove(carteCible);
+                        }
+                    } else {
+                        System.out.println("Le pokemon cible n'a pas été trouvé.");
+                    }
+                } else {
+                    System.out.println("Le pokemon attaquant n'a pas été trouvé.");
                 }
             } else {
-                System.out.println("Le pokemon choisi n'est pas dans votre main. Veuillez choisir un pokemon valide.");
-            }
+                // Affichage du tour et des informations des joueurs
+                System.out.println("********************************************************************************");
+                System.out.println("Tour " + numeroTour + ":");
+                System.out.println();
+                System.out.println("                                    " + (joueurActuel == joueur2 ? joueur2.getNom() : joueur1.getNom()));
+                System.out.println();
+                System.out.println("********************************************************************************");
+                System.out.println();
+                System.out.println("                                    " + (joueurActuel == joueur1 ? joueur1.getNom() : joueur2.getNom()));
+                System.out.println();
 
+                joueur1.afficherPioche();
+                joueur1.afficherDefausse();
+
+                for (CartePokemon carte : joueur1.getTerrain()) {
+                    carte.afficherCarte();
+                }
+                System.out.println("----------------------------------------------------------------------------------------------------");
+
+                // Afficher les cartes sur le terrain du joueur 2
+                String cartesTerrainJoueur2 = afficherCartesTerrainJoueur2();
+                System.out.println("Cartes sur le terrain : " + cartesTerrainJoueur2);
+
+                joueur2.afficherPioche();
+                joueur2.afficherDefausse();
+
+                // Afficher la main du joueur 2
+                String mainJoueur2 = afficherMainJoueur2();
+                System.out.println(mainJoueur2);
+
+                System.out.println();
+                System.out.println();
+                System.out.println("                                    " + joueur2.getNom());
+
+                Scanner scanner = new Scanner(System.in);
+                System.out.println("Quel pokemon souhaitez-vous placer sur le terrain? (" + afficherCarteMainJoueur2() + "): ");
+                String choixJoueur2 = scanner.nextLine();
+
+                CartePokemon carteChoisie = trouverCarteDansMainJoueur2(choixJoueur2);
+                if (carteChoisie != null) {
+                    if (joueur2.placerPokemonSurTerrain(carteChoisie)) {
+                        System.out.println("Le pokemon " + carteChoisie.getNom() + " a été placé sur le terrain.");
+                    } else {
+                        System.out.println("Le terrain est plein. Vous ne pouvez pas placer plus de Pokémon.");
+                    }
+                } else {
+                    System.out.println("Le pokemon choisi n'est pas dans votre main. Veuillez choisir un pokemon valide.");
+                }
+            }
+        }
+
+        numeroTour++;
+    }
+
+
+
+
+    public CartePokemon trouverCarteDansTerrainJoueurAdverse(String nomCarte, Dresseur joueur) {
+        for (CartePokemon carte : joueur.getTerrain()) {
+            if (carte.getNom().equalsIgnoreCase(nomCarte)) {
+                return carte;
+            }
+        }
+        return null;
     }
 
     private String afficherCartesTerrainJoueur2() {
@@ -140,7 +205,14 @@ public class Jeu {
 
         return cartesTerrain.toString();
     }
-
+    private CartePokemon trouverCarteDansTerrainJoueur2(String nomCarte) {
+        for (CartePokemon carte : joueur2.getTerrain()) {
+            if (carte.getNom().equalsIgnoreCase(nomCarte)) {
+                return carte;
+            }
+        }
+        return null;
+    }
 
 
     public void prochainTour() {
@@ -212,6 +284,7 @@ public class Jeu {
             return joueur1;
         }
     }
+
 
 
 }

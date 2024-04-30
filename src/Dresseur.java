@@ -18,6 +18,7 @@ public class Dresseur {
         this.terrain = new ArrayList<>();
     }
 
+
     public List<CartePokemon> getTerrain() {
         return terrain;
     }
@@ -100,6 +101,18 @@ public class Dresseur {
             // Puis on l'ajoute à la défausse
             defausse.add(pokemon);
         }
+    }
+    public boolean peutAttaquer() {
+        return terrain.size() >= 3 ;
+    }
+
+    public String afficherCartesTerrainAvecIndex() {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < terrain.size(); i++) {
+            CartePokemon pokemon = terrain.get(i);
+            sb.append(i + 1).append(". ").append(pokemon.getNom()).append(", ").append(pokemon.getAffinite()).append(", Vie: ").append(pokemon.getVie()).append("/").append(pokemon.getVieMax()).append(", Attaque: ").append(pokemon.getAttaque()).append("\n");
+        }
+        return sb.toString();
     }
 
 

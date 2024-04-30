@@ -1,6 +1,9 @@
 public class JoueurOrdinateur extends Dresseur {
+    private int compteurTour;
+
     public JoueurOrdinateur(String nom) {
         super(nom);
+        compteurTour = 0;
     }
 
     public void jouerTour(Jeu jeu) {
@@ -15,23 +18,29 @@ public class JoueurOrdinateur extends Dresseur {
             }
         }
 
-        // Joue chacun des Pokémons de son terrain dans l'ordre de son choix
-        for (CartePokemon pokemon : terrain) {
-            if (pokemon != null) {
-                // Trouve un Pokémon à attaquer en fonction des règles de l'ordinateur
-                CartePokemon pokemonACibler = trouverPokemonACibler(jeu.getJoueurAdverse(this));
+        // Vérifie si le compteur de tour est supérieur ou égal à 3
+        if (compteurTour >= 3) {
+            // Joue chacun des Pokémons de son terrain dans l'ordre de son choix
+            for (CartePokemon pokemon : terrain) {
+                if (pokemon != null ) {
+                    // Trouve un Pokémon à attaquer en fonction des règles de l'ordinateur
+                    CartePokemon pokemonACibler = trouverPokemonACibler(jeu.getJoueurAdverse(this));
 
-                if (pokemonACibler != null) {
-                    // Attaque le Pokémon ciblé
-                    pokemon.attaquer(pokemonACibler);
+                    if (pokemonACibler != null) {
+                        // Attaque le Pokémon ciblé
+                        pokemon.attaquer(pokemonACibler);
 
-                    // Vérifie si le Pokémon ciblé n'a plus de points de vie et le place dans la défausse de l'adversaire
-                    if (pokemonACibler.getVie() <= 0) {
-                        jeu.getJoueurAdverse(this).defausserPokemon(pokemonACibler);
+                        // Vérifie si le Pokémon ciblé n'a plus de points de vie et le place dans la défausse de l'adversaire
+                        if (pokemonACibler.getVie() <= 0) {
+                            jeu.getJoueurAdverse(this).defausserPokemon(pokemonACibler);
+                        }
                     }
                 }
             }
         }
+
+        // Incrémente le compteur de tour
+        compteurTour++;
     }
 
     private CartePokemon trouverPokemonACibler(Dresseur adversaire) {
@@ -60,5 +69,4 @@ public class JoueurOrdinateur extends Dresseur {
 
         return pokemonMoinsDeVie;
     }
-
 }
