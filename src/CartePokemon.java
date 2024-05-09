@@ -63,10 +63,10 @@ public class CartePokemon {
 
     public void afficherCarte() {
         System.out.println("  *--------------------*");
-        System.out.printf("  | Attaque: %-2d       |\n", attaque);
-        System.out.printf("  | Vie: %-2d/%-3d     |\n", vie, vieMax);
-        System.out.printf("  | Affinite : %-6s   |\n", affinite.getClass().getSimpleName());
-        System.out.printf("  |     %-10s          |\n", nom);
+        System.out.printf("  | Attaque: %-2d        |\n", attaque);
+        System.out.printf("  | Vie: %-2d/%-3d       |\n", vie, vieMax);
+        System.out.printf("  | Affinite : %-6s  |\n", affinite.getClass().getSimpleName());
+        System.out.printf("  |     %-10s     |\n", nom);
         System.out.println("  *--------------------*");
     }
 }

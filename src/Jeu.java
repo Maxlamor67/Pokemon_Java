@@ -63,8 +63,8 @@ public class Jeu {
 
             // Vérifier si le joueur 2 a déjà 3 Pokémons sur le terrain
             if (joueur2.getTerrain().size() == 3) {
-                // Vérifier si on est au troisième tour
-                if (numeroTour == 3) {
+                // Vérifier si on est au quatrième tour
+                if (numeroTour == 4) {
                     // Afficher toutes les cartes
                     System.out.println("Voici les cartes sur le terrain :");
                     for (CartePokemon carte : joueur1.getTerrain()) {
@@ -74,12 +74,22 @@ public class Jeu {
                     String cartesTerrainJoueur2 = afficherCartesTerrainJoueur2();
                     System.out.println("Cartes sur le terrain : " + cartesTerrainJoueur2);
                 }
+
                 // Demander au joueur 2 de choisir un Pokémon pour attaquer
                 System.out.println("Joueur 2, veuillez choisir un Pokémon pour attaquer :");
                 Scanner scanner = new Scanner(System.in);
                 String choixAttaque = scanner.nextLine();
                 CartePokemon carteAttaque = trouverCarteDansTerrainJoueur2(choixAttaque);
                 if (carteAttaque != null) {
+                    // Afficher les cartes du terrain
+                    System.out.println("Voici les cartes sur le terrain :");
+                    for (CartePokemon carte : joueur1.getTerrain()) {
+                        carte.afficherCarte();
+                    }
+                    System.out.println("----------------------------------------------------------------------------------------------------");
+                    String cartesTerrainJoueur2 = afficherCartesTerrainJoueur2();
+                    System.out.println("Cartes sur le terrain : " + cartesTerrainJoueur2);
+
                     // Demander au joueur 2 de choisir un Pokémon à attaquer
                     System.out.println("Joueur 2, veuillez choisir un Pokémon à attaquer :");
                     String choixCible = scanner.nextLine();
@@ -154,6 +164,7 @@ public class Jeu {
 
         numeroTour++;
     }
+
 
 
 
