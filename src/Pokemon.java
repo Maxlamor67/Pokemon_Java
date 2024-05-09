@@ -21,7 +21,7 @@ public class Pokemon {
     joueur2.piocher();
 
     // Nombre de tours à jouer
-    int nbTours = 10;
+    int nbTours = 20;
 
     // Boucle pour simuler les tours du jeu
     for (int i = 0; i < nbTours; i++) {

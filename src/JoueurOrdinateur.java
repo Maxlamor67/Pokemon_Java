@@ -1,9 +1,15 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
 public class JoueurOrdinateur extends Dresseur {
     private int compteurTour;
+    private int compteurAttaque;
 
     public JoueurOrdinateur(String nom) {
         super(nom);
         compteurTour = 0;
+        compteurAttaque = 0;
     }
 
     public void jouerTour(Jeu jeu) {
@@ -18,8 +24,8 @@ public class JoueurOrdinateur extends Dresseur {
             }
         }
 
-        // Vérifie si le compteur de tour est supérieur ou égal à 3
-        if (compteurTour == 3) {
+        // Vérifie si le compteur de tour est supérieur ou égal à 3 et si le compteur d'attaque est inférieur à 1
+        if (compteurTour >= 3 && compteurAttaque < 1) {
             // Trouve le Pokémon de l'ordinateur avec le plus d'attaque et la meilleure affinité
             CartePokemon pokemonAUtiliser = trouverPokemonAUtiliser();
 
@@ -34,6 +40,9 @@ public class JoueurOrdinateur extends Dresseur {
                 if (pokemonACibler.getVie() <= 0) {
                     jeu.getJoueurAdverse(this).defausserPokemon(pokemonACibler);
                 }
+
+                // Incrémente le compteur d'attaque
+                compteurAttaque++;
             }
         }
 
@@ -57,30 +66,34 @@ public class JoueurOrdinateur extends Dresseur {
     }
 
     private CartePokemon trouverPokemonACibler(Dresseur adversaire) {
-        // Trouve un Pokémon à attaquer en fonction des règles de l'ordinateur
+        List<CartePokemon> pokemonsAvecMoinsDeVie = new ArrayList<>();
+
         // Parcours les Pokémons adverses
         for (CartePokemon pokemonAdverse : adversaire.getTerrain()) {
             if (pokemonAdverse != null) {
+                boolean avantageTrouve = false;
                 // Vérifie si l'affinité du Pokémon adverse avantage l'ordinateur
-                if (pokemonAdverse.getAffinite().equals(this.getTerrain().get(0).getAffinite().getAvantage())){
-                    return pokemonAdverse;
+                for (CartePokemon pokemonOrdinateur : this.terrain) {
+                    if (pokemonAdverse.getAffinite().equals(pokemonOrdinateur.getAffinite().getAvantage())) {
+                        return pokemonAdverse;
+                    }
                 }
-                // Autres règles d'affinité à ajouter ici
+                // Si aucun Pokémon n'a d'affinité avantageuse, ajoute le Pokémon ayant le moins de points de vie à une liste
+                if (!avantageTrouve && pokemonAdverse.getVie() <= adversaire.getVieRestante()) {
+                    if (pokemonAdverse.getVie() < adversaire.getVieRestante()) {
+                        pokemonsAvecMoinsDeVie.clear();
+                        adversaire.setVieRestante(pokemonAdverse.getVie());
+                    }
+                    pokemonsAvecMoinsDeVie.add(pokemonAdverse);
+                }
             }
         }
-
-        // Si aucun Pokémon n'a d'affinité avantageuse, attaque le Pokémon ayant le moins de points de vie
-        CartePokemon pokemonMoinsDeVie = null;
-        int vieMin = Integer.MAX_VALUE;
-
-        for (CartePokemon pokemonAdverse : adversaire.getTerrain()) {
-            if (pokemonAdverse != null && pokemonAdverse.getVie() < vieMin) {
-                vieMin = pokemonAdverse.getVie();
-                pokemonMoinsDeVie = pokemonAdverse;
-            }
+        // Si plusieurs Pokémon adverses ont le moins de points de vie, choisit l'un d'eux au hasard
+        if (!pokemonsAvecMoinsDeVie.isEmpty()) {
+            int index = new Random().nextInt(pokemonsAvecMoinsDeVie.size());
+            return pokemonsAvecMoinsDeVie.get(index);
         }
-
-
-        return pokemonMoinsDeVie;
+        return null;
     }
+
 }

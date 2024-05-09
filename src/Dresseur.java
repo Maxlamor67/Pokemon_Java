@@ -8,6 +8,8 @@ public class Dresseur {
     protected List<CartePokemon> defausse;
 
     protected List<CartePokemon> terrain;
+    private int vieRestante = Integer.MAX_VALUE;
+
 
 
     public Dresseur(String nom) {
@@ -16,6 +18,7 @@ public class Dresseur {
         this.pioche = new ArrayList<>();
         this.defausse = new ArrayList<>();
         this.terrain = new ArrayList<>();
+
     }
 
 
@@ -114,6 +117,16 @@ public class Dresseur {
         }
         return sb.toString();
     }
+
+    public int getVieRestante() {
+        return vieRestante;
+    }
+
+    public void setVieRestante(int vieRestante) {
+        this.vieRestante = vieRestante;
+    }
+
+
 
 
 }

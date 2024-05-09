@@ -80,7 +80,7 @@ public class Jeu {
                 Scanner scanner = new Scanner(System.in);
                 String choixAttaque = scanner.nextLine();
                 CartePokemon carteAttaque = trouverCarteDansTerrainJoueur2(choixAttaque);
-                if (carteAttaque != null) {
+                if (carteAttaque != null&& !carteAttaque.getADejaAttaque()) {
                     // Afficher les cartes du terrain
                     System.out.println("Voici les cartes sur le terrain :");
                     for (CartePokemon carte : joueur1.getTerrain()) {
@@ -162,7 +162,17 @@ public class Jeu {
             }
         }
 
+
         numeroTour++;
+
+        // Réinitialiser l'attribut aDejaAttaque de toutes les cartes Pokémon sur le terrain
+        for (CartePokemon carte : joueur1.getTerrain()) {
+            carte.resetAttaque();
+        }
+        for (CartePokemon carte : joueur2.getTerrain()) {
+            carte.resetAttaque();
+        }
+
     }
 
 
@@ -178,6 +188,7 @@ public class Jeu {
         }
         return null;
     }
+
 
 
     private String afficherCartesTerrainJoueur2() {
