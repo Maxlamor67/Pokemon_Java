@@ -175,11 +175,7 @@ public class Jeu {
             }
 
             cartesTerrain.append("\n");
-<<<<<<< HEAD
             cartesTerrain.append(String.format("  | Affinite : %-6s   |", carte.getAffinite().getClass().getSimpleName()));
-=======
-            cartesTerrain.append(String.format("  | Affinite : %-6s   |", carte.getAffinite()));
->>>>>>> e89514b0096bab0428b64fe29eedc0ec936b3eb5
             if (i < joueur2.getTerrain().size() - 1) {
                 cartesTerrain.append("\t");
             }
@@ -232,11 +228,7 @@ public class Jeu {
 
         mainJoueur2.append("En main:\n");
         for (CartePokemon carte : joueur2.getMain()) {
-<<<<<<< HEAD
             mainJoueur2.append("- ").append(carte.getNom()).append(", ").append(carte.getAffinite().getClass().getSimpleName()).append(", Vie: ").append(carte.getVie()).append("/").append(carte.getVieMax()).append(", Attaque: ").append(carte.getAttaque()).append("\n");
-=======
-            mainJoueur2.append("- ").append(carte.getNom()).append(", ").append(carte.getAffinite()).append(", Vie: ").append(carte.getVie()).append("/").append(carte.getVieMax()).append(", Attaque: ").append(carte.getAttaque()).append("\n");
->>>>>>> e89514b0096bab0428b64fe29eedc0ec936b3eb5
         }
 
         return mainJoueur2.toString();
@@ -270,11 +262,7 @@ public class Jeu {
             throw new RuntimeException("Aucun nom de Pokémon disponible.");
         }
 
-<<<<<<< HEAD
         List<Type> affinites = Arrays.asList(new Air(), new Feu(), new Eau(), new Terre());
-=======
-        List<String> affinites = Arrays.asList("Air", "Feu", "Eau", "Terre");
->>>>>>> e89514b0096bab0428b64fe29eedc0ec936b3eb5
 
         Random rand = new Random();
 
@@ -285,11 +273,7 @@ public class Jeu {
         int vie = vieMax;
         int attaque = rand.nextInt(4) * 10 + 10; // Nombre aléatoire entre 10 et 40, multiple de 10
 
-<<<<<<< HEAD
         Type affinite = affinites.get(rand.nextInt(affinites.size()));
-=======
-        String affinite = affinites.get(rand.nextInt(affinites.size()));
->>>>>>> e89514b0096bab0428b64fe29eedc0ec936b3eb5
 
         return new CartePokemon(nom, affinite, vie, vieMax, attaque);
     }

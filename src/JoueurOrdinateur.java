@@ -49,11 +49,7 @@ public class JoueurOrdinateur extends Dresseur {
         for (CartePokemon pokemonAdverse : adversaire.getTerrain()) {
             if (pokemonAdverse != null) {
                 // Vérifie si l'affinité du Pokémon adverse avantage l'ordinateur
-<<<<<<< HEAD
                 if (pokemonAdverse.getAffinite().equals(this.getTerrain().get(0).getAffinite().getAvantage())){
-=======
-                if (pokemonAdverse.getAffinite().equalsIgnoreCase("eau") && this.getTerrain().get(0).getAffinite().equalsIgnoreCase("feu")) {
->>>>>>> e89514b0096bab0428b64fe29eedc0ec936b3eb5
                     return pokemonAdverse;
                 }
                 // Autres règles d'affinité à ajouter ici
@@ -71,10 +67,7 @@ public class JoueurOrdinateur extends Dresseur {
             }
         }
 
-<<<<<<< HEAD
 
-=======
->>>>>>> e89514b0096bab0428b64fe29eedc0ec936b3eb5
         return pokemonMoinsDeVie;
     }
 }
