@@ -83,8 +83,8 @@ public class Jeu {
                     // Demander au joueur 2 de choisir un Pokémon à attaquer
                     System.out.println("Joueur 2, veuillez choisir un Pokémon à attaquer :");
                     String choixCible = scanner.nextLine();
-                    Dresseur joueurAdverse = getJoueurAdverse(joueurActuel);
-                    CartePokemon carteCible = trouverCarteDansTerrainJoueurAdverse(choixCible, joueurAdverse);
+                    CartePokemon carteCible = trouverCarteDansTerrainJoueurAdverse(choixCible, joueurActuel);
+
                     if (carteCible != null) {
                         // Faire attaquer le Pokémon choisi par le joueur 2
                         carteAttaque.attaquer(carteCible);
@@ -158,15 +158,16 @@ public class Jeu {
 
 
 
-
-    public CartePokemon trouverCarteDansTerrainJoueurAdverse(String nomCarte, Dresseur joueur) {
-        for (CartePokemon carte : joueur.getTerrain()) {
+    public CartePokemon trouverCarteDansTerrainJoueurAdverse(String nomCarte, Dresseur joueurActuel) {
+        Dresseur joueurAdverse = getJoueurAdverse(joueurActuel);
+        for (CartePokemon carte : joueurAdverse.getTerrain()) {
             if (carte.getNom().equalsIgnoreCase(nomCarte)) {
                 return carte;
             }
         }
         return null;
     }
+
 
     private String afficherCartesTerrainJoueur2() {
         StringBuilder cartesTerrain = new StringBuilder();
@@ -289,13 +290,14 @@ public class Jeu {
 
         return new CartePokemon(nom, affinite, vie, vieMax, attaque);
     }
-    public Dresseur getJoueurAdverse(Dresseur joueur) {
-        if (joueur == joueur1) {
+    public Dresseur getJoueurAdverse(Dresseur joueurActuel) {
+        if (joueurActuel == joueur1) {
             return joueur2;
         } else {
             return joueur1;
         }
     }
+
 
 
 
