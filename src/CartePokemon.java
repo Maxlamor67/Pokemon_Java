@@ -42,19 +42,23 @@ public class CartePokemon {
         return affinite;
     }
 
-    public void attaquer(CartePokemon pokemonCible) {
-        if (pokemonCible.getAffinite().equals(this.getAffinite().getAvantage())){
-            pokemonCible.setVie(pokemonCible.getVie() - this.attaque - 10);
-            System.out.println(this.nom + " a infligé " + (this.attaque + 10) + " dégâts à " + pokemonCible.nom);
-        } else if (this.getAffinite().equals(pokemonCible.getAffinite().getAvantage())) {
-            pokemonCible.setVie(pokemonCible.getVie() - this.attaque + 10);
-            System.out.println(this.nom + " a infligé " + (this.attaque - 10) + " dégâts à " + pokemonCible.nom);
+
+        public void attaquer(CartePokemon pokemonCible) {
+            if (pokemonCible.getAffinite().equals(this.getAffinite().getType())){
+                pokemonCible.setVie(pokemonCible.getVie() - this.attaque - 10);
+                System.out.println(this.nom + " a infligé " + (this.attaque + 10) + " dégâts à " + pokemonCible.nom);
+            }
+            else if (this.getAffinite().equals(pokemonCible.getAffinite().getType())) {
+                pokemonCible.setVie(pokemonCible.getVie() - this.attaque + 10);
+                System.out.println(this.nom + " a infligé " + (this.attaque - 10) + " dégâts à " + pokemonCible.nom);
+            }
+            else {
+                pokemonCible.setVie(pokemonCible.getVie() - this.attaque);
+                System.out.println(this.nom + " a infligé " + this.attaque + " dégâts à " + pokemonCible.nom);
+            }
         }
-        else {
-            pokemonCible.setVie(pokemonCible.getVie() - this.attaque);
-            System.out.println(this.nom + " a infligé " + this.attaque + " dégâts à " + pokemonCible.nom);
-        }
-    }
+
+
 
 
     public void afficherCarte() {

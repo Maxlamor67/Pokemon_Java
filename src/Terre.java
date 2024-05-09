@@ -6,4 +6,9 @@ public class Terre extends Type {
     public Type getAvantage(){
         return new Eau();
     }
+
+    @Override
+    public Type getType(){
+        return new Terre();
+    }
 }

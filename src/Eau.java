@@ -6,4 +6,9 @@ public class Eau extends Type {
     public Type getAvantage(){
         return new Feu();
     }
+
+    @Override
+    public Type getType(){
+        return new Eau();
+    }
 }

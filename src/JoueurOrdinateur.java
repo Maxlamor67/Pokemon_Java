@@ -20,27 +20,40 @@ public class JoueurOrdinateur extends Dresseur {
 
         // Vérifie si le compteur de tour est supérieur ou égal à 3
         if (compteurTour >= 3) {
-            // Joue chacun des Pokémons de son terrain dans l'ordre de son choix
-            for (CartePokemon pokemon : terrain) {
-                if (pokemon != null ) {
-                    // Trouve un Pokémon à attaquer en fonction des règles de l'ordinateur
-                    CartePokemon pokemonACibler = trouverPokemonACibler(jeu.getJoueurAdverse(this));
+            // Trouve le Pokémon de l'ordinateur avec le plus d'attaque et la meilleure affinité
+            CartePokemon pokemonAUtiliser = trouverPokemonAUtiliser();
 
-                    if (pokemonACibler != null) {
-                        // Attaque le Pokémon ciblé
-                        pokemon.attaquer(pokemonACibler);
+            // Trouve un Pokémon adverse à cibler
+            CartePokemon pokemonACibler = trouverPokemonACibler(jeu.getJoueurAdverse(this));
 
-                        // Vérifie si le Pokémon ciblé n'a plus de points de vie et le place dans la défausse de l'adversaire
-                        if (pokemonACibler.getVie() <= 0) {
-                            jeu.getJoueurAdverse(this).defausserPokemon(pokemonACibler);
-                        }
-                    }
+            if (pokemonACibler != null && pokemonAUtiliser != null) {
+                // Utilise le Pokémon de l'ordinateur avec le plus d'attaque et la meilleure affinité pour attaquer le Pokémon adverse
+                pokemonAUtiliser.attaquer(pokemonACibler);
+
+                // Vérifie si le Pokémon adverse n'a plus de points de vie et le place dans la défausse de l'adversaire
+                if (pokemonACibler.getVie() <= 0) {
+                    jeu.getJoueurAdverse(this).defausserPokemon(pokemonACibler);
                 }
             }
         }
 
         // Incrémente le compteur de tour
         compteurTour++;
+    }
+
+    private CartePokemon trouverPokemonAUtiliser() {
+        // Trouve le Pokémon de l'ordinateur avec le plus d'attaque et la meilleure affinité
+        CartePokemon pokemonAUtiliser = null;
+        int attaqueMax = Integer.MIN_VALUE;
+
+        for (CartePokemon pokemon : terrain) {
+            if (pokemon != null && pokemon.getAttaque() > attaqueMax && pokemon.getAffinite().getAvantage().equals(pokemon.getAffinite().getType())) {
+                pokemonAUtiliser = pokemon;
+                attaqueMax = pokemon.getAttaque();
+            }
+        }
+
+        return pokemonAUtiliser;
     }
 
     private CartePokemon trouverPokemonACibler(Dresseur adversaire) {

@@ -20,7 +20,7 @@ public class Jeu {
         this.joueurActuel = joueur1;
         this.numeroTour = 1;
         this.nomsPokemon = new ArrayList<>(Arrays.asList("Herbizarre", "Florizarre", "Salamèche", "Dracaufeu", "Bulbizarre", "Pikachu",
-                "Arceus", "Keunotor", "Entei", "Sharpedo", "lippoutou", "fulguris",
+                "Arceus", "Keunotor", "Entei", "Sharpedo", "Lippoutou", "Fulguris",
                 "Carchacrok", "Elektor", "Philaly", "Raiku", "Zeraora", "Poussacha",
                 "Simiabraz", "Roigada", "Tengalice", "Metamorph", "Malamandre", "Altaria",
                 "Galifeu", "Mustéflott", "Cacnea", "Laggron", "Flambusard", "Suicune",
@@ -63,6 +63,17 @@ public class Jeu {
 
             // Vérifier si le joueur 2 a déjà 3 Pokémons sur le terrain
             if (joueur2.getTerrain().size() == 3) {
+                // Vérifier si on est au troisième tour
+                if (numeroTour == 3) {
+                    // Afficher toutes les cartes
+                    System.out.println("Voici les cartes sur le terrain :");
+                    for (CartePokemon carte : joueur1.getTerrain()) {
+                        carte.afficherCarte();
+                    }
+                    System.out.println("----------------------------------------------------------------------------------------------------");
+                    String cartesTerrainJoueur2 = afficherCartesTerrainJoueur2();
+                    System.out.println("Cartes sur le terrain : " + cartesTerrainJoueur2);
+                }
                 // Demander au joueur 2 de choisir un Pokémon pour attaquer
                 System.out.println("Joueur 2, veuillez choisir un Pokémon pour attaquer :");
                 Scanner scanner = new Scanner(System.in);
@@ -147,6 +158,7 @@ public class Jeu {
 
 
 
+
     public CartePokemon trouverCarteDansTerrainJoueurAdverse(String nomCarte, Dresseur joueur) {
         for (CartePokemon carte : joueur.getTerrain()) {
             if (carte.getNom().equalsIgnoreCase(nomCarte)) {
@@ -169,25 +181,25 @@ public class Jeu {
             }
 
             cartesTerrain.append("\n");
-            cartesTerrain.append(String.format("  |     %-10s      |", carte.getNom()));
+            cartesTerrain.append(String.format("  |     %-10s     |", carte.getNom()));
             if (i < joueur2.getTerrain().size() - 1) {
                 cartesTerrain.append("\t");
             }
 
             cartesTerrain.append("\n");
-            cartesTerrain.append(String.format("  | Affinite : %-6s   |", carte.getAffinite().getClass().getSimpleName()));
+            cartesTerrain.append(String.format("  | Affinite : %-6s  |", carte.getAffinite().getClass().getSimpleName()));
             if (i < joueur2.getTerrain().size() - 1) {
                 cartesTerrain.append("\t");
             }
 
             cartesTerrain.append("\n");
-            cartesTerrain.append(String.format("  | Vie: %-2d/%-3d   |", carte.getVie(), carte.getVieMax()));
+            cartesTerrain.append(String.format("  | Vie: %-2d/%-3d       |", carte.getVie(), carte.getVieMax()));
             if (i < joueur2.getTerrain().size() - 1) {
                 cartesTerrain.append("\t");
             }
 
             cartesTerrain.append("\n");
-            cartesTerrain.append(String.format("  | Attaque: %-2d   |", carte.getAttaque()));
+            cartesTerrain.append(String.format("  | Attaque: %-2d        |", carte.getAttaque()));
             if (i < joueur2.getTerrain().size() - 1) {
                 cartesTerrain.append("\t");
             }
