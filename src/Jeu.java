@@ -82,7 +82,6 @@ public class Jeu {
                 boolean tousLesPokemonsOntAttaque = false;
                 int compteurPokemonsAttaque = 0;//ajout d'un compteur
                 while (!tousLesPokemonsOntAttaque) {
-                    tousLesPokemonsOntAttaque = true;
                     for (CartePokemon carteAttaque : joueurActuel.getTerrain()) {
                         if (!carteAttaque.getADejaAttaque()) {
                             // Afficher les cartes du terrain
@@ -95,7 +94,7 @@ public class Jeu {
                             System.out.println("Cartes sur le terrain : " + cartesTerrainJoueur2);
 
                             // Demander au joueur 2 de choisir un Pokémon à attaquer
-                            System.out.println("Joueur 2, veuillez choisir un Pokémon à attaquer :");
+                            System.out.println("Joueur 2, veuillez choisir le nom du Pokémon à attaquer avec "+joueurActuel.getTerrain().get(compteurPokemonsAttaque).getNom() + ":");
                             String choixCible = scanner.nextLine();
                             CartePokemon carteCible = trouverCarteDansTerrainJoueurAdverse(choixCible, joueurActuel);
 
@@ -114,7 +113,7 @@ public class Jeu {
                             }
                             // Vérifier si tous les Pokémons ont attaqué et passer au tour suivant si c'est le cas
                             if (compteurPokemonsAttaque == joueurActuel.getTerrain().size()) {
-                                tousLesPokemonsOntAttaque = false;
+                                tousLesPokemonsOntAttaque = true;
 
                             }
                         }
@@ -126,13 +125,13 @@ public class Jeu {
                     joueurAdverse.jouerTour(this);
                 }
 
-                // Réinitialiser l'attribut aDejaAttaque de toutes les cartes Pokémon sur le terrain
-                for (CartePokemon carte : joueur1.getTerrain()) {
-                    carte.resetAttaque();
-                }
-                for (CartePokemon carte : joueur2.getTerrain()) {
-                    carte.resetAttaque();
-                }
+//                // Réinitialiser l'attribut aDejaAttaque de toutes les cartes Pokémon sur le terrain
+//                for (CartePokemon carte : joueur1.getTerrain()) {
+//                    carte.resetAttaque();
+//                }
+//                for (CartePokemon carte : joueur2.getTerrain()) {
+//                    carte.resetAttaque();
+//                }
 
                 // Réafficher la pioche, la défausse, les cartes du joueur dans sa main et tout ceux sur le plateau
                 System.out.println("********************************************************************************");

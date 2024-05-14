@@ -24,8 +24,8 @@ public class JoueurOrdinateur extends Dresseur {
             }
         }
 
-        // Vérifie si le compteur de tour est supérieur ou égal à 3 et si le compteur d'attaque est inférieur à 1
-        if (compteurTour >= 3 && compteurAttaque < 1) {
+        // Vérifie si le compteur de tour est supérieur ou égal à 3 et
+        if (compteurTour >= 3 ) {
             // Trouve le Pokémon de l'ordinateur avec le plus d'attaque et la meilleure affinité
             CartePokemon pokemonAUtiliser = trouverPokemonAUtiliser();
 
