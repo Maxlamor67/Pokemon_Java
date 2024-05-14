@@ -78,37 +78,95 @@ public class Jeu {
                     System.out.println("Cartes sur le terrain : " + cartesTerrainJoueur2);
                 }
 
-                // Itérer sur tous les Pokémons du joueur actuel et attaquer avec chacun d'entre eux s'ils n'ont pas déjà attaqué pendant ce tour
-                for (CartePokemon carteAttaque : joueurActuel.getTerrain()) {
-                    if (!carteAttaque.getADejaAttaque()) {
-                        // Afficher les cartes du terrain
-                        System.out.println("Voici les cartes sur le terrain :");
-                        for (CartePokemon carte : joueur1.getTerrain()) {
-                            carte.afficherCarte();
-                        }
-                        System.out.println("----------------------------------------------------------------------------------------------------");
-                        String cartesTerrainJoueur2 = afficherCartesTerrainJoueur2();
-                        System.out.println("Cartes sur le terrain : " + cartesTerrainJoueur2);
-
-                        // Demander au joueur 2 de choisir un Pokémon à attaquer
-                        System.out.println("Joueur 2, veuillez choisir un Pokémon à attaquer :");
-                        String choixCible = scanner.nextLine();
-                        CartePokemon carteCible = trouverCarteDansTerrainJoueurAdverse(choixCible, joueurActuel);
-
-                        if (carteCible != null) {
-                            // Faire attaquer le Pokémon choisi par le joueur 2
-                            carteAttaque.attaquer(carteCible);
-                            System.out.println("Le pokemon " + carteCible.getNom() + " a été attaqué et il lui reste " + carteCible.getVie() + " points de vie.");
-                            if (carteCible.getVie() == 0) {
-                                System.out.println("Le pokemon " + carteCible.getNom() + " a été mis K.O. !");
-                                joueurAdverse.defausserPokemon(carteCible);
-                                joueurAdverse.getTerrain().remove(carteCible);
+                // Boucle pour que tous les Pokémons du joueur actuel attaquent
+                boolean tousLesPokemonsOntAttaque = false;
+                int compteurPokemonsAttaque = 0;//ajout d'un compteur
+                while (!tousLesPokemonsOntAttaque) {
+                    tousLesPokemonsOntAttaque = true;
+                    for (CartePokemon carteAttaque : joueurActuel.getTerrain()) {
+                        if (!carteAttaque.getADejaAttaque()) {
+                            // Afficher les cartes du terrain
+                            System.out.println("Voici les cartes sur le terrain :");
+                            for (CartePokemon carte : joueur1.getTerrain()) {
+                                carte.afficherCarte();
                             }
-                        } else {
-                            System.out.println("Le pokemon cible n'a pas été trouvé.");
+                            System.out.println("----------------------------------------------------------------------------------------------------");
+                            String cartesTerrainJoueur2 = afficherCartesTerrainJoueur2();
+                            System.out.println("Cartes sur le terrain : " + cartesTerrainJoueur2);
+
+                            // Demander au joueur 2 de choisir un Pokémon à attaquer
+                            System.out.println("Joueur 2, veuillez choisir un Pokémon à attaquer :");
+                            String choixCible = scanner.nextLine();
+                            CartePokemon carteCible = trouverCarteDansTerrainJoueurAdverse(choixCible, joueurActuel);
+
+                            if (carteCible != null) {
+                                // Faire attaquer le Pokémon choisi par le joueur 2
+                                carteAttaque.attaquer(carteCible);
+                                System.out.println("Le pokemon " + carteCible.getNom() + " a été attaqué et il lui reste " + carteCible.getVie() + " points de vie.");
+                                compteurPokemonsAttaque+=1;
+                                if (carteCible.getVie() == 0) {
+                                    System.out.println("Le pokemon " + carteCible.getNom() + " a été mis K.O. !");
+                                    joueurAdverse.defausserPokemon(carteCible);
+                                    joueurAdverse.getTerrain().remove(carteCible);
+                                }
+                            } else {
+                                System.out.println("Le pokemon cible n'a pas été trouvé.");
+                            }
+                            // Vérifier si tous les Pokémons ont attaqué et passer au tour suivant si c'est le cas
+                            if (compteurPokemonsAttaque == joueurActuel.getTerrain().size()) {
+                                tousLesPokemonsOntAttaque = false;
+
+                            }
                         }
                     }
                 }
+
+                // Tour de l'ordinateur
+                if (joueurActuel == joueur2) {
+                    joueurAdverse.jouerTour(this);
+                }
+
+                // Réinitialiser l'attribut aDejaAttaque de toutes les cartes Pokémon sur le terrain
+                for (CartePokemon carte : joueur1.getTerrain()) {
+                    carte.resetAttaque();
+                }
+                for (CartePokemon carte : joueur2.getTerrain()) {
+                    carte.resetAttaque();
+                }
+
+                // Réafficher la pioche, la défausse, les cartes du joueur dans sa main et tout ceux sur le plateau
+                System.out.println("********************************************************************************");
+                System.out.println("Fin du tour " + numeroTour + ":");
+                System.out.println();
+                System.out.println("                                    " + (joueurActuel == joueur2 ? joueur2.getNom() : joueur1.getNom()));
+                System.out.println();
+                System.out.println("********************************************************************************");
+                System.out.println();
+                System.out.println("                                    " + (joueurActuel == joueur1 ? joueur1.getNom() : joueur2.getNom()));
+                System.out.println();
+
+                joueur1.afficherPioche();
+                joueur1.afficherDefausse();
+
+                for (CartePokemon carte : joueur1.getTerrain()) {
+                    carte.afficherCarte();
+                }
+                System.out.println("----------------------------------------------------------------------------------------------------");
+
+                // Afficher les cartes sur le terrain du joueur 2
+                String cartesTerrainJoueur2 = afficherCartesTerrainJoueur2();
+                System.out.println("Cartes sur le terrain : " + cartesTerrainJoueur2);
+
+                joueur2.afficherPioche();
+                joueur2.afficherDefausse();
+
+                // Afficher la main du joueur 2
+                String mainJoueur2 = afficherMainJoueur2();
+                System.out.println(mainJoueur2);
+
+                System.out.println();
+                System.out.println();
+                System.out.println("                                    " + joueur2.getNom());
             } else {
                 // Affichage du tour et des informations des joueurs
                 System.out.println("********************************************************************************");
@@ -163,14 +221,9 @@ public class Jeu {
 
         numeroTour++;
 
-        // Réinitialiser l'attribut aDejaAttaque de toutes les cartes Pokémon sur le terrain
-        for (CartePokemon carte : joueur1.getTerrain()) {
-            carte.resetAttaque();
-        }
-        for (CartePokemon carte : joueur2.getTerrain()) {
-            carte.resetAttaque();
-        }
+
     }
+
 
 
 

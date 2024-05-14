@@ -57,21 +57,17 @@ public class CartePokemon {
 
 
     public void attaquer(CartePokemon pokemonCible) {
-        if (!this.aDejaAttaque) {// Vérifier que le Pokémon n'a pas encore attaqué pendant le tour en cours
-            this.aDejaAttaque = true; // Mettre à jour l'attribut après avoir effectué l'attaque
-            if (pokemonCible.getAffinite().equals(this.getAffinite().getType())) {
+            if (pokemonCible.getAffinite().equals(this.getAffinite().getAvantage())) {
                 pokemonCible.setVie(pokemonCible.getVie() - this.attaque - 10);
                 System.out.println(this.nom + " a infligé " + (this.attaque + 10) + " dégâts à " + pokemonCible.nom);
-            } else if (this.getAffinite().equals(pokemonCible.getAffinite().getType())) {
+            } else if (this.getAffinite().equals(pokemonCible.getAffinite().getAvantage())) {
                 pokemonCible.setVie(pokemonCible.getVie() - this.attaque + 10);
                 System.out.println(this.nom + " a infligé " + (this.attaque - 10) + " dégâts à " + pokemonCible.nom);
             } else {
                 pokemonCible.setVie(pokemonCible.getVie() - this.attaque);
                 System.out.println(this.nom + " a infligé " + this.attaque + " dégâts à " + pokemonCible.nom);
             }
-        } else {
-            System.out.println("Ce Pokémon a déjà attaqué pendant ce tour !");
-        }
+
     }
 
 
