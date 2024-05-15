@@ -105,9 +105,6 @@ public class Dresseur {
             defausse.add(pokemon);
         }
     }
-    public boolean peutAttaquer() {
-        return terrain.size() >= 3 ;
-    }
 
     public String afficherCartesTerrainAvecIndex() {
         StringBuilder sb = new StringBuilder();

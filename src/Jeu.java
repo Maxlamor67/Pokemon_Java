@@ -16,6 +16,7 @@ public class Jeu {
     JoueurOrdinateur joueurAdverse = new JoueurOrdinateur("Ordinateur");
 
 
+
     public Jeu(Dresseur joueur1, Dresseur joueur2) {
         this.joueur1 = joueur1;
         this.joueur2 = joueur2;
@@ -28,6 +29,14 @@ public class Jeu {
                 "Galifeu", "Mustéflott", "Cacnea", "Laggron", "Flambusard", "Suicune",
                 "Psykokwak", "Tiplouf", "Démolosse", "Pingoléon", "Aéroptéryx", "Manaphy",
                 "Scorplane", "Cizayox", "Yveltal", "Mewtwo","Giratina"));
+
+//        this.nomsPokemon = new ArrayList<>(Arrays.asList("He", "Flo", "Sal", "Dra", "Bul", "Pi",
+//                "Arc", "Keu", "Entei", "Shar", "Lip", "Ful",
+//                "Car", "Elek", "Phi", "Raiku", "Zer", "Pou",
+//                "Si", "Roi", "Tengo", "Meta", "Mala", "Alta",
+//                "Gal", "Must", "Cac", "Lag", "Flame", "Sui",
+//                "Psy", "Ti", "Démo", "Ping", "Ryx", "Mana",
+//                "Sco", "Ciz", "Yve", "Mew","Gir"));
         Collections.shuffle(nomsPokemon);
         this.scanner = new Scanner(System.in);
     }
@@ -105,11 +114,12 @@ public class Jeu {
                                 compteurPokemonsAttaque+=1;
                                 if (carteCible.getVie() == 0) {
                                     System.out.println("Le pokemon " + carteCible.getNom() + " a été mis K.O. !");
-                                    joueurAdverse.defausserPokemon(carteCible);
-                                    joueurAdverse.getTerrain().remove(carteCible);
+                                    joueur1.defausserPokemon(carteCible);
+                                    joueur1.getTerrain().remove(carteCible);
                                 }
                             } else {
                                 System.out.println("Le pokemon cible n'a pas été trouvé.");
+
                             }
                             // Vérifier si tous les Pokémons ont attaqué et passer au tour suivant si c'est le cas
                             if (compteurPokemonsAttaque == joueurActuel.getTerrain().size()) {
@@ -121,9 +131,16 @@ public class Jeu {
                 }
 
                 // Tour de l'ordinateur
-                if (joueurActuel == joueur2) {
-                    joueurAdverse.jouerTour(this);
+                joueurAdverse.jouerTour(this);
+
+                if (numeroTour >= 3) {
+
+
+                    // Passer au tour suivant
+                    numeroTour++;
                 }
+
+
 
 //                // Réinitialiser l'attribut aDejaAttaque de toutes les cartes Pokémon sur le terrain
 //                for (CartePokemon carte : joueur1.getTerrain()) {
@@ -135,7 +152,7 @@ public class Jeu {
 
                 // Réafficher la pioche, la défausse, les cartes du joueur dans sa main et tout ceux sur le plateau
                 System.out.println("********************************************************************************");
-                System.out.println("Fin du tour " + numeroTour + ":");
+                System.out.println("Tour "+ numeroTour + ":");
                 System.out.println();
                 System.out.println("                                    " + (joueurActuel == joueur2 ? joueur2.getNom() : joueur1.getNom()));
                 System.out.println();
@@ -217,10 +234,12 @@ public class Jeu {
                 }
             }
         }
+        if (numeroTour == 1) {
 
-        numeroTour++;
 
-
+            // Passer au tour suivant
+            numeroTour++;
+        }
     }
 
 

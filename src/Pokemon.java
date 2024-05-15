@@ -25,11 +25,13 @@ public class Pokemon {
 
     // Boucle pour simuler les tours du jeu
     for (int i = 0; i < nbTours; i++) {
-      // Joueur 1 (ordinateur) joue son tour
+// Joueur 1 (ordinateur) joue son tour
       joueur1.jouerTour(jeu);
 
       // Joueur 2 (humain) joue son tour
       jeu.jouerTour();
+
+
     }
 
     // Afficher les Pokémon sur le terrain pour chaque joueur
