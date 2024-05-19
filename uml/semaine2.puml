@@ -5,81 +5,71 @@ class Pokemon {
 }
 
 class Jeu {
-+ afficherMainJoueur2() : String
-+ afficherCartesTerrainJoueur2() : String
+- scanner : Scanner
+- joueur1 : Dresseur
+- joueur2 : Dresseur
+- joueurActuel : Dresseur
+- numeroTour : int
+- nomsPokemon : String[*]
+- joueurAdverse : JoueurOrdinateur
++ «create» Jeu (joueur1 : Dresseur, joueur2 : Dresseur)
 + jouerTour()
++ trouverCarteDansTerrainJoueurAdverse(nomCarte : String, joueurActuel : Dresseur) : CartePokemon
++ afficherCartesTerrainJoueur2() : String
++ trouverCarteDansTerrainJoueur2(nomCarte : String) : CartePokemon
++ prochainTour()
++ afficherMainJoueur2() : String
++ afficherCarteMainJoueur2() : String
++ trouverCarteDansMainJoueur2(nomCarte : String) : CartePokemon
 + genererPokemon() : CartePokemon
-+ getJoueurAdverse(joueur : Dresseur) : Dresseur
++ getJoueurAdverse(joueurActuel : Dresseur) : Dresseur
 }
 
+
 class Dresseur {
-- nom : String
-- main : List<CartePokemon>
-- pioche : List<CartePokemon>
-- defausse : List<CartePokemon>
-- terrain : List<CartePokemon>
-+ Dresseur(nom : String)
+# nom : String
+# main : List<CartePokemon>
+# pioche : List<CartePokemon>
+# defausse : List<CartePokemon>
+# terrain : List<CartePokemon>
+- vieRestante : int
++ «create» Dresseur(nom : String)
++ getTerrain() : List<CartePokemon>
 + piocher()
++ afficherPioche()
++ afficherDefausse()
++ afficherMain()
++ getNom() : String
++ getMain() : List<CartePokemon>
++ getPioche() : List<CartePokemon>
++ jouerCarte(carte : CartePokemon)
 + ajouterCarteAPioche(carte : CartePokemon)
 + ajouterCarte(carte : CartePokemon)
 + placerPokemonSurTerrain(carte : CartePokemon) : boolean
 + defausserPokemon(pokemon : CartePokemon)
-+ afficherPioche()
-+ afficherDefausse()
-+ afficherMain()
-+ jouerCarte(carte : CartePokemon)
++ afficherCartesTerrainAvecIndex() : String
++ getVieRestante() : Integer
++ setVieRestante(vieRestante : Integer)
+
 }
 
 class CartePokemon {
 - nom : String
-- affinite : String
+- affinite : Type
 - vie : int
 - vieMax : int
 - attaque : int
-+ CartePokemon(nom : String, affinite : String, vie : int, vieMax : int, attaque : int)
++ CartePokemon(nom : String, affinite : Type, vie : int, vieMax : int, attaque : int)
 + getNom() : String
 + getVie() : int
 + getVieMax() : int
 + getAttaque() : int
-+ getAffinite() : String
++ getAffinite() : Type
 + attaquer(pokemonCible : CartePokemon)
 + afficherCarte()
 }
 
-abstract class Type {
-#-m_type : String
-+ Type (type : Type)
-+ getType() : Type
-}
-
-class Air {
-+ «create» Air()
-+ getAvantage() : Boolean
-+ getType(): Type
-}
-
-class Eau {
-+ «create» Eau()
-+ getAvantage() : Boolean
-+ getType(): Type
-
-}
-
-class Feu {
-+ «create» Feu()
-+ getAvantage() : Boolean
-+ getType(): Type
-
-}
-
-class Terre {
-+ «create» Terre()
-+ getAvantage() : Boolean
-+ getType(): Type
-
-}
-
-class JoueurOrdinateur {
+class JoueurOrdinateur extends Dresseur {
 - nom : String
 - main : List<CartePokemon>
 - pioche : List<CartePokemon>
@@ -90,18 +80,53 @@ class JoueurOrdinateur {
 + trouverPokemonACibler(adversaire : Dresseur) : CartePokemon
 }
 
-Air " -m_avantage"---|> Type
-Terre " -m_avantage"---|> Type
-Eau " -m_avantage"---|> Type
-Feu " -m_avantage"---|> Type
-Type o--> CartePokemon
-Dresseur o--> CartePokemon
+
+
+abstract class Type {
+#-m_type : String
++ Type (type : Type)
++ getType() : Type
++ abstract getAvantage() : Type
++ abstract getType() : Type
+}
+
+class Air {
++ «create» Air()
++ getAvantage() : Type
++ getType(): Type
+}
+
+class Eau {
++ «create» Eau()
++ getAvantage() : Type
++ getType(): Type
+}
+
+class Feu {
++ «create» Feu()
++ getAvantage() : Type
++ getType(): Type
+}
+
+class Terre {
++ «create» Terre()
++ getAvantage() : Type
++ getType(): Type
+}
+
+
+
+Air --|> Type
+Terre --|> Type
+Eau --|> Type
+Feu --|> Type
+CartePokemon "1" *-- "1" Type : affinite
+Dresseur "1" *-- "0..*" CartePokemon : possède
+Pokemon --> JoueurOrdinateur
 Pokemon --> Dresseur
 Pokemon --> Jeu
+JoueurOrdinateur --> Jeu : utilise
 JoueurOrdinateur o--> CartePokemon
-Dresseur <|-- JoueurOrdinateur
-Jeu "1" -- "0.." CartePokemon
-Dresseur "1" -- "0.." CartePokemon
-JoueurOrdinateur "1" -- "0..*" CartePokemon
-
+JoueurOrdinateur --> Dresseur : hérite
+Jeu --> CartePokemon
 @enduml

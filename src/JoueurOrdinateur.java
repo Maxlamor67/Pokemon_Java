@@ -26,7 +26,7 @@ public class JoueurOrdinateur extends Dresseur {
 
         // Vérifie si le compteur de tour est supérieur ou égal à 3 et
         if (compteurTour >= 0 ) {
-            System.out.println("ordi  +" +compteurTour);
+
             // Trouve le Pokémon de l'ordinateur avec le plus d'attaque et la meilleure affinité
             CartePokemon pokemonAUtiliser = trouverPokemonAUtiliser();
 
@@ -71,7 +71,7 @@ public class JoueurOrdinateur extends Dresseur {
 
         // Parcours les Pokémons adverses
         for (CartePokemon pokemonAdverse : adversaire.getTerrain()) {
-            if (pokemonAdverse != null) {
+            if (pokemonAdverse != null ) {
                 boolean avantageTrouve = false;
                 // Vérifie si l'affinité du Pokémon adverse avantage l'ordinateur
                 for (CartePokemon pokemonOrdinateur : this.terrain) {
@@ -79,6 +79,7 @@ public class JoueurOrdinateur extends Dresseur {
                         return pokemonAdverse;
                     }
                 }
+
                 // Si aucun Pokémon n'a d'affinité avantageuse, ajoute le Pokémon ayant le moins de points de vie à une liste
                 if (!avantageTrouve && pokemonAdverse.getVie() <= adversaire.getVieRestante()) {
                     if (pokemonAdverse.getVie() < adversaire.getVieRestante()) {
