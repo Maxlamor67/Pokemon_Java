@@ -43,6 +43,7 @@ public class Jeu {
 
     public void jouerTour() {
         Dresseur joueurActuel = (numeroTour % 2 == 1) ? joueur1 : joueur2;
+        afficherInformationsJoueurs();
 
         if (numeroTour == 1 && joueurActuel == joueur2) {
             choisirCartesPokemonPourJoueur2();
@@ -57,7 +58,7 @@ public class Jeu {
 
 
             } else {
-                afficherInformationsJoueurs();
+
                 choisirCartePokemonPourJoueur2();
             }
         }
