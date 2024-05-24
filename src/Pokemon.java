@@ -8,8 +8,7 @@ public class Pokemon {
     // Générer les Pokémon pour les joueurs
     for (int i = 0; i < 21; i++) {
       CartePokemon cartePokemon = jeu.genererPokemon();
-      joueur1.ajouterCarteAPioche(cartePokemon);
-    }
+      joueur1.ajouterCarteAPioche(cartePokemon);    }
 
     for (int i = 0; i < 20; i++) {
       CartePokemon cartePokemon = jeu.genererPokemon();

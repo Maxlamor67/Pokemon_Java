@@ -6,6 +6,7 @@ import java.util.Random;
 public class CartePokemon {
     private String nom;
     private Type affinite;
+    private Pouvoir pouvoir;
     private int vie;
     private int vieMax;
     private int attaque;
@@ -14,9 +15,10 @@ public class CartePokemon {
 
 
 
-    public CartePokemon(String nom, Type affinite, int vie, int vieMax, int attaque) {
+    public CartePokemon(String nom, Type affinite, Pouvoir pouvoir, int vie, int vieMax, int attaque) {
         this.nom = nom;
         this.affinite = affinite;
+        this.pouvoir = pouvoir;
         this.vie = vie;
         this.vieMax = vieMax;
         this.attaque = attaque;
@@ -46,6 +48,8 @@ public class CartePokemon {
     public Type getAffinite() {
         return affinite;
     }
+
+    public Pouvoir getPouvoir() {return pouvoir;}
 
     public boolean getADejaAttaque() {
         return this.aDejaAttaque;
@@ -78,6 +82,12 @@ public class CartePokemon {
         System.out.printf("  | Attaque: %-2d        |\n", attaque);
         System.out.printf("  | Vie: %-2d/%-3d       |\n", vie, vieMax);
         System.out.printf("  | Affinite : %-6s  |\n", affinite.getClass().getSimpleName());
+        if(pouvoir==null) {
+            System.out.printf("  | Pouvoir : None  |\n");
+        }
+        else {
+            System.out.printf("  | Pouvoir : %-6s  |\n", pouvoir.getClass().getSimpleName());
+        }
         System.out.printf("  |     %-10s     |\n", nom);
         System.out.println("  *--------------------*");
     }
