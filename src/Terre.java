@@ -11,4 +11,7 @@ public class Terre extends Type {
     public Type getType(){
         return new Terre();
     }
+
+    public String toString() {return "Terre";}
+
 }

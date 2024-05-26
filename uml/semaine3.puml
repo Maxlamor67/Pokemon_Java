@@ -28,20 +28,20 @@ class Jeu {
 
 class Dresseur {
 # nom : String
-# main : List<CartePokemon>
-# pioche : List<CartePokemon>
-# defausse : List<CartePokemon>
-# terrain : List<CartePokemon>
+# main : String[*]
+# pioche : String[*]
+# defausse : String[*]
+# terrain : String[*]
 - vieRestante : int
 + «create» Dresseur(nom : String)
-+ getTerrain() : List<CartePokemon>
++ getTerrain() : String[*]
 + piocher()
 + afficherPioche()
 + afficherDefausse()
 + afficherMain()
 + getNom() : String
-+ getMain() : List<CartePokemon>
-+ getPioche() : List<CartePokemon>
++ getMain() : String[*]
++ getPioche() : String[*]
 + jouerCarte(carte : CartePokemon)
 + ajouterCarteAPioche(carte : CartePokemon)
 + ajouterCarte(carte : CartePokemon)
@@ -71,10 +71,10 @@ class CartePokemon {
 
 class JoueurOrdinateur extends Dresseur {
 - nom : String
-- main : List<CartePokemon>
-- pioche : List<CartePokemon>
-- defausse : List<CartePokemon>
-- terrain : List<CartePokemon>
+- main : String[*]
+- pioche : String[*]
+- defausse : String[*]
+- terrain : String[*]
 + JoueurOrdinateur(nom : String)
 + jouerTour(jeu : Jeu)
 + trouverPokemonACibler(adversaire : Dresseur) : CartePokemon
@@ -114,13 +114,47 @@ class Terre {
 + getType(): Type
 }
 
+abstract class Pouvoir {
++ Pouvoir ()
+}
 
+class SoinTotal {
+- m_utilisation: Integer
++ «create» SoinTotal()
++ soignerTotalement(carte : CartePokemon)
++ getUtilisation() : Integer
++ setUtilisation(utilisation : Integer)
++ toString(): String
+}
 
+class SoinSimple {
+- m_soin;
+- m_utilisation: Integer
++ «create» SoinSimple()
++ soigner(carte : CartePokemon)
++ getSoin() : Integer
++ getUtilisation() : Integer
++ setUtilisation(utilisation : Integer)
++ toString(): String
+}
+
+class Kamikaze {
+- m_utilisation: Integer
++ «create» Kamikaze()
++ exploser(carte : CartePokemon)
++ getUtilisation() : Integer
++ setUtilisation(utilisation : Integer)
++ toString(): String
+}
 
 Air --|> Type
 Terre --|> Type
 Eau --|> Type
 Feu --|> Type
+SoinSimple --|> Pouvoir
+SoinTotal --|> Pouvoir
+Kamikaze --|> Pouvoir
+CartePokemon "1" *-- "1" Pouvoir
 CartePokemon "1" *-- "1" Type : affinite
 Dresseur "1" *-- "0..*" CartePokemon : possède
 Pokemon --> JoueurOrdinateur

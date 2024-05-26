@@ -11,4 +11,7 @@ public class Air extends Type {
     public Type getType(){
         return new Air();
     }
+
+    public String toString() {return "Air";}
+
 }

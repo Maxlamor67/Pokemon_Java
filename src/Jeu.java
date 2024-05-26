@@ -13,6 +13,10 @@ public class Jeu {
     private Dresseur joueurActuel;
     private int numeroTour;
     private List<String> nomsPokemon;
+    private List<Pouvoir> pouvoirs;
+    //private List<Pouvoir> pouvoirs = Arrays.asList(new SoinSimple(), new SoinTotal());
+
+
     JoueurOrdinateur joueurAdverse = new JoueurOrdinateur("Ordinateur");
 
 
@@ -37,6 +41,7 @@ public class Jeu {
                 "Gal", "Must", "Cac", "Lag", "Flame", "Sui",
                 "Psy", "Ti", "Démo", "Ping", "Ryx", "Mana",
                 "Sco", "Ciz", "Yve", "Mew","Gir"));
+        pouvoirs = new ArrayList<>(Arrays.asList(new SoinSimple(), new SoinTotal(), new Resistance()));
         Collections.shuffle(nomsPokemon);
         this.scanner = new Scanner(System.in);
     }
@@ -223,7 +228,18 @@ public class Jeu {
             }
 
             cartesTerrain.append("\n");
-            cartesTerrain.append(String.format("  | Affinite : %-6s  |", carte.getAffinite().getClass().getSimpleName()));
+            cartesTerrain.append(String.format("  | Affinite : %-6s  |", carte.getAffinite().toString()));
+            if (i < joueur2.getTerrain().size() - 1) {
+                cartesTerrain.append("\t");
+            }
+
+            cartesTerrain.append("\n");
+            if(carte.getPouvoir()==null) {
+                cartesTerrain.append(String.format("  | Pouvoir : None  |"));
+            }
+            else {
+                cartesTerrain.append(String.format("  | Pouvoir : %-6s  |", carte.getPouvoir().toString()));
+            }
             if (i < joueur2.getTerrain().size() - 1) {
                 cartesTerrain.append("\t");
             }
@@ -270,7 +286,7 @@ public class Jeu {
 
         mainJoueur2.append("En main:\n");
         for (CartePokemon carte : joueur2.getMain()) {
-            mainJoueur2.append("- ").append(carte.getNom()).append(", ").append(carte.getAffinite().getClass().getSimpleName()).append(", Vie: ").append(carte.getVie()).append("/").append(carte.getVieMax()).append(", Attaque: ").append(carte.getAttaque()).append("\n");
+            mainJoueur2.append("- ").append(carte.getNom()).append(", ").append(carte.getAffinite().toString()).append(", Pouvoir: ").append(carte.getPouvoir()).append(", Vie: ").append(carte.getVie()).append("/").append(carte.getVieMax()).append(", Attaque: ").append(carte.getAttaque()).append("\n");
         }
 
         return mainJoueur2.toString();
@@ -316,8 +332,15 @@ public class Jeu {
         int attaque = rand.nextInt(4) * 10 + 10; // Nombre aléatoire entre 10 et 40, multiple de 10
 
         Type affinite = affinites.get(rand.nextInt(affinites.size()));
-
-        return new CartePokemon(nom, affinite, vie, vieMax, attaque);
+        Pouvoir pouvoir = null;
+        if((rand.nextInt(2))%2==0) {
+            if (!pouvoirs.isEmpty()) {
+                int indice = rand.nextInt(pouvoirs.size());
+                pouvoir = pouvoirs.get(indice);
+                pouvoirs.remove(indice);
+            }
+        }
+        return new CartePokemon(nom, affinite, pouvoir, vie, vieMax, attaque);
     }
     public Dresseur getJoueurAdverse(Dresseur joueurActuel) {
         if (joueurActuel == joueur1) {
