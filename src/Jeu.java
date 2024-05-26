@@ -14,25 +14,14 @@ public class Jeu {
     private int numeroTour;
     private List<String> nomsPokemon;
     private List<Pouvoir> pouvoirs;
-    //private List<Pouvoir> pouvoirs = Arrays.asList(new SoinSimple(), new SoinTotal());
-
 
     JoueurOrdinateur joueurAdverse = new JoueurOrdinateur("Ordinateur");
-
-
 
     public Jeu(Dresseur joueur1, Dresseur joueur2) {
         this.joueur1 = joueur1;
         this.joueur2 = joueur2;
         this.joueurActuel = joueur2;
         this.numeroTour = 1;
-//        this.nomsPokemon = new ArrayList<>(Arrays.asList("Herbizarre", "Florizarre", "Salamèche", "Dracaufeu", "Bulbizarre", "Pikachu",
-//                "Arceus", "Keunotor", "Entei", "Sharpedo", "Lippoutou", "Fulguris",
-//                "Carchacrok", "Elektor", "Philaly", "Raiku", "Zeraora", "Poussacha",
-//                "Simiabraz", "Roigada", "Tengalice", "Metamorph", "Malamandre", "Altaria",
-//                "Galifeu", "Mustéflott", "Cacnea", "Laggron", "Flambusard", "Suicune",
-//                "Psykokwak", "Tiplouf", "Démolosse", "Pingoléon", "Aéroptéryx", "Manaphy",
-//                "Scorplane", "Cizayox", "Yveltal", "Mewtwo","Giratina"));
 
         this.nomsPokemon = new ArrayList<>(Arrays.asList("He", "Flo", "Sal", "Dra", "Bul", "Pi",
                 "Arc", "Keu", "Entei", "Shar", "Lip", "Ful",
@@ -40,44 +29,49 @@ public class Jeu {
                 "Si", "Roi", "Tengo", "Meta", "Mala", "Alta",
                 "Gal", "Must", "Cac", "Lag", "Flame", "Sui",
                 "Psy", "Ti", "Démo", "Ping", "Ryx", "Mana",
-                "Sco", "Ciz", "Yve", "Mew","Gir"));
+                "Sco", "Ciz", "Yve", "Mew", "Gir"));
         pouvoirs = new ArrayList<>(Arrays.asList(new SoinSimple(), new SoinTotal(), new Resistance()));
         Collections.shuffle(nomsPokemon);
         this.scanner = new Scanner(System.in);
     }
 
     public void jouerTour() {
-        Dresseur joueurActuel = (numeroTour % 2 == 1) ? joueur1 : joueur2;
-        afficherInformationsJoueurs();
-
-        if (numeroTour == 1 && joueurActuel == joueur2) {
-            choisirCartesPokemonPourJoueur2();
-        } else {
+        boolean estPerdant = false;
+        while (!estPerdant) {
             placerPokemonsSurTerrainPourJoueur1();
-            piocherCartePourJoueur2();
+            afficherInformationsJoueurs();
 
-            if (joueur2.getTerrain().size() == 3) {
-                afficherCartesSurTerrain();
-                tousLesPokemonsOntAttaque();
-                joueurAdverse.jouerTour(this);
-
-
-            } else {
-
+            while (joueur2.getTerrain().size() < 3 && joueur2.getPioche().size() > 0) {
+                joueur2.piocher();
                 choisirCartePokemonPourJoueur2();
             }
-        }
 
-        if (numeroTour >= 1) {
+            joueurAdverse.jouerTour(this);
+
+            if (joueur1.getTerrain().size() == 0) {
+                if (joueur1.getPioche().size() == 0 && joueur1.getMain().size() == 0) {
+                    numeroTour++;
+                    System.out.println(joueur1 + " a perdu.");
+                    break;
+                }
+            }
+
+            if (joueur2.getTerrain().size() == 0) {
+                if (joueur2.getPioche().size() == 0 && joueur2.getMain().size() == 0) {
+                    System.out.println(joueur2 + " a perdu.");
+                    break;
+                }
+            }
+
+            tousLesPokemonsOntAttaque();
             numeroTour++;
         }
     }
 
     private void choisirCartesPokemonPourJoueur2() {
         System.out.println("Joueur 2, veuillez choisir 3 cartes à placer sur le terrain :");
-        Scanner scanner = new Scanner(System.in);
         for (int i = 0; i < 3; i++) {
-            System.out.println("Carte " + (i+1) + " :");
+            System.out.println("Carte " + (i + 1) + " :");
             String choixJoueur2 = scanner.nextLine();
             CartePokemon carteChoisie = trouverCarteDansMainJoueur2(choixJoueur2);
             if (carteChoisie != null) {
@@ -101,10 +95,6 @@ public class Jeu {
         }
     }
 
-    private void piocherCartePourJoueur2() {
-        joueur2.piocher();
-    }
-
     private void afficherCartesSurTerrain() {
         System.out.println("Voici les cartes sur le terrain :");
         for (CartePokemon carte : joueur1.getTerrain()) {
@@ -122,14 +112,14 @@ public class Jeu {
             for (CartePokemon carteAttaque : joueurActuel.getTerrain()) {
                 if (!carteAttaque.getADejaAttaque()) {
                     afficherCartesSurTerrain();
-                    System.out.println("Joueur 2, veuillez choisir le nom du Pokémon à attaquer avec "+joueurActuel.getTerrain().get(compteurPokemonsAttaque).getNom() + ":");
+                    System.out.println(joueurActuel.getNom() + ", veuillez choisir le nom du Pokémon à attaquer avec " + joueurActuel.getTerrain().get(compteurPokemonsAttaque).getNom() + ":");
                     String choixCible = scanner.nextLine();
                     CartePokemon carteCible = trouverCarteDansTerrainJoueurAdverse(choixCible, joueurActuel);
 
                     if (carteCible != null) {
                         carteAttaque.attaquer(carteCible);
                         System.out.println("Le pokemon " + carteCible.getNom() + " a été attaqué et il lui reste " + carteCible.getVie() + " points de vie.");
-                        compteurPokemonsAttaque+=1;
+                        compteurPokemonsAttaque += 1;
                         if (carteCible.getVie() == 0) {
                             System.out.println("Le pokemon " + carteCible.getNom() + " a été mis K.O. !");
                             joueur1.defausserPokemon(carteCible);

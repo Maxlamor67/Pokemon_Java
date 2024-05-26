@@ -3,6 +3,13 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
+//this.nomsPokemon = new ArrayList<>(Arrays.asList("Herbizarre", "Florizarre", "Salamèche", "Dracaufeu", "Bulbizarre", "Pikachu",
+//                "Arceus", "Keunotor", "Entei", "Sharpedo", "Lippoutou", "Fulguris",
+//                "Carchacrok", "Elektor", "Philaly", "Raiku", "Zeraora", "Poussacha",
+//                "Simiabraz", "Roigada", "Tengalice", "Metamorph", "Malamandre", "Altaria",
+//                "Galifeu", "Mustéflott", "Cacnea", "Laggron", "Flambusard", "Suicune",
+//                "Psykokwak", "Tiplouf", "Démolosse", "Pingoléon", "Aéroptéryx", "Manaphy",
+//                "Scorplane", "Cizayox", "Yveltal", "Mewtwo","Giratina"));
 public class CartePokemon {
     private String nom;
     private Type affinite;
@@ -80,7 +87,9 @@ public class CartePokemon {
 
     }
 
-
+    public void setADejaAttaque(boolean aDejaAttaque) {
+        this.aDejaAttaque = aDejaAttaque;
+    }
 
 
     public void afficherCarte() {
@@ -98,3 +107,5 @@ public class CartePokemon {
         System.out.println("  *--------------------*");
     }
 }
+
+
