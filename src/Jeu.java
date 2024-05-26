@@ -14,11 +14,11 @@ public class Jeu {
     private int numeroTour;
     private List<String> nomsPokemon;
     private List<Pouvoir> pouvoirs;
-
     JoueurOrdinateur joueurAdverse = new JoueurOrdinateur("Ordinateur");
 
     public Jeu(Dresseur joueur1, Dresseur joueur2) {
         this.joueur1 = joueur1;
+        joueurAdverse = (JoueurOrdinateur) joueur1;
         this.joueur2 = joueur2;
         this.joueurActuel = joueur2;
         this.numeroTour = 1;
@@ -41,13 +41,15 @@ public class Jeu {
             placerPokemonsSurTerrainPourJoueur1();
             afficherInformationsJoueurs();
 
+            // Choix des Pokémon pour Joueur2
             while (joueur2.getTerrain().size() < 3 && joueur2.getPioche().size() > 0) {
                 joueur2.piocher();
                 choisirCartePokemonPourJoueur2();
             }
 
-            joueurAdverse.jouerTour(this);
-
+            if (numeroTour>=2) {
+                joueurAdverse.jouerTour(this);
+            }
             if (joueur1.getTerrain().size() == 0) {
                 if (joueur1.getPioche().size() == 0 && joueur1.getMain().size() == 0) {
                     numeroTour++;
@@ -68,24 +70,8 @@ public class Jeu {
         }
     }
 
-    private void choisirCartesPokemonPourJoueur2() {
-        System.out.println("Joueur 2, veuillez choisir 3 cartes à placer sur le terrain :");
-        for (int i = 0; i < 3; i++) {
-            System.out.println("Carte " + (i + 1) + " :");
-            String choixJoueur2 = scanner.nextLine();
-            CartePokemon carteChoisie = trouverCarteDansMainJoueur2(choixJoueur2);
-            if (carteChoisie != null) {
-                if (joueur2.placerPokemonSurTerrain(carteChoisie)) {
-                    System.out.println("Le pokemon " + carteChoisie.getNom() + " a été placé sur le terrain.");
-                } else {
-                    System.out.println("Le terrain est plein. Vous ne pouvez pas placer plus de Pokémon.");
-                }
-            } else {
-                System.out.println("Le pokemon choisi n'est pas dans votre main. Veuillez choisir un pokemon valide.");
-                i--;
-            }
-        }
-    }
+
+
 
     private void placerPokemonsSurTerrainPourJoueur1() {
         while (joueur1.getTerrain().size() < 3 && joueur1.getPioche().size() > 0) {
@@ -94,6 +80,7 @@ public class Jeu {
             joueur1.getPioche().remove(0);
         }
     }
+
 
     private void afficherCartesSurTerrain() {
         System.out.println("Voici les cartes sur le terrain :");
@@ -112,14 +99,14 @@ public class Jeu {
             for (CartePokemon carteAttaque : joueurActuel.getTerrain()) {
                 if (!carteAttaque.getADejaAttaque()) {
                     afficherCartesSurTerrain();
-                    System.out.println(joueurActuel.getNom() + ", veuillez choisir le nom du Pokémon à attaquer avec " + joueurActuel.getTerrain().get(compteurPokemonsAttaque).getNom() + ":");
+                    System.out.println(joueurActuel.getNom() +" , veuillez choisir le nom du Pokémon à attaquer avec "+joueurActuel.getTerrain().get(compteurPokemonsAttaque).getNom() + ":");
                     String choixCible = scanner.nextLine();
                     CartePokemon carteCible = trouverCarteDansTerrainJoueurAdverse(choixCible, joueurActuel);
 
                     if (carteCible != null) {
                         carteAttaque.attaquer(carteCible);
                         System.out.println("Le pokemon " + carteCible.getNom() + " a été attaqué et il lui reste " + carteCible.getVie() + " points de vie.");
-                        compteurPokemonsAttaque += 1;
+                        compteurPokemonsAttaque+=1;
                         if (carteCible.getVie() == 0) {
                             System.out.println("Le pokemon " + carteCible.getNom() + " a été mis K.O. !");
                             joueur1.defausserPokemon(carteCible);
@@ -128,8 +115,13 @@ public class Jeu {
                     } else {
                         System.out.println("Le pokemon cible n'a pas été trouvé.");
                     }
-                    if (compteurPokemonsAttaque == joueurActuel.getTerrain().size()) {
-                        tousLesPokemonsOntAttaque = true;
+                    if (joueurActuel.getPioche().size()!=0 && joueurActuel.getMain().size()!=0)
+                    {
+                        tousLesPokemonsOntAttaque=true;
+                    }
+                    if (compteurPokemonsAttaque == 3) {
+                        compteurPokemonsAttaque=0;
+                        tousLesPokemonsOntAttaque=true;
                     }
                 }
             }
@@ -171,20 +163,35 @@ public class Jeu {
 
     private void choisirCartePokemonPourJoueur2() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Quel pokemon souhaitez-vous placer sur le terrain? (" + afficherCarteMainJoueur2() + "): ");
-        String choixJoueur2 = scanner.nextLine();
+        boolean carteChoisie = false;
 
-        CartePokemon carteChoisie = trouverCarteDansMainJoueur2(choixJoueur2);
-        if (carteChoisie != null) {
-            if (joueur2.placerPokemonSurTerrain(carteChoisie)) {
-                System.out.println("Le pokemon " + carteChoisie.getNom() + " a été placé sur le terrain.");
-            } else {
-                System.out.println("Le terrain est plein. Vous ne pouvez pas placer plus de Pokémon.");
+        while (!carteChoisie) {
+            // Affiche la main du joueur2
+            System.out.println("Votre main:");
+            for (CartePokemon carte : joueur2.getMain()) {
+                carte.afficherCarte();
             }
-        } else {
-            System.out.println("Le pokemon choisi n'est pas dans votre main. Veuillez choisir un pokemon valide.");
+
+            // Demande au joueur de choisir une carte
+            System.out.println("Quel pokemon souhaitez-vous placer sur le terrain? "+afficherCarteMainJoueur2()+": ");
+            String choixJoueur2 = scanner.nextLine();
+
+            CartePokemon carteChoisieMain = trouverCarteDansMainJoueur2(choixJoueur2);
+
+            if (carteChoisieMain != null) {
+                if (joueur2.placerPokemonSurTerrain(carteChoisieMain)) {
+                    System.out.println("Le pokemon " + carteChoisieMain.getNom() + " a été placé sur le terrain.");
+                    carteChoisie = true;
+                } else {
+                    System.out.println("Le terrain est plein. Vous ne pouvez pas placer plus de Pokémon.");
+                    carteChoisie = true; // sortir de la boucle même si le terrain est plein
+                }
+            } else {
+                System.out.println("Le pokemon choisi n'est pas dans votre main. Veuillez choisir un pokemon valide.");
+            }
         }
     }
+
 
 
     public CartePokemon trouverCarteDansTerrainJoueurAdverse(String nomCarte, Dresseur joueurActuel) {
@@ -259,24 +266,12 @@ public class Jeu {
 
         return cartesTerrain.toString();
     }
-    private CartePokemon trouverCarteDansTerrainJoueur2(String nomCarte) {
-        for (CartePokemon carte : joueur2.getTerrain()) {
-            if (carte.getNom().equalsIgnoreCase(nomCarte)) {
-                return carte;
-            }
-        }
-        return null;
-    }
-
-
-
-
     private String afficherMainJoueur2() {
         StringBuilder mainJoueur2 = new StringBuilder();
 
         mainJoueur2.append("En main:\n");
         for (CartePokemon carte : joueur2.getMain()) {
-            mainJoueur2.append("- ").append(carte.getNom()).append(", ").append(carte.getAffinite().toString()).append(", Pouvoir: ").append(carte.getPouvoir()).append(", Vie: ").append(carte.getVie()).append("/").append(carte.getVieMax()).append(", Attaque: ").append(carte.getAttaque()).append("\n");
+            mainJoueur2.append("- ").append(carte.getNom()).append(", ").append(carte.getAffinite().getClass().getSimpleName()).append(", Vie: ").append(carte.getVie()).append("/").append(carte.getVieMax()).append(", Attaque: ").append(carte.getAttaque()).append("\n");
         }
 
         return mainJoueur2.toString();
@@ -332,6 +327,7 @@ public class Jeu {
         }
         return new CartePokemon(nom, affinite, pouvoir, vie, vieMax, attaque);
     }
+
     public Dresseur getJoueurAdverse(Dresseur joueurActuel) {
         if (joueurActuel == joueur1) {
             return joueur2;
