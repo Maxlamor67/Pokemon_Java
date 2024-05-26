@@ -84,7 +84,7 @@ class JoueurOrdinateur extends Dresseur {
 
 abstract class Type {
 #-m_type : String
-+ Type (type : Type)
++ «create» Type ()
 + getType() : Type
 + abstract getAvantage() : Type
 + abstract getType() : Type
@@ -115,7 +115,8 @@ class Terre {
 }
 
 abstract class Pouvoir {
-+ Pouvoir ()
++ «create» Pouvoir ()
++ toString () : String
 }
 
 class SoinTotal {
@@ -128,7 +129,7 @@ class SoinTotal {
 }
 
 class SoinSimple {
-- m_soin;
+- m_soin : Integer
 - m_utilisation: Integer
 + «create» SoinSimple()
 + soigner(carte : CartePokemon)
@@ -147,6 +148,17 @@ class Kamikaze {
 + toString(): String
 }
 
+class Resistance {
+- m_resistance;
+- m_utilisation: Integer
++ «create» Resistance()
++ resister(carte : CartePokemon)
++ getResistance() : Integer
++ getUtilisation() : Integer
++ setUtilisation(utilisation : Integer)
++ toString(): String
+}
+
 Air --|> Type
 Terre --|> Type
 Eau --|> Type
@@ -154,6 +166,7 @@ Feu --|> Type
 SoinSimple --|> Pouvoir
 SoinTotal --|> Pouvoir
 Kamikaze --|> Pouvoir
+Resistance --|> Pouvoir
 CartePokemon "1" *-- "1" Pouvoir
 CartePokemon "1" *-- "1" Type : affinite
 Dresseur "1" *-- "0..*" CartePokemon : possède
