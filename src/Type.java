@@ -21,3 +21,4 @@ public abstract class Type {
         return this.getClass().equals(otherType.getClass());
     }
 }
+
