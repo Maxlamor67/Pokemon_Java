@@ -10,4 +10,7 @@ public class Feu extends Type {
     public Type getType(){
         return new Feu();
     }
+
+    public String toString() {return "Feu";}
+
 }

@@ -41,7 +41,7 @@ public class Jeu {
                 "Gal", "Must", "Cac", "Lag", "Flame", "Sui",
                 "Psy", "Ti", "Démo", "Ping", "Ryx", "Mana",
                 "Sco", "Ciz", "Yve", "Mew","Gir"));
-        pouvoirs = new ArrayList<>(Arrays.asList(new SoinSimple(), new SoinTotal()));
+        pouvoirs = new ArrayList<>(Arrays.asList(new SoinSimple(), new SoinTotal(), new Resistance()));
         Collections.shuffle(nomsPokemon);
         this.scanner = new Scanner(System.in);
     }
@@ -227,7 +227,7 @@ public class Jeu {
             }
 
             cartesTerrain.append("\n");
-            cartesTerrain.append(String.format("  | Affinite : %-6s  |", carte.getAffinite().getClass().getSimpleName()));
+            cartesTerrain.append(String.format("  | Affinite : %-6s  |", carte.getAffinite().toString()));
             if (i < joueur2.getTerrain().size() - 1) {
                 cartesTerrain.append("\t");
             }
@@ -237,7 +237,7 @@ public class Jeu {
                 cartesTerrain.append(String.format("  | Pouvoir : None  |"));
             }
             else {
-                cartesTerrain.append(String.format("  | Pouvoir : %-6s  |", carte.getPouvoir().getClass().getSimpleName()));
+                cartesTerrain.append(String.format("  | Pouvoir : %-6s  |", carte.getPouvoir().toString()));
             }
             if (i < joueur2.getTerrain().size() - 1) {
                 cartesTerrain.append("\t");
@@ -285,7 +285,7 @@ public class Jeu {
 
         mainJoueur2.append("En main:\n");
         for (CartePokemon carte : joueur2.getMain()) {
-            mainJoueur2.append("- ").append(carte.getNom()).append(", ").append(carte.getAffinite().getClass().getSimpleName()).append(", Pouvoir: ").append(carte.getPouvoir()).append(", Vie: ").append(carte.getVie()).append("/").append(carte.getVieMax()).append(", Attaque: ").append(carte.getAttaque()).append("\n");
+            mainJoueur2.append("- ").append(carte.getNom()).append(", ").append(carte.getAffinite().toString()).append(", Pouvoir: ").append(carte.getPouvoir()).append(", Vie: ").append(carte.getVie()).append("/").append(carte.getVieMax()).append(", Attaque: ").append(carte.getAttaque()).append("\n");
         }
 
         return mainJoueur2.toString();

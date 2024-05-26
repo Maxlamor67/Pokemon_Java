@@ -10,6 +10,7 @@ public class CartePokemon {
     private int vie;
     private int vieMax;
     private int attaque;
+    private int resistance;
 
     private boolean aDejaAttaque;
 
@@ -22,6 +23,7 @@ public class CartePokemon {
         this.vie = vie;
         this.vieMax = vieMax;
         this.attaque = attaque;
+        this.resistance = 0;
         this.aDejaAttaque = false; // Le Pokémon n'a pas encore attaqué au début du tour
     }
 
@@ -51,6 +53,10 @@ public class CartePokemon {
 
     public Pouvoir getPouvoir() {return pouvoir;}
 
+    public int getResistance() {return resistance;}
+
+    public void setResistance(int resistance) {this.resistance = resistance;}
+
     public boolean getADejaAttaque() {
         return this.aDejaAttaque;
     }
@@ -62,14 +68,14 @@ public class CartePokemon {
 
     public void attaquer(CartePokemon pokemonCible) {
             if (pokemonCible.getAffinite().equals(this.getAffinite().getAvantage())) {
-                pokemonCible.setVie(pokemonCible.getVie() - this.attaque - 10);
-                System.out.println(this.nom + " a infligé " + (this.attaque + 10) + " dégâts à " + pokemonCible.nom);
+                pokemonCible.setVie(pokemonCible.getVie() - this.attaque + pokemonCible.resistance - 10);
+                System.out.println(this.nom + " a infligé " + (this.attaque - pokemonCible.resistance + 10) + " dégâts à " + pokemonCible.nom);
             } else if (this.getAffinite().equals(pokemonCible.getAffinite().getAvantage())) {
-                pokemonCible.setVie(pokemonCible.getVie() - this.attaque + 10);
-                System.out.println(this.nom + " a infligé " + (this.attaque - 10) + " dégâts à " + pokemonCible.nom);
+                pokemonCible.setVie(pokemonCible.getVie() - this.attaque + pokemonCible.resistance + 10);
+                System.out.println(this.nom + " a infligé " + (this.attaque - pokemonCible.resistance - 10) + " dégâts à " + pokemonCible.nom);
             } else {
-                pokemonCible.setVie(pokemonCible.getVie() - this.attaque);
-                System.out.println(this.nom + " a infligé " + this.attaque + " dégâts à " + pokemonCible.nom);
+                pokemonCible.setVie(pokemonCible.getVie() - this.attaque + pokemonCible.resistance);
+                System.out.println(this.nom + " a infligé " + (this.attaque-pokemonCible.resistance) + " dégâts à " + pokemonCible.nom);
             }
 
     }
@@ -86,7 +92,7 @@ public class CartePokemon {
             System.out.printf("  | Pouvoir : None  |\n");
         }
         else {
-            System.out.printf("  | Pouvoir : %-6s  |\n", pouvoir.getClass().getSimpleName());
+            System.out.printf("  | Pouvoir : %-6s  |\n", pouvoir);
         }
         System.out.printf("  |     %-10s     |\n", nom);
         System.out.println("  *--------------------*");

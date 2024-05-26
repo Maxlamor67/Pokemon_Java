@@ -28,20 +28,20 @@ class Jeu {
 
 class Dresseur {
 # nom : String
-# main : List<CartePokemon>
-# pioche : List<CartePokemon>
-# defausse : List<CartePokemon>
-# terrain : List<CartePokemon>
+# main : String[*]
+# pioche : String[*]
+# defausse : String[*]
+# terrain : String[*]
 - vieRestante : int
 + «create» Dresseur(nom : String)
-+ getTerrain() : List<CartePokemon>
++ getTerrain() : String[*]
 + piocher()
 + afficherPioche()
 + afficherDefausse()
 + afficherMain()
 + getNom() : String
-+ getMain() : List<CartePokemon>
-+ getPioche() : List<CartePokemon>
++ getMain() : String[*]
++ getPioche() : String[*]
 + jouerCarte(carte : CartePokemon)
 + ajouterCarteAPioche(carte : CartePokemon)
 + ajouterCarte(carte : CartePokemon)
@@ -71,10 +71,10 @@ class CartePokemon {
 
 class JoueurOrdinateur extends Dresseur {
 - nom : String
-- main : List<CartePokemon>
-- pioche : List<CartePokemon>
-- defausse : List<CartePokemon>
-- terrain : List<CartePokemon>
+- main : String[*]
+- pioche : String[*]
+- defausse : String[*]
+- terrain : String[*]
 + JoueurOrdinateur(nom : String)
 + jouerTour(jeu : Jeu)
 + trouverPokemonACibler(adversaire : Dresseur) : CartePokemon

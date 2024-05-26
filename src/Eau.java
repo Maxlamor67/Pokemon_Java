@@ -11,4 +11,7 @@ public class Eau extends Type {
     public Type getType(){
         return new Eau();
     }
+
+    public String toString() {return "Eau";}
+
 }

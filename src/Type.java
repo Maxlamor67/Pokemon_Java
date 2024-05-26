@@ -3,6 +3,7 @@ public abstract class Type {
 
     public abstract Type getAvantage();
     public abstract Type getType();
+    public abstract String toString();
 
     @Override
     public boolean equals(Object other) {
