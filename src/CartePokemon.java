@@ -3,13 +3,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-//this.nomsPokemon = new ArrayList<>(Arrays.asList("Herbizarre", "Florizarre", "Salamèche", "Dracaufeu", "Bulbizarre", "Pikachu",
-//                "Arceus", "Keunotor", "Entei", "Sharpedo", "Lippoutou", "Fulguris",
-//                "Carchacrok", "Elektor", "Philaly", "Raiku", "Zeraora", "Poussacha",
-//                "Simiabraz", "Roigada", "Tengalice", "Metamorph", "Malamandre", "Altaria",
-//                "Galifeu", "Mustéflott", "Cacnea", "Laggron", "Flambusard", "Suicune",
-//                "Psykokwak", "Tiplouf", "Démolosse", "Pingoléon", "Aéroptéryx", "Manaphy",
-//                "Scorplane", "Cizayox", "Yveltal", "Mewtwo","Giratina"));
+
 public class CartePokemon {
     private String nom;
     private Type affinite;
@@ -31,7 +25,7 @@ public class CartePokemon {
         this.vieMax = vieMax;
         this.attaque = attaque;
         this.resistance = 0;
-        this.aDejaAttaque = false; // Le Pokémon n'a pas encore attaqué au début du tour
+        this.aDejaAttaque = false;
     }
 
     public String getNom() {
@@ -98,7 +92,7 @@ public class CartePokemon {
         System.out.printf("  | Vie: %-2d/%-3d       |\n", vie, vieMax);
         System.out.printf("  | Affinite : %-6s  |\n", affinite.getClass().getSimpleName());
         if(pouvoir==null) {
-            System.out.printf("  | Pouvoir : None  |\n");
+            System.out.printf("  | Pouvoir : None     |\n");
         }
         else {
             System.out.printf("  | Pouvoir : %-6s  |\n", pouvoir);
@@ -106,6 +100,9 @@ public class CartePokemon {
         System.out.printf("  |     %-10s     |\n", nom);
         System.out.println("  *--------------------*");
     }
+
+
+
 }
 
 
