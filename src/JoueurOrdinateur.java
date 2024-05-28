@@ -12,7 +12,7 @@ public class JoueurOrdinateur extends Dresseur {
     }
 
     private void placerPokemonsSurTerrain() {
-        while (terrain.size() < 3 && !pioche.isEmpty()) {
+        while (terrain.size() < 3 && pioche.size() !=0) {
             CartePokemon carte = pioche.remove(0);
             terrain.add(carte);
         }

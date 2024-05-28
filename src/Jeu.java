@@ -1,9 +1,10 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
-import java.util.Scanner;
+import javax.sound.sampled.*;
+import javax.swing.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.io.File;
+import java.io.IOException;
+import java.util.*;
 
 
 public class Jeu {
@@ -15,6 +16,7 @@ public class Jeu {
     private List<String> nomsPokemon;
     private List<Pouvoir> pouvoirs;
     JoueurOrdinateur joueurAdverse = new JoueurOrdinateur("Ordinateur");
+    private Clip clip;
 
     public Jeu(Dresseur joueur1, Dresseur joueur2) {
         this.joueur1 = joueur1;
@@ -22,25 +24,62 @@ public class Jeu {
         this.joueur2 = joueur2;
         this.joueurActuel = joueur2;
         this.numeroTour = 1;
-        this.nomsPokemon = new ArrayList<>(Arrays.asList("Herbizarre", "Florizarre", "Salamèche", "Dracaufeu", "Bulbizarre", "Pikachu",
-                "Arceus", "Keunotor", "Entei", "Sharpedo", "Lippoutou", "Fulguris",
-                "Carchacrok", "Elektor", "Philaly", "Raiku", "Zeraora", "Poussacha",
-                "Simiabraz", "Roigada", "Tengalice", "Metamorph", "Malamandre", "Altaria",
-                "Galifeu", "Mustéflott", "Cacnea", "Laggron", "Flambusard", "Suicune",
-                "Psykokwak", "Tiplouf", "Démolosse", "Pingoléon", "Aéroptéryx", "Manaphy",
-                "Scorplane", "Cizayox", "Yveltal", "Mewtwo","Giratina"));
-//        this.nomsPokemon = new ArrayList<>(Arrays.asList("He", "Flo", "Sal", "Dra", "Bul", "Pi",
-//                "Arc", "Keu", "Entei", "Shar", "Lip", "Ful",
-//                "Car", "Elek", "Phi", "Raiku", "Zer", "Pou",
-//                "Si", "Roi", "Tengo", "Meta", "Mala", "Alta",
-//                "Gal", "Must", "Cac", "Lag", "Flame", "Sui",
-//                "Psy", "Ti", "Démo", "Ping", "Ryx", "Mana",
-//                "Sco", "Ciz", "Yve", "Mew", "Gir"));
+//        this.nomsPokemon = new ArrayList<>(Arrays.asList("Herbizarre", "Florizarre", "Salamèche", "Dracaufeu", "Bulbizarre", "Pikachu",
+//                "Arceus", "Keunotor", "Entei", "Sharpedo", "Lippoutou", "Fulguris",
+//                "Carchacrok", "Elektor", "Philaly", "Raiku", "Zeraora", "Poussacha",
+//                "Simiabraz", "Roigada", "Tengalice", "Metamorph", "Malamandre", "Altaria",
+//                "Galifeu", "Mustéflott", "Cacnea", "Laggron", "Flambusard", "Suicune",
+//                "Psykokwak", "Tiplouf", "Démolosse", "Pingoléon", "Aéroptéryx", "Manaphy",
+//                "Scorplane", "Cizayox", "Yveltal", "Mewtwo","Giratina"));
+       this.nomsPokemon = new ArrayList<>(Arrays.asList("He", "Flo", "Sal", "Dra", "Bul", "Pi",
+                "Arc", "Keu", "Entei", "Shar", "Lip", "Ful",
+                "Car", "Elek", "Phi", "Raiku", "Zer", "Pou",
+                "Si", "Roi", "Tengo", "Meta", "Mala", "Alta",
+                "Gal", "Must", "Cac", "Lag", "Flame", "Sui",
+               "Psy", "Ti", "Démo", "Ping", "Ryx", "Mana",
+                "Sco", "Ciz", "Yve", "Mew", "Gir"));
         pouvoirs = new ArrayList<>(Arrays.asList(new SoinSimple(), new SoinTotal(), new Resistance()));
         Collections.shuffle(nomsPokemon);
         this.scanner = new Scanner(System.in);
+        playBackgroundMusic("src/son/Pokemon Heart Gold & Soul Silver Musique - Combat ： Champion Arène de Kanto.wav");
+        setupKeyListener();
+    }
+    public void playBackgroundMusic(String filePath) {
+        try {
+            File audioFile = new File(filePath);
+            AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioFile);
+            clip = AudioSystem.getClip();
+            clip.open(audioStream);
+            clip.loop(Clip.LOOP_CONTINUOUSLY);
+            System.out.println("Musique est en route. Appuyez sur flèche du haut pour arrêter la musique.");
+        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+            e.printStackTrace();
+        }
     }
 
+    public void stopBackgroundMusic() {
+        if (clip != null && clip.isRunning()) {
+            clip.stop();
+            clip.close();
+            System.out.println("Musique de fond éteinte.");
+        }
+    }
+
+    private void setupKeyListener() {
+        JFrame frame = new JFrame();
+        frame.setSize(200, 200);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setVisible(true);
+        frame.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_UP) {
+                    stopBackgroundMusic();
+
+                }
+            }
+        });
+    }
     public void jouerTour() {
         boolean estPerdant = false;
         while (!estPerdant) {
@@ -57,7 +96,7 @@ public class Jeu {
                 joueurAdverse.jouerTour(this);
             }
             if (joueur1.getTerrain().size() == 0) {
-                if (joueur1.getPioche().size() == 0 && joueur1.getMain().size() == 0) {
+                if (joueur1.getPioche().size() == 0 && joueur1.getMain().size() == 0 && joueur1.getPioche().size() ==0) {
                     numeroTour++;
                     System.out.println(joueur1 + " a perdu.");
                     break;
@@ -65,12 +104,13 @@ public class Jeu {
             }
 
             if (joueur2.getTerrain().size() == 0) {
-                if (joueur2.getPioche().size() == 0 && joueur2.getMain().size() == 0) {
+                if (joueur2.getPioche().size() == 0 && joueur2.getMain().size() == 0 && joueur2.getPioche().size() ==0) {
+                    numeroTour++;
                     System.out.println(joueur2 + " a perdu.");
                     break;
                 }
             }
-
+            if (joueur2.getTerrain().size()!=0 || joueur1.getTerrain().size()!=0 )
             tousLesPokemonsOntAttaque();
             numeroTour++;
         }
@@ -103,27 +143,27 @@ public class Jeu {
                 String info = "";
                 switch (j) {
                     case 0:
-                        info = "  *--------------------*";
+                        info = "  *--------------------------*";
                         break;
                     case 1:
                         if(carte.getPouvoir()==null) {
-                            info = "  | Pouvoir : None     |";
+                            info = "  | Pouvoir : None           |";
                         }
                         else {
-                            info = String.format("  | Pouvoir : %-7s  |", carte.getPouvoir().toString());
+                            info = String.format("  | Pouvoir : %-7s     |", carte.getPouvoir().toString());
                         }
                         break;
                     case 2:
-                        info = String.format("  | Affinite : %-6s  |", carte.getAffinite().getClass().getSimpleName());
+                        info = String.format("  | Affinite : %-6s        |", carte.getAffinite().getClass().getSimpleName());
                         break;
                     case 3:
-                        info = String.format("  | Vie: %-2d/%-3d       |", carte.getVie(), carte.getVieMax());
+                        info = String.format("  | Vie: %-2d/%-3d             |", carte.getVie(), carte.getVieMax());
                         break;
                     case 4:
-                        info = String.format("  | Attaque: %-2d        |", carte.getAttaque());
+                        info = String.format("  | Attaque: %-2d              |", carte.getAttaque());
                         break;
                     case 5:
-                        info = "  *--------------------*";
+                        info = "  *--------------------------*";
                         break;
 
                 }
@@ -140,7 +180,7 @@ public class Jeu {
         for (int i = 0; i < joueur1.getTerrain().size(); i++) {
             System.out.printf("      ");
             CartePokemon carte = joueur1.getTerrain().get(i);
-            System.out.printf("  |     %-10s     |", carte.getNom());
+            System.out.printf("  |        %-10s        |", carte.getNom());
 
             if (i < joueur1.getTerrain().size() - 1) {
                 System.out.print("\t");
@@ -149,18 +189,18 @@ public class Jeu {
         System.out.println();
         for (int i = 0; i < joueur1.getTerrain().size(); i++) {
             System.out.printf("      ");
-            System.out.print("  *--------------------*");
+            System.out.print("  *--------------------------*");
             if (i < joueur1.getTerrain().size() - 1) {
                 System.out.print("\t");
             }
         }
         System.out.println();
-        System.out.println("----------------------------------------------------------------------------------------------------");
+        System.out.println("-----------------------------------------------------------------------------------------------------------");
 
 
         for (int i = 0; i < joueur2.getTerrain().size(); i++) {
             System.out.printf("      ");
-            System.out.print("  *--------------------*");
+            System.out.print("  *--------------------------*");
             if (i < joueur2.getTerrain().size() - 1) {
                 System.out.print("\t");
             }
@@ -170,7 +210,7 @@ public class Jeu {
         for (int i = 0; i < joueur2.getTerrain().size(); i++) {
             System.out.printf("      ");
             CartePokemon carte = joueur2.getTerrain().get(i);
-            System.out.printf("  |     %-10s     |", carte.getNom());
+            System.out.printf("  |        %-10s        |", carte.getNom());
 
             if (i < joueur2.getTerrain().size() - 1) {
                 System.out.print("\t");
@@ -185,27 +225,27 @@ public class Jeu {
                 String info = "";
                 switch (j) {
                     case 0:
-                        info = "  *--------------------*";
+                        info = "  *--------------------------*";
                         break;
                     case 1:
-                        info = String.format("  | Attaque: %-2d        |", carte.getAttaque());
+                        info = String.format("  | Attaque: %-2d              |", carte.getAttaque());
                         break;
                     case 2:
-                        info = String.format("  | Vie: %-2d/%-3d       |", carte.getVie(), carte.getVieMax());
+                        info = String.format("  | Vie: %-2d/%-3d             |", carte.getVie(), carte.getVieMax());
                         break;
                     case 3:
-                        info = String.format("  | Affinite : %-6s  |", carte.getAffinite().getClass().getSimpleName());
+                        info = String.format("  | Affinite : %-6s        |", carte.getAffinite().getClass().getSimpleName());
                         break;
                     case 4:
                         if(carte.getPouvoir()==null) {
-                            info = "  | Pouvoir : None     |";
+                            info = "  | Pouvoir : None              |";
                         }
                         else {
-                            info = String.format("  | Pouvoir : %-7s  |", carte.getPouvoir().toString());
+                            info = String.format("  | Pouvoir : %-7s     |", carte.getPouvoir().toString());
                         }
                         break;
                     case 5:
-                        info = String.format("  *--------------------*");
+                        info = String.format("  *-------------------------*");
                         break;
 
                 }
@@ -327,7 +367,7 @@ public class Jeu {
             CartePokemon carte = joueur2.getTerrain().get(i);
 
             cartesTerrain.append("\n");
-            cartesTerrain.append("  *--------------------*");
+            cartesTerrain.append("    *--------------------*");
             if (i < joueur2.getTerrain().size() - 1) {
                 cartesTerrain.append("\t");
             }
@@ -346,7 +386,7 @@ public class Jeu {
 
             cartesTerrain.append("\n");
             if(carte.getPouvoir()==null) {
-                cartesTerrain.append(String.format("  | Pouvoir : None      |"));
+                cartesTerrain.append(String.format("  | Pouvoir : None         |"));
             }
             else {
                 cartesTerrain.append(String.format("  | Pouvoir : %-7s  |", carte.getPouvoir().toString()));
@@ -390,7 +430,7 @@ public class Jeu {
         System.out.println();
         System.out.printf("    ");
         for (int i = 0; i < joueur2.getMain().size(); i++) {
-            System.out.print("    *--------------------*      ");
+            System.out.print("    *--------------------------*        ");
 
         }
         System.out.println();
@@ -398,7 +438,7 @@ public class Jeu {
         for (int i = 0; i < joueur2.getMain().size(); i++) {
             System.out.printf("      ");
             CartePokemon carte = joueur2.getMain().get(i);
-            System.out.printf("  |     %-10s     |", carte.getNom());
+            System.out.printf("  |        %-10s        |", carte.getNom());
 
             if (i < joueur2.getMain().size() - 1) {
                 System.out.print("\t");
@@ -413,26 +453,26 @@ public class Jeu {
                 String info = "";
                 switch (j) {
                     case 0:
-                        info = "  *--------------------*";
+                        info = "  *--------------------------*";
                         break;
                     case 1:
-                        info = String.format("  | Attaque: %-2d        |", carte.getAttaque());
+                        info = String.format("  | Attaque: %-2d              |", carte.getAttaque());
                         break;
                     case 2:
-                        info = String.format("  | Vie: %-2d/%-3d       |", carte.getVie(), carte.getVieMax());
+                        info = String.format("  | Vie: %-2d/%-3d             |", carte.getVie(), carte.getVieMax());
                         break;
                     case 3:
-                        info = String.format("  | Affinite : %-6s  |", carte.getAffinite().getClass().getSimpleName());
+                        info = String.format("  | Affinite : %-6s        |", carte.getAffinite().getClass().getSimpleName());
                         break;
                     case 4:
                         if (carte.getPouvoir() == null) {
-                            info = "  | Pouvoir : None     |";
+                            info = "  | Pouvoir : None           |";
                         } else {
-                            info = String.format("  | Pouvoir : %-7s  |", carte.getPouvoir().toString());
+                            info = String.format("  | Pouvoir : %-7s        |", carte.getPouvoir().toString());
                         }
                         break;
                     case 5:
-                        info = String.format("  *--------------------*");
+                        info = String.format("  *--------------------------*");
                         break;
 
                 }
@@ -481,7 +521,7 @@ public class Jeu {
 
         int vieMax = rand.nextInt(11) * 10 + 100; // Nombre aléatoire entre 100 et 200, multiple de 10
         int vie = vieMax;
-        int attaque = rand.nextInt(4000) * 10 + 10; // Nombre aléatoire entre 10 et 40, multiple de 10
+        int attaque = rand.nextInt(8) * 10 + 10; // Nombre aléatoire entre 10 et 40, multiple de 10
 
         Type affinite = affinites.get(rand.nextInt(affinites.size()));
         Pouvoir pouvoir = null;
