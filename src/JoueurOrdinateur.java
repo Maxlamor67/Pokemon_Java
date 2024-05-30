@@ -12,7 +12,7 @@ public class JoueurOrdinateur extends Dresseur {
     }
 
     private void placerPokemonsSurTerrain() {
-        while (terrain.size() < 3 && !pioche.isEmpty()) {
+        while (terrain.size() < 3 && pioche.size() !=0) {
             CartePokemon carte = pioche.remove(0);
             terrain.add(carte);
         }
@@ -26,8 +26,12 @@ public class JoueurOrdinateur extends Dresseur {
                 CartePokemon carteCible = choisirCible(adversaire.getTerrain());
 
                 if (carteCible != null) {
+                    int vieAvantAttaque = carteCible.getVie();
                     carteAttaque.attaquer(carteCible);
-                    System.out.println(nom + " a attaqué " + carteCible.getNom() + " avec " + carteAttaque.getNom() + ". Il reste " + carteCible.getVie() + " points de vie à " + carteCible.getNom());
+                    int degats = vieAvantAttaque - carteCible.getVie();
+                    System.out.println(nom + " a attaqué " + carteCible.getNom() + " avec " + carteAttaque.getNom() + ". " +
+                            "Il reste " + carteCible.getVie() + " points de vie à " + carteCible.getNom() +
+                            " (-" + degats + " points)");
 
                     if (carteCible.getVie() <= 0) {
                         System.out.println("Le pokemon " + carteCible.getNom() + " a été mis K.O. !");

@@ -30,7 +30,7 @@ public class Jeu {
                 "Gal", "Must", "Cac", "Lag", "Flame", "Sui",
                 "Psy", "Ti", "Démo", "Ping", "Ryx", "Mana",
                 "Sco", "Ciz", "Yve", "Mew", "Gir"));
-        pouvoirs = new ArrayList<>(Arrays.asList(new SoinSimple(), new SoinTotal(), new Resistance(), new SoinTotal(), new Resistance(), new SoinTotal(), new Resistance(), new SoinTotal(), new Resistance(), new SoinTotal(), new Resistance(), new SoinTotal(), new Resistance(), new SoinTotal(), new Resistance(), new SoinTotal(), new Resistance()));
+        pouvoirs = new ArrayList<>(Arrays.asList(new SoinSimple(), new SoinTotal(), new Resistance()));
         Collections.shuffle(nomsPokemon);
         this.scanner = new Scanner(System.in);
     }
@@ -65,72 +65,12 @@ public class Jeu {
                 }
             }
 
-            utilisationDesPouvoirs();
-
             tousLesPokemonsOntAttaque();
             numeroTour++;
         }
     }
 
-    private void utilisationDesPouvoirs() {
-        afficherCartesSurTerrain();
-        for (CartePokemon carte : this.joueur2.getTerrain()) {
-            if (carte.getPouvoir() != null && carte.getPouvoir().getUtilisation() > 0) {
-                System.out.println("Le pokemon " + carte.getNom() + " peut encore utiliser : " + carte.getPouvoir().toString() + "\n");
-                System.out.println("Voulez-vous utiliser le pouvoir de ce pokemon ? (oui/non) \n");
 
-                String choix = scanner.nextLine();
-                if (choix.equalsIgnoreCase("oui")) {
-                    System.out.println("Vous voulez utiliser le pouvoir sur quel pokemon? \n");
-                    String choixCible = scanner.nextLine();
-                    CartePokemon carteCible = trouverCarteDansTerrain(choixCible);
-                    if (carteCible != null) {
-                        Pouvoir pouvoir = carte.getPouvoir();
-                        boolean peutUtiliserPouvoir = false;
-
-                        switch (pouvoir.getType()) {
-                            case ALLIE:
-                                if (joueur2.getTerrain().contains(carteCible)) {
-                                    peutUtiliserPouvoir = true;
-                                }
-                                break;
-                            case ENNEMI:
-                                if (getJoueurAdverse(joueur2).getTerrain().contains(carteCible)) {
-                                    peutUtiliserPouvoir = true;
-                                }
-                                break;
-                            case TOUS:
-                                peutUtiliserPouvoir = true;
-                                break;
-                        }
-
-                        if (peutUtiliserPouvoir) {
-                            pouvoir.utiliserPouvoir(carteCible);
-                            System.out.println("Le pouvoir a été utilisé avec succès sur " + carteCible.getNom() + ".");
-                        } else {
-                            System.out.println("Le pouvoir ne peut pas être utilisé sur ce Pokémon.");
-                        }
-                    } else {
-                        System.out.println("Le pokemon cible n'a pas été trouvé.");
-                    }
-                }
-            }
-        }
-    }
-
-    private CartePokemon trouverCarteDansTerrain(String nomCarte) {
-        for (CartePokemon carte : joueur1.getTerrain()) {
-            if (carte.getNom().equalsIgnoreCase(nomCarte)) {
-                return carte;
-            }
-        }
-        for (CartePokemon carte : joueur2.getTerrain()) {
-            if (carte.getNom().equalsIgnoreCase(nomCarte)) {
-                return carte;
-            }
-        }
-        return null;
-    }
 
 
     private void placerPokemonsSurTerrainPourJoueur1() {
