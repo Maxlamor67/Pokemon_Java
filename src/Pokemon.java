@@ -26,5 +26,4 @@ public class Pokemon {
     // Joueur 2 (humain) joue son tour
     jeu.jouerTour();
   }
-
 }
