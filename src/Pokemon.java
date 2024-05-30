@@ -5,16 +5,17 @@ public class Pokemon {
 
     Jeu jeu = new Jeu(joueur1, joueur2);
 
+    for (int i = 0; i < 20; i++) {
+      CartePokemon cartePokemon = jeu.genererPokemon();
+      joueur2.ajouterCarteAPioche(cartePokemon);
+    }
     // Générer les Pokémon pour les joueurs
     for (int i = 0; i < 21; i++) {
       CartePokemon cartePokemon = jeu.genererPokemon();
       joueur1.ajouterCarteAPioche(cartePokemon);
     }
 
-    for (int i = 0; i < 20; i++) {
-      CartePokemon cartePokemon = jeu.genererPokemon();
-      joueur2.ajouterCarteAPioche(cartePokemon);
-    }
+
 
     // Piocher 5 cartes pour chaque joueur
     joueur1.piocher();

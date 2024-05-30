@@ -38,7 +38,7 @@ public class Jeu {
                 "Gal", "Must", "Cac", "Lag", "Flame", "Sui",
                "Psy", "Ti", "Démo", "Ping", "Ryx", "Mana",
                 "Sco", "Ciz", "Yve", "Mew", "Gir"));
-        pouvoirs = new ArrayList<>(Arrays.asList(new SoinSimple(), new SoinTotal(), new Resistance()));
+        pouvoirs = new ArrayList<>(Arrays.asList(new SoinSimple(), new SoinTotal(), new Resistance(),new SoinSimple(), new SoinTotal(), new Resistance(),new SoinSimple(), new SoinTotal(), new Resistance()));
         Collections.shuffle(nomsPokemon);
         this.scanner = new Scanner(System.in);
         playBackgroundMusic("src/son/Pokemon Heart Gold & Soul Silver Musique - Combat ： Champion Arène de Kanto.wav");
@@ -110,9 +110,10 @@ public class Jeu {
                     break;
                 }
             }
-            if (joueur2.getTerrain().size()!=0 || joueur1.getTerrain().size()!=0 )
-            tousLesPokemonsOntAttaque();
-            numeroTour++;
+            if (joueur2.getTerrain().size()!=0 && joueur1.getTerrain().size()!=0 ) {
+                tousLesPokemonsOntAttaque();
+                numeroTour++;
+            }
         }
     }
 
@@ -551,7 +552,7 @@ public class Jeu {
 
         Type affinite = affinites.get(rand.nextInt(affinites.size()));
         Pouvoir pouvoir = null;
-        if((rand.nextInt(16))%2==0) {
+        if((rand.nextInt(2))%2==0) {
             if (!pouvoirs.isEmpty()) {
                 int indice = rand.nextInt(pouvoirs.size());
                 pouvoir = pouvoirs.get(indice);
