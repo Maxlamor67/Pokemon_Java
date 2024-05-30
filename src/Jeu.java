@@ -150,14 +150,25 @@ public class Jeu {
                             info = "  | Pouvoir : None           |";
                         }
                         else {
-                            info = String.format("  | Pouvoir : %-7s     |", carte.getPouvoir().toString());
+                            if (carte.getPouvoir().toString()=="Berserk") {
+                                info = String.format("  | Pouvoir : %-7s        |", carte.getPouvoir().toString());
+                                break;
+                            }else{
+                                info = String.format("  | Pouvoir : %-7s     |", carte.getPouvoir().toString());
+                                break;
+                            }
                         }
                         break;
                     case 2:
                         info = String.format("  | Affinite : %-6s        |", carte.getAffinite().getClass().getSimpleName());
                         break;
                     case 3:
-                        info = String.format("  | Vie: %-2d/%-3d             |", carte.getVie(), carte.getVieMax());
+                        if (carte.getVie()>=100) {
+                            info = String.format("  | Vie: %-2d/%-3d             |", carte.getVie(), carte.getVieMax());
+                        }else{
+                            info = String.format("  | Vie: %-2d/%-3d              |", carte.getVie(), carte.getVieMax());
+                        }
+
                         break;
                     case 4:
                         info = String.format("  | Attaque: %-2d              |", carte.getAttaque());
@@ -195,7 +206,7 @@ public class Jeu {
             }
         }
         System.out.println();
-        System.out.println("-----------------------------------------------------------------------------------------------------------");
+        System.out.println("------------------------------------------------------------------------------------------------------------------------");
 
 
         for (int i = 0; i < joueur2.getTerrain().size(); i++) {
@@ -231,21 +242,32 @@ public class Jeu {
                         info = String.format("  | Attaque: %-2d              |", carte.getAttaque());
                         break;
                     case 2:
-                        info = String.format("  | Vie: %-2d/%-3d             |", carte.getVie(), carte.getVieMax());
-                        break;
+                        if (carte.getVie()>=100) {
+                            info = String.format("  | Vie: %-2d/%-3d             |", carte.getVie(), carte.getVieMax());
+                            break;
+                        }else{
+                            info = String.format("  | Vie: %-2d/%-3d              |", carte.getVie(), carte.getVieMax());
+                            break;
+                        }
                     case 3:
                         info = String.format("  | Affinite : %-6s        |", carte.getAffinite().getClass().getSimpleName());
                         break;
                     case 4:
                         if(carte.getPouvoir()==null) {
-                            info = "  | Pouvoir : None              |";
+                            info = "  | Pouvoir : None           |";
                         }
                         else {
-                            info = String.format("  | Pouvoir : %-7s     |", carte.getPouvoir().toString());
+                            if (carte.getPouvoir().toString() == "Berserk") {
+                                info = String.format("  | Pouvoir : %-7s        |", carte.getPouvoir().toString());
+
+                            }else{
+                                info = String.format("  | Pouvoir : %-7s     |", carte.getPouvoir().toString());
+                            }
+                            break;
                         }
                         break;
                     case 5:
-                        info = String.format("  *-------------------------*");
+                        info = String.format("  *--------------------------*   ");
                         break;
 
                 }
@@ -267,15 +289,16 @@ public class Jeu {
 
     private void tousLesPokemonsOntAttaque() {
         boolean tousLesPokemonsOntAttaque = false;
+        boolean carteChoisie = false;
         int compteurPokemonsAttaque = 0;
         while (!tousLesPokemonsOntAttaque) {
+            while(!carteChoisie){
             for (CartePokemon carteAttaque : joueurActuel.getTerrain()) {
                 if (!carteAttaque.getADejaAttaque()) {
                     afficherCartesSurTerrain();
                     System.out.println(joueurActuel.getNom() +" , veuillez choisir le nom du Pokémon à attaquer avec "+joueurActuel.getTerrain().get(compteurPokemonsAttaque).getNom() + ":");
                     String choixCible = scanner.nextLine();
                     CartePokemon carteCible = trouverCarteDansTerrainJoueurAdverse(choixCible, joueurActuel);
-
                     if (carteCible != null) {
                         int vieInitiale = carteCible.getVie(); // Stocke les points de vie initiaux
                         carteAttaque.attaquer(carteCible);
@@ -291,8 +314,11 @@ public class Jeu {
                             joueur1.defausserPokemon(carteCible);
                             joueur1.getTerrain().remove(carteCible);
                         }
+                        carteChoisie = true;
                     } else {
                         System.out.println("Le pokemon cible n'a pas été trouvé.");
+
+                    }
                     }
                     if (joueurActuel.getPioche().size() != 0 && joueurActuel.getMain().size() != 0) {
                         tousLesPokemonsOntAttaque = true;
@@ -521,11 +547,11 @@ public class Jeu {
 
         int vieMax = rand.nextInt(11) * 10 + 100; // Nombre aléatoire entre 100 et 200, multiple de 10
         int vie = vieMax;
-        int attaque = rand.nextInt(8) * 10 + 10; // Nombre aléatoire entre 10 et 40, multiple de 10
+        int attaque = rand.nextInt(4) * 10 + 10; // Nombre aléatoire entre 10 et 40, multiple de 10
 
         Type affinite = affinites.get(rand.nextInt(affinites.size()));
         Pouvoir pouvoir = null;
-        if((rand.nextInt(2))%2==0) {
+        if((rand.nextInt(16))%2==0) {
             if (!pouvoirs.isEmpty()) {
                 int indice = rand.nextInt(pouvoirs.size());
                 pouvoir = pouvoirs.get(indice);
