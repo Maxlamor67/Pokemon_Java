@@ -102,7 +102,9 @@ public class CartePokemon {
     }
 
 
-
+    public void setAttaque(int attaque) {
+        this.attaque = attaque;
+    }
 }
 
 
