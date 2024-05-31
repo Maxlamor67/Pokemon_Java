@@ -6,7 +6,7 @@ public class SoinSimple extends Pouvoir{
     public SoinSimple() {
         super();
         this.m_soin = 30;
-        this.m_utilisation = 1;
+        this.m_utilisation = 1000;
         this.m_type = TypePouvoir.ALLIE;
     }
 
@@ -17,7 +17,9 @@ public class SoinSimple extends Pouvoir{
         else{
             pokemon.setVie(pokemon.getVie()+m_soin);
         }
-        m_utilisation = 0;
+        if(m_utilisation != 0){
+            m_utilisation--;
+        }
     }
 
     public int getSoin() {

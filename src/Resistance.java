@@ -6,13 +6,14 @@ public class Resistance extends Pouvoir {
         super();
         this.m_resistance = 10;
         this.m_utilisation = 1;
-        this.m_type = TypePouvoir.ALLIE;
+        this.m_type = TypePouvoir.TOUTCAMP;
     }
 
     public void utiliserPouvoir(CartePokemon pokemon) {
         pokemon.setResistance(this.m_resistance);
-        m_utilisation = 0;
-
+        if(m_utilisation != 0){
+            m_utilisation--;
+        }
     }
 
     public int getResistance() {
