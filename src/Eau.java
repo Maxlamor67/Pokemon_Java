@@ -1,10 +1,17 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class Eau extends Type {
     public Eau(){
         super();
     }
+
     @Override
-    public Type getAvantage(){
-        return new Feu();
+    public List<Type> getAvantages(){
+        List<Type> avantages = new ArrayList<>();
+        avantages.add(new Feu());
+        avantages.add(new Plomb());
+        return avantages;
     }
 
     @Override
@@ -13,5 +20,4 @@ public class Eau extends Type {
     }
 
     public String toString() {return "Eau";}
-
 }

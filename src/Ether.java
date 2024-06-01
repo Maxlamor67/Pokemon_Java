@@ -1,8 +1,8 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class Air extends Type {
-    public Air(){
+public class Ether extends Type {
+    public Ether(){
         super();
     }
 
@@ -10,14 +10,18 @@ public class Air extends Type {
     public List<Type> getAvantages(){
         List<Type> avantages = new ArrayList<>();
         avantages.add(new Terre());
+        avantages.add(new Eau());
+        avantages.add(new Feu());
+        avantages.add(new Air());
         avantages.add(new Plomb());
+        avantages.add(new Ether());
         return avantages;
     }
 
     @Override
     public Type getType(){
-        return new Air();
+        return new Ether();
     }
 
-    public String toString() {return "Air";}
+    public String toString() {return "Ether";}
 }

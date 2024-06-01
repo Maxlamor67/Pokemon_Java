@@ -1,10 +1,17 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class Terre extends Type {
     public Terre(){
         super();
     }
+
     @Override
-    public Type getAvantage(){
-        return new Eau();
+    public List<Type> getAvantages(){
+        List<Type> avantages = new ArrayList<>();
+        avantages.add(new Eau());
+        avantages.add(new Plomb());
+        return avantages;
     }
 
     @Override
@@ -13,5 +20,4 @@ public class Terre extends Type {
     }
 
     public String toString() {return "Terre";}
-
 }

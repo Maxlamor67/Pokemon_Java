@@ -1,7 +1,10 @@
-public abstract class Type {
-    public Type(){};
+import java.util.Arrays;
+import java.util.List;
 
-    public abstract Type getAvantage();
+public abstract class Type {
+    public Type() {}
+
+    public abstract List<Type> getAvantages();
     public abstract Type getType();
     public abstract String toString();
 
@@ -21,4 +24,3 @@ public abstract class Type {
         return this.getClass().equals(otherType.getClass());
     }
 }
-
