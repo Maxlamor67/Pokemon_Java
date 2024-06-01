@@ -25,6 +25,6 @@ public class SoinTotal extends Pouvoir {
     public TypePouvoir getType() {return m_type;}
 
 
-    public String toString() {return "SoinSimple";}
+    public String toString() {return "SoinTotal";}
 
 }

@@ -10,7 +10,7 @@ public class Kamikaze extends Pouvoir{
 
     public void utiliserPouvoir(CartePokemon pokemon, CartePokemon other) {
         pokemon.setVie(0);
-        other.setVie(0);
+        other.setVie((0));
         m_utilisation = 0;
     }
 
@@ -25,6 +25,6 @@ public class Kamikaze extends Pouvoir{
     public TypePouvoir getType() {return m_type;}
 
 
-    public String toString() {return "SoinSimple";}
+    public String toString() {return "Kamikaze";}
 
 }
