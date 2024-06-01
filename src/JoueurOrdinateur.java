@@ -1,4 +1,5 @@
 import java.util.List;
+import java.util.Objects;
 import java.util.Random;
 
 public class JoueurOrdinateur extends Dresseur {
@@ -8,7 +9,50 @@ public class JoueurOrdinateur extends Dresseur {
 
     public void jouerTour(Jeu jeu) {
         placerPokemonsSurTerrain();
+        utilisationDesPouvoirs(jeu);
         attaquerAdversaire(jeu);
+    }
+
+    private void utilisationDesPouvoirs(Jeu jeu) {
+        Dresseur adversaire = jeu.getJoueurAdverse(this);
+        CartePokemon carteCible = null;
+        for (CartePokemon carte : this.getTerrain()) {
+            if (carte.getPouvoir() != null && carte.getPouvoir().getUtilisation() > 0) {
+                Pouvoir pouvoir = carte.getPouvoir();
+                if(Objects.equals(pouvoir.toString(), "SoinSimple") || Objects.equals(pouvoir.toString(), "SoinTotal")){
+                    for(CartePokemon carte2 : this.getTerrain()) {
+                        if(carte2.getVie() <70 ){
+                            carteCible = carte2;
+                            break;
+                        }
+                    }
+                }
+                else {
+                    switch (pouvoir.getType()) {
+                        case ALLIE:
+                            for(CartePokemon carte2 : this.getTerrain()) {
+                                if(!Objects.equals(carte2.getNom(), carte.getNom())){
+                                    carteCible = carte2;
+                                    break;
+                                }
+                            }
+                        case ENNEMI:
+                            carteCible = choisirCible(adversaire.getTerrain());
+                            break;
+                        case TOUTCAMP:
+                            carteCible = carte;
+                            break;
+                        case TOUS:
+                            carteCible = choisirCible(adversaire.getTerrain());
+                            break;
+                    }
+                }
+                if (carteCible != null) {
+                    pouvoir.utiliserPouvoir(carteCible);
+                    System.out.println("Le pouvoir a été utilisé avec succès sur " + carteCible.getNom() + ".");
+                }
+            }
+        }
     }
 
     private void placerPokemonsSurTerrain() {

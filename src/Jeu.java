@@ -148,6 +148,9 @@ public class Jeu {
                                     peutUtiliserPouvoir = true;
                                 }
                                 break;
+                            case TOUTCAMP:
+                                peutUtiliserPouvoir = true;
+                                break;
                             case TOUS:
                                 peutUtiliserPouvoir = true;
                                 break;

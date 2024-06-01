@@ -11,7 +11,9 @@ public class SoinTotal extends Pouvoir {
 
     public void utiliserPouvoir(CartePokemon pokemon) {
         pokemon.setVie(pokemon.getVieMax());
-        m_utilisation = 0;
+        if(m_utilisation != 0){
+            m_utilisation--;
+        }
     }
 
     public int getUtilisation() {

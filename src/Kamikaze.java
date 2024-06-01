@@ -10,8 +10,11 @@ public class Kamikaze extends Pouvoir{
 
     public void utiliserPouvoir(CartePokemon pokemon, CartePokemon other) {
         pokemon.setVie(0);
-        other.setVie((0));
-        m_utilisation = 0;
+
+        other.setVie(0);
+        if(m_utilisation != 0){
+            m_utilisation--;
+        }
     }
 
     public int getUtilisation() {
