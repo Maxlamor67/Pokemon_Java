@@ -38,7 +38,7 @@ public class Jeu {
                 "Gal", "Must", "Cac", "Lag", "Flame", "Sui",
                 "Psy", "Ti", "Taup", "Ping", "Ryx", "Mana",
                 "Sco", "Ciz", "Yve", "Mew", "Gir"));
-        pouvoirs = new ArrayList<>(Arrays.asList(new SoinTotal(),new SoinTotal(), new Kamikaze(), new Resistance(),new SoinTotal(),new SoinTotal(), new Resistance(),new AffiniteEther(), new AffinitePlomb(),new AffiniteEther(), new AffinitePlomb(),new AffiniteEther(), new AffinitePlomb()));
+        pouvoirs = new ArrayList<>(Arrays.asList(new SoinTotal(),new SoinTotal(), new Kamikaze(), new Resistance(),new SoinTotal(),new SoinTotal(), new Resistance(),new AffiniteEther(), new AffinitePlomb(),new AffiniteEther(), new AffinitePlomb(),new Peur(),new FerveurGuerriere(),new Peur(),new FerveurGuerriere(),new Peur(),new FerveurGuerriere(),new Peur(),new FerveurGuerriere()));
         Collections.shuffle(nomsPokemon);
         this.scanner = new Scanner(System.in);
         playBackgroundMusic("src/son/Pokemon Heart Gold & Soul Silver Musique - Combat ： Champion Arène de Kanto.wav");
@@ -233,6 +233,14 @@ public class Jeu {
                                 info = String.format("  | Pouvoir : %-7s       |", carte.getPouvoir().toString());
                                 break;
                             }
+                            else if (carte.getPouvoir().toString()=="Peur") {
+                                info = String.format("  | Pouvoir : %-7s        |", carte.getPouvoir().toString());
+                                break;
+                            }
+                            else if (carte.getPouvoir().toString()=="FerveurGuerriere") {
+                                info = String.format("  | Pouvoir :%-7s|", carte.getPouvoir().toString());
+                                break;
+                            }
                             else if (carte.getPouvoir().toString()=="AffinitePlomb" || carte.getPouvoir().toString()=="AffiniteEther") {
                                 info = String.format("  | Pouvoir : %-7s  |", carte.getPouvoir().toString());
                                 break;
@@ -354,6 +362,14 @@ public class Jeu {
                             }
                             else if (carte.getPouvoir().toString()=="Kamikaze") {
                                 info = String.format("  | Pouvoir : %-7s       |", carte.getPouvoir().toString());
+                                break;
+                            }
+                            else if (carte.getPouvoir().toString()=="Peur") {
+                                info = String.format("  | Pouvoir : %-7s        |", carte.getPouvoir().toString());
+                                break;
+                            }
+                            else if (carte.getPouvoir().toString()=="FerveurGuerriere") {
+                                info = String.format("  | Pouvoir :%-7s|", carte.getPouvoir().toString());
                                 break;
                             }
                             else if (carte.getPouvoir().toString()=="AffinitePlomb" || carte.getPouvoir().toString()=="AffiniteEther") {
@@ -535,6 +551,14 @@ public class Jeu {
                         }else {
                             if (carte.getPouvoir().toString()=="Berserk") {
                                 info = String.format("  | Pouvoir : %-7s              |", carte.getPouvoir().toString());
+                                break;
+                            }
+                            else if (carte.getPouvoir().toString()=="Peur") {
+                                info = String.format("  | Pouvoir : %-7s              |", carte.getPouvoir().toString());
+                                break;
+                            }
+                            else if (carte.getPouvoir().toString()=="FerveurGuerriere") {
+                                info = String.format("  | Pouvoir :%-7s      |", carte.getPouvoir().toString());
                                 break;
                             }
                             else if (carte.getPouvoir().toString()=="AffinitePlomb" || carte.getPouvoir().toString()=="AffiniteEther") {
