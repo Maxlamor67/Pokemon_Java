@@ -1,3 +1,6 @@
+package Pouvoir;
+import Joueur.CartePokemon;
+
 public abstract class Pouvoir {
 
 

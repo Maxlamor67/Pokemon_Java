@@ -1,23 +1,25 @@
+package Element;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class Terre extends Type {
-    public Terre(){
+public class Eau extends Type {
+    public Eau(){
         super();
     }
 
     @Override
     public List<Type> getAvantages(){
         List<Type> avantages = new ArrayList<>();
-        avantages.add(new Eau());
+        avantages.add(new Feu());
         avantages.add(new Plomb());
         return avantages;
     }
 
     @Override
     public Type getType(){
-        return new Terre();
+        return new Eau();
     }
 
-    public String toString() {return "Terre";}
+    public String toString() {return "Element.Eau";}
 }

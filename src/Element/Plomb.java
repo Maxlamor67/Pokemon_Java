@@ -1,3 +1,5 @@
+package Element;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,5 +18,5 @@ public class Plomb extends Type {
         return new Plomb();
     }
 
-    public String toString() {return "Plomb";}
+    public String toString() {return "Element.Plomb";}
 }

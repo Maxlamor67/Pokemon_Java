@@ -1,3 +1,6 @@
+package Pouvoir;
+import Joueur.CartePokemon;
+
 public class FerveurGuerriere extends Pouvoir {
     private int m_utilisation;
     private TypePouvoir m_type;

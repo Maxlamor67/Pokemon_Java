@@ -1,23 +1,22 @@
-public class Resistance extends Pouvoir {
-    private int m_resistance;
+package Pouvoir;
+import Joueur.CartePokemon;
+
+public class SoinTotal extends Pouvoir {
+
     private int m_utilisation;
     private TypePouvoir m_type;
-    public Resistance() {
+
+    public SoinTotal() {
         super();
-        this.m_resistance = 10;
         this.m_utilisation = 1;
-        this.m_type = TypePouvoir.TOUTCAMP;
+        this.m_type = TypePouvoir.ALLIE;
     }
 
     public void utiliserPouvoir(CartePokemon pokemon) {
-        pokemon.setResistance(this.m_resistance);
+        pokemon.setVie(pokemon.getVieMax());
         if(m_utilisation != 0){
             m_utilisation--;
         }
-    }
-
-    public int getResistance() {
-        return m_resistance;
     }
 
     public int getUtilisation() {
@@ -30,5 +29,7 @@ public class Resistance extends Pouvoir {
 
     public TypePouvoir getType() {return m_type;}
 
-    public String toString() {return "Resistance";}
+
+    public String toString() {return "SoinTotal";}
+
 }

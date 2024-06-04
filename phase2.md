@@ -15,14 +15,14 @@ Le même pouvoir ne peut se voir attribuer qu'à un seul Pokémon dans tout le j
 Les pouvoirs peuvent être à utilisation unique ou être réutilisables à chaque tour.
 - **Résistance**, à utilisation unique : le Pokémon choisit un Pokémon de son camp (éventuellement lui-même). Jusqu'à la fin de la partie ou à la mort du Pokémon choisi, à chaque attaque reçue celui-ci subit subit 10 dégâts de moins.
 - **Ferveur guerrière**, à utilisation unique : le Pokémon choisit un Pokémon de son camp (éventuellement lui-même). Jusqu'à la fin de la partie ou à la mort du Pokémon choisi, les attaques de celui-ci infligent 10 dégâts de plus.
-- **Peur**, à utilisation unique : le Pokémon choisit un Pokémon du camp adverse. Jusqu'à la fin de la partie ou à la mort du Pokémon choisi, les attaques de celui-ci infligent 10 dégats de moins.
-- **Berserk**, à utilisation unique : le Pokémon choisit un Pokémon de son camp (éventuellement lui-même). Pour le tour en cours, l'attaque de ce Pokémon est doublée.
+- **Pouvoir.Peur**, à utilisation unique : le Pokémon choisit un Pokémon du camp adverse. Jusqu'à la fin de la partie ou à la mort du Pokémon choisi, les attaques de celui-ci infligent 10 dégats de moins.
+- **Pouvoir.Pouvoir.Berserk**, à utilisation unique : le Pokémon choisit un Pokémon de son camp (éventuellement lui-même). Pour le tour en cours, l'attaque de ce Pokémon est doublée.
 - **Intimidation**, à utilisation unique : le Pokémon choisit un Pokémon du camp adverse. Pour le prochain tour de l'adversaire, les dégats infligés par le Pokémon choisi sont réduits de moitié.
 - **Soin total**, à utilisation unique : le Pokémon choisit un Pokémon de son camp (éventuellement lui-même). Celui-ci regagne toute sa vie.
 - **Soin simple**, utilisable à chaque tour : le Pokémon choisit un Pokémon de son camp (éventuellement lui-même). Celui-ci regagne 30 points de vie (mais ne peut pas dépasser son nombre de points de vie initial).
-- **Kamikaze**, à utilisation unique : le Pokémon choisit un Pokémon du camp adverse. Les deux Pokémons sont alors éliminés.
-- **Affinité Ether**, à utilisation unique : le Pokémon choisit un Pokémon de son camp (éventuellement lui-même). Le Pokémon change son affinité pour une affinité avec l'Ether. L'Ether est un nouvel élément ayant un avantage sur tous les autres.
-- **Affinité Plomb**, à utilisation unique : le Pokémon choisit un Pokémon adverse. Le Pokémon change son affinité pour une affinité avec le plomb. Le Plomb est un nouvel élément sur lequel tous les autres éléments ont un avantage.
+- **Pouvoir.Pouvoir.Kamikaze**, à utilisation unique : le Pokémon choisit un Pokémon du camp adverse. Les deux Pokémons sont alors éliminés.
+- **Affinité Element.Ether**, à utilisation unique : le Pokémon choisit un Pokémon de son camp (éventuellement lui-même). Le Pokémon change son affinité pour une affinité avec l'Element.Ether. L'Element.Ether est un nouvel élément ayant un avantage sur tous les autres.
+- **Affinité Element.Plomb**, à utilisation unique : le Pokémon choisit un Pokémon adverse. Le Pokémon change son affinité pour une affinité avec le plomb. Le Element.Plomb est un nouvel élément sur lequel tous les autres éléments ont un avantage.
 - **Usurpation**, à utilisation unique : le Pokémon choisit un Pokémon (dans son camp ou dans le camp adverse). Il gagne alors le pouvoir du Pokémon choisi et le Pokémon choisi perd son pouvoir (fonctionne aussi pour les pouvoirs à utilisation unique déjà utilisés).
 - **Régénération**, à utilisation unique : le Pokémon choisit un Pokémon de son camp. Si le Pokémon a déjà utilisé un pouvoir à utilisation unique, il peut alors l'utiliser une seconde fois.
 - **Soin de zone**, utilisable à chaque tour : chaque Pokémon de son camp regagne 10 points de vie.

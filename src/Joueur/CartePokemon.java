@@ -1,12 +1,9 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
+package Joueur;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import Element.Type;
+import Pouvoir.Pouvoir;
+
 import java.util.List;
-import java.util.Random;
 
 public class CartePokemon {
     private String nom;
@@ -102,9 +99,9 @@ public class CartePokemon {
         System.out.printf("  | Vie: %-2d/%-3d       |\n", vie, vieMax);
         System.out.printf("  | Affinite : %-6s  |\n", affinite.getClass().getSimpleName());
         if (pouvoir == null) {
-            System.out.printf("  | Pouvoir : None     |\n");
+            System.out.printf("  | Pouvoir.Pouvoir : None     |\n");
         } else {
-            System.out.printf("  | Pouvoir : %-6s  |\n", pouvoir);
+            System.out.printf("  | Pouvoir.Pouvoir : %-6s  |\n", pouvoir);
         }
         System.out.printf("  |     %-10s     |\n", nom);
         System.out.println("  *--------------------*");

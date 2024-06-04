@@ -1,30 +1,22 @@
-public class SoinSimple extends Pouvoir{
-    private int m_soin;
+package Pouvoir;
+import Joueur.CartePokemon;
+
+public class Berserk extends Pouvoir {
     private int m_utilisation;
     private TypePouvoir m_type;
-
-    public SoinSimple() {
+    public Berserk() {
         super();
-        this.m_soin = 30;
-        this.m_utilisation = 1000;
+        this.m_utilisation = 1;
         this.m_type = TypePouvoir.ALLIE;
     }
 
     public void utiliserPouvoir(CartePokemon pokemon) {
-        if(pokemon.getVie()+m_soin > pokemon.getVieMax()) {
-            pokemon.setVie(pokemon.getVieMax());
-        }
-        else{
-            pokemon.setVie(pokemon.getVie()+m_soin);
-        }
+        pokemon.setAttaque(pokemon.getAttaque()*2);
         if(m_utilisation != 0){
             m_utilisation--;
         }
     }
 
-    public int getSoin() {
-        return m_soin;
-    }
 
     public int getUtilisation() {
         return m_utilisation;
@@ -36,6 +28,5 @@ public class SoinSimple extends Pouvoir{
 
     public TypePouvoir getType() {return m_type;}
 
-
-    public String toString() {return "SoinSimple";}
+    public String toString() {return "Berserk";}
 }

@@ -1,18 +1,23 @@
-public class AffinitePlomb extends Pouvoir {
+package Pouvoir;
+import Joueur.*;
+import Element.*;
+
+public class AffiniteEther extends Pouvoir {
     private int m_utilisation;
     private TypePouvoir m_type;
 
-    public AffinitePlomb() {
+    public AffiniteEther() {
         super();
         this.m_utilisation = 1;
-        this.m_type = TypePouvoir.ENNEMI;
+        this.m_type = TypePouvoir.ALLIE;
     }
 
     public void utiliserPouvoir(CartePokemon pokemon) {
         if (m_utilisation > 0) {
-            pokemon.setAffinite(new Plomb());
+            pokemon.setAffinite(new Ether());
             m_utilisation = 0;
-        }    }
+        }
+    }
 
     public void utiliserPouvoir(CartePokemon pokemon, CartePokemon other) {
         m_utilisation = 0;
@@ -31,6 +36,6 @@ public class AffinitePlomb extends Pouvoir {
     }
 
     public String toString() {
-        return "AffinitePlomb";
+        return "AffiniteEther";
     }
 }

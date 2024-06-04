@@ -1,4 +1,5 @@
-import java.util.Arrays;
+package Element;
+
 import java.util.List;
 
 public abstract class Type {
@@ -20,7 +21,7 @@ public abstract class Type {
 
         Type otherType = (Type) other;
 
-        // Compare les classes des deux objets Type
+        // Compare les classes des deux objets Element.Type
         return this.getClass().equals(otherType.getClass());
     }
 }
