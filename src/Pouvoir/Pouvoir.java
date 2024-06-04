@@ -8,8 +8,9 @@ public abstract class Pouvoir {
 
     public void utiliserPouvoir(CartePokemon pokemon){};
     public void utiliserPouvoir(CartePokemon pokemon, CartePokemon other){};
-    public abstract int getUtilisation();
-    public abstract TypePouvoir getType();
+    public abstract int nbrUtilisation();
+
+    public abstract TypePouvoir getTypePouvoir();
     public abstract String toString();
 
     public abstract String getDescription();

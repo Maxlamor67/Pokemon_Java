@@ -19,11 +19,11 @@ public class Kamikaze extends Pouvoir {
         }
     }
 
-    public int getUtilisation() {
+    public int nbrUtilisation() {
         return m_utilisation;
     }
 
-    public TypePouvoir getType() {return m_type;}
+    public TypePouvoir getTypePouvoir() {return m_type;}
 
 
     public String toString() {return "Kamikaze";}

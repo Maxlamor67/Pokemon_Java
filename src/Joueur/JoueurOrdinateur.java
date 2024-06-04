@@ -22,7 +22,7 @@ public class JoueurOrdinateur extends Dresseur {
         Dresseur adversaire = jeu.getJoueurAdverse(this);
         CartePokemon carteCible = null;
         for (CartePokemon carte : this.getTerrain()) {
-            if (carte.getPouvoir() != null && carte.getPouvoir().getUtilisation() > 0) {
+            if (carte.getPouvoir() != null && carte.getPouvoir().nbrUtilisation() > 0) {
                 Pouvoir pouvoir = carte.getPouvoir();
                 if(Objects.equals(pouvoir.toString(), "Pouvoir.Pouvoir.SoinSimple") || Objects.equals(pouvoir.toString(), "Pouvoir.Pouvoir.SoinTotal")){
                     for(CartePokemon carte2 : this.getTerrain()) {
@@ -33,8 +33,8 @@ public class JoueurOrdinateur extends Dresseur {
                     }
                 }
                 else {
-                    switch (pouvoir.getType()) {
-                        case ALLIE:
+                    switch (pouvoir.getTypePouvoir()) {
+                        case ALLIE :
                             for(CartePokemon carte2 : this.getTerrain()) {
                                 if(!Objects.equals(carte2.getNom(), carte.getNom())){
                                     carteCible = carte2;

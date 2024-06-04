@@ -20,7 +20,7 @@ public class Resistance extends Pouvoir {
     }
 
 
-    public int getUtilisation() {
+    public int nbrUtilisation() {
         return m_utilisation;
     }
 
@@ -28,7 +28,7 @@ public class Resistance extends Pouvoir {
         m_utilisation = utilisation;
     }
 
-    public TypePouvoir getType() {return m_type;}
+    public TypePouvoir getTypePouvoir() {return m_type;}
 
     public String toString() {return "Resistance";}
     @Override

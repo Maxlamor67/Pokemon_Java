@@ -23,7 +23,7 @@ public class AffiniteEther extends Pouvoir {
         m_utilisation = 0;
     }
 
-    public int getUtilisation() {
+    public int nbrUtilisation() {
         return m_utilisation;
     }
 
@@ -31,7 +31,7 @@ public class AffiniteEther extends Pouvoir {
         m_utilisation = utilisation;
     }
 
-    public TypePouvoir getType() {
+    public TypePouvoir getTypePouvoir() {
         return m_type;
     }
 
