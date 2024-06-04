@@ -13,8 +13,8 @@ public class Resistance extends Pouvoir {
     }
 
     public void utiliserPouvoir(CartePokemon pokemon) {
-        pokemon.setResistance(this.m_resistance);
-        if(m_utilisation != 0){
+        if(m_utilisation > 0){
+            pokemon.setResistance(this.m_resistance);
             m_utilisation--;
         }
     }

@@ -15,8 +15,10 @@ public class AffinitePlomb extends Pouvoir {
     public void utiliserPouvoir(CartePokemon pokemon) {
         if (m_utilisation > 0) {
             pokemon.setAffinite(new Plomb());
-            m_utilisation = 0;
-        }    }
+            m_utilisation--;
+        }
+    }
+
 
     public void utiliserPouvoir(CartePokemon pokemon, CartePokemon other) {
         m_utilisation = 0;

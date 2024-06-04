@@ -8,14 +8,14 @@ public class FerveurGuerriere extends Pouvoir {
     public FerveurGuerriere() {
         super();
         this.m_utilisation = 1;
-        this.m_type = TypePouvoir.ALLIE;
+        this.m_type = TypePouvoir.TOUTCAMP;
     }
 
     @Override
     public void utiliserPouvoir(CartePokemon pokemon) {
         if (m_utilisation > 0) {
             pokemon.setAttaque(pokemon.getAttaque() + 10);
-            m_utilisation = 0;
+            m_utilisation--;
         }
     }
 

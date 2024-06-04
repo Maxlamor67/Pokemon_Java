@@ -9,13 +9,13 @@ public class AffiniteEther extends Pouvoir {
     public AffiniteEther() {
         super();
         this.m_utilisation = 1;
-        this.m_type = TypePouvoir.ALLIE;
+        this.m_type = TypePouvoir.TOUTCAMP;
     }
 
     public void utiliserPouvoir(CartePokemon pokemon) {
         if (m_utilisation > 0) {
             pokemon.setAffinite(new Ether());
-            m_utilisation = 0;
+            m_utilisation--;
         }
     }
 

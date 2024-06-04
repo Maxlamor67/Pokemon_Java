@@ -9,12 +9,12 @@ public class SoinTotal extends Pouvoir {
     public SoinTotal() {
         super();
         this.m_utilisation = 1;
-        this.m_type = TypePouvoir.ALLIE;
+        this.m_type = TypePouvoir.TOUTCAMP;
     }
 
     public void utiliserPouvoir(CartePokemon pokemon) {
-        pokemon.setVie(pokemon.getVieMax());
-        if(m_utilisation != 0){
+        if(m_utilisation > 0){
+            pokemon.setVie(pokemon.getVieMax());
             m_utilisation--;
         }
     }

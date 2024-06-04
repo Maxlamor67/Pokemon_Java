@@ -10,17 +10,17 @@ public class SoinSimple extends Pouvoir {
         super();
         this.m_soin = 30;
         this.m_utilisation = 1000;
-        this.m_type = TypePouvoir.ALLIE;
+        this.m_type = TypePouvoir.TOUTCAMP;
     }
 
     public void utiliserPouvoir(CartePokemon pokemon) {
-        if(pokemon.getVie()+m_soin > pokemon.getVieMax()) {
-            pokemon.setVie(pokemon.getVieMax());
-        }
-        else{
-            pokemon.setVie(pokemon.getVie()+m_soin);
-        }
-        if(m_utilisation != 0){
+        if(m_utilisation > 0){
+            if(pokemon.getVie()+m_soin > pokemon.getVieMax()) {
+                pokemon.setVie(pokemon.getVieMax());
+            }
+            else{
+                pokemon.setVie(pokemon.getVie()+m_soin);
+            }
             m_utilisation--;
         }
     }
