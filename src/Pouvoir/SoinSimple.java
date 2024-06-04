@@ -43,7 +43,7 @@ public class SoinSimple extends Pouvoir {
     public String toString() {return "SoinSimple";}
     @Override
     public String getDescription() {
-        return "Soin simple, utilisable à chaque tour : le Pokémon choisit un Pokémon de son camp (éventuellement lui-même)." +
+        return "Soin simple, utilisable à chaque tour : le Pokémon choisit un Pokémon de son camp (éventuellement lui-même).\n" +
                 " Celui-ci regagne 30 points de vie (mais ne peut pas dépasser son nombre de points de vie initial).\n";
     }
 }

@@ -39,7 +39,7 @@ public class AffinitePlomb extends Pouvoir {
     }
     @Override
     public String getDescription() {
-        return "Affinité Plomb, à utilisation unique : le Pokémon choisit un Pokémon adverse. Le Pokémon change son affinité pour une affinité avec le plomb." +
+        return "Affinité Plomb, à utilisation unique : le Pokémon choisit un Pokémon adverse. Le Pokémon change son affinité pour une affinité avec le plomb.\n" +
                 " Le Plomb est un nouvel élément sur lequel tous les autres éléments ont un avantage.\n";
     }
 }

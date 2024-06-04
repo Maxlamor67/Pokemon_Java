@@ -35,7 +35,7 @@ public class Peur extends Pouvoir {
     }
     @Override
     public String getDescription() {
-        return "Peur, à utilisation unique : le Pokémon choisit un Pokémon du camp adverse. " +
+        return "Peur, à utilisation unique : le Pokémon choisit un Pokémon du camp adverse. \n" +
                 "Jusqu'à la fin de la partie ou à la mort du Pokémon choisi, les attaques de celui-ci infligent 10 dégats de moins.\n";
     }
 }

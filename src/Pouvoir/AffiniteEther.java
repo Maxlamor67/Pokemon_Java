@@ -41,7 +41,7 @@ public class AffiniteEther extends Pouvoir {
 
     @Override
     public String getDescription() {
-        return "Affinité Ether, à utilisation unique : le Pokémon choisit un Pokémon de son camp (éventuellement lui-même). " +
+        return "Affinité Ether, à utilisation unique : le Pokémon choisit un Pokémon de son camp (éventuellement lui-même). \n" +
                 "Le Pokémon change son affinité pour une affinité avec l'Ether. L'Ether est un nouvel élément ayant un avantage sur tous les autres.\n";
     }
 }

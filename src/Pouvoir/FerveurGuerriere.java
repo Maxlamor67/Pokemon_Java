@@ -35,7 +35,7 @@ public class FerveurGuerriere extends Pouvoir {
     }
     @Override
     public String getDescription() {
-        return "Ferveur guerrière, à utilisation unique : le Pokémon choisit un Pokémon de son camp (éventuellement lui-même). " +
+        return "Ferveur guerrière, à utilisation unique : le Pokémon choisit un Pokémon de son camp (éventuellement lui-même). \n" +
                 "Jusqu'à la fin de la partie ou à la mort du Pokémon choisi, les attaques de celui-ci infligent 10 dégâts de plus.\n";
     }
 }

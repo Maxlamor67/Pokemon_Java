@@ -139,6 +139,7 @@ public class Jeu {
                     String choix = scanner.nextLine();
 
                     if (choix.equalsIgnoreCase("description")) {
+                        System.out.println();
                         System.out.println("Description du pouvoir: " + carte.getPouvoir().getDescription());
                     } else if (choix.equalsIgnoreCase("oui")) {
                         decisionPrise = true;
