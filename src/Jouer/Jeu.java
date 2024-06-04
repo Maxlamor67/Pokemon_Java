@@ -130,7 +130,7 @@ public class Jeu {
     private void utilisationDesPouvoirs() {
         afficherCartesSurTerrain();
         for (CartePokemon carte : this.joueur2.getTerrain()) {
-            if (carte.getPouvoir() != null && carte.getPouvoir().getUtilisation() > 0) {
+            if (carte.getPouvoir() != null && carte.getPouvoir().nbrUtilisation() > 0) {
                 System.out.println("Le pokemon " + carte.getNom() + " peut encore utiliser : " + carte.getPouvoir().toString() + "\n");
 
                 boolean decisionPrise = false;
@@ -151,7 +151,7 @@ public class Jeu {
                             Pouvoir pouvoir = carte.getPouvoir();
                             boolean peutUtiliserPouvoir = false;
 
-                            switch (pouvoir.getType()) {
+                            switch (pouvoir.getTypePouvoir()) {
                                 case ALLIE:
                                     if (joueur2.getTerrain().contains(carteCible)) {
                                         peutUtiliserPouvoir = true;

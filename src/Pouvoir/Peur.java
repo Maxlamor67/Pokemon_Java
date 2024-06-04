@@ -20,12 +20,12 @@ public class Peur extends Pouvoir {
     }
 
     @Override
-    public int getUtilisation() {
+    public int nbrUtilisation() {
         return m_utilisation;
     }
 
     @Override
-    public TypePouvoir getType() {
+    public TypePouvoir getTypePouvoir() {
         return m_type;
     }
 
