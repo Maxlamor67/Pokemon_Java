@@ -8,4 +8,7 @@ public abstract class Pouvoir {
     public abstract int getUtilisation();
     public abstract TypePouvoir getType();
     public abstract String toString();
+
+    public abstract String getDescription();
+
 }

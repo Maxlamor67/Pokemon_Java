@@ -28,5 +28,10 @@ public class SoinTotal extends Pouvoir {
 
 
     public String toString() {return "SoinTotal";}
+    @Override
+    public String getDescription() {
+        return "Soin total, à utilisation unique : le Pokémon choisit un Pokémon de son camp (éventuellement lui-même). " +
+                "Celui-ci regagne toute sa vie.\n";
+    }
 
 }

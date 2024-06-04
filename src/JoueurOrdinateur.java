@@ -21,7 +21,7 @@ public class JoueurOrdinateur extends Dresseur {
                 Pouvoir pouvoir = carte.getPouvoir();
                 if(Objects.equals(pouvoir.toString(), "SoinSimple") || Objects.equals(pouvoir.toString(), "SoinTotal")){
                     for(CartePokemon carte2 : this.getTerrain()) {
-                        if(carte2.getVie() <70 ){
+                        if(carte2.getVie() < carte2.getVie()/2 ){
                             carteCible = carte2;
                             break;
                         }
@@ -102,3 +102,4 @@ public class JoueurOrdinateur extends Dresseur {
         return terrainAdversaire.get(random.nextInt(terrainAdversaire.size()));
     }
 }
+

@@ -126,57 +126,67 @@ public class Jeu {
         for (CartePokemon carte : this.joueur2.getTerrain()) {
             if (carte.getPouvoir() != null && carte.getPouvoir().getUtilisation() > 0) {
                 System.out.println("Le pokemon " + carte.getNom() + " peut encore utiliser : " + carte.getPouvoir().toString() + "\n");
-                System.out.println("Voulez-vous utiliser le pouvoir de ce pokemon ? (oui/non) \n");
 
-                String choix = scanner.nextLine();
-                if (choix.equalsIgnoreCase("oui")) {
-                    System.out.println("Vous voulez utiliser le pouvoir sur quel pokemon? \n");
-                    String choixCible = scanner.nextLine();
-                    CartePokemon carteCible = trouverCarteDansTerrain(choixCible);
-                    if (carteCible != null) {
-                        Pouvoir pouvoir = carte.getPouvoir();
-                        boolean peutUtiliserPouvoir = false;
+                boolean decisionPrise = false;
+                while (!decisionPrise) {
+                    System.out.println("Voulez-vous utiliser le pouvoir de ce pokemon ? (oui/non/description) \n");
+                    String choix = scanner.nextLine();
 
-                        switch (pouvoir.getType()) {
-                            case ALLIE:
-                                if (joueur2.getTerrain().contains(carteCible)) {
+                    if (choix.equalsIgnoreCase("description")) {
+                        System.out.println("Description du pouvoir: " + carte.getPouvoir().getDescription());
+                    } else if (choix.equalsIgnoreCase("oui")) {
+                        decisionPrise = true;
+                        System.out.println("Vous voulez utiliser le pouvoir sur quel pokemon? \n");
+                        String choixCible = scanner.nextLine();
+                        CartePokemon carteCible = trouverCarteDansTerrain(choixCible);
+
+                        if (carteCible != null) {
+                            Pouvoir pouvoir = carte.getPouvoir();
+                            boolean peutUtiliserPouvoir = false;
+
+                            switch (pouvoir.getType()) {
+                                case ALLIE:
+                                    if (joueur2.getTerrain().contains(carteCible)) {
+                                        peutUtiliserPouvoir = true;
+                                    }
+                                    break;
+                                case ENNEMI:
+                                    if (getJoueurAdverse(joueur2).getTerrain().contains(carteCible)) {
+                                        peutUtiliserPouvoir = true;
+                                    }
+                                    break;
+                                case TOUTCAMP:
+                                case TOUS:
                                     peutUtiliserPouvoir = true;
-                                }
-                                break;
-                            case ENNEMI:
-                                if (getJoueurAdverse(joueur2).getTerrain().contains(carteCible)) {
-                                    peutUtiliserPouvoir = true;
-                                }
-                                break;
-                            case TOUTCAMP:
-                                peutUtiliserPouvoir = true;
-                                break;
-                            case TOUS:
-                                peutUtiliserPouvoir = true;
-                                break;
-                        }
-
-                        if (peutUtiliserPouvoir) {
-                            if (pouvoir.toString() == "Kamikaze") {
-                                pouvoir.utiliserPouvoir(carteCible,carte);
-                                System.out.println("Les deux pokemons sont mort exploser ");
-                                joueur1.defausserPokemon(carteCible);
-                                joueur2.defausserPokemon(carte);
-                                break;
+                                    break;
                             }
 
-                        pouvoir.utiliserPouvoir(carteCible);
-                        System.out.println("Le pouvoir a été utilisé avec succès sur " + carteCible.getNom() + ".");
+                            if (peutUtiliserPouvoir) {
+                                if (pouvoir.toString().equals("Kamikaze")) {
+                                    pouvoir.utiliserPouvoir(carteCible, carte);
+                                    System.out.println("Les deux pokemons sont morts exploser ");
+                                    joueur1.defausserPokemon(carteCible);
+                                    joueur2.defausserPokemon(carte);
+                                } else {
+                                    pouvoir.utiliserPouvoir(carteCible);
+                                    System.out.println("Le pouvoir a été utilisé avec succès sur " + carteCible.getNom() + ".");
+                                }
+                            } else {
+                                System.out.println("Le pouvoir ne peut pas être utilisé sur ce Pokémon.");
+                            }
+                        } else {
+                            System.out.println("Le pokemon cible n'a pas été trouvé.");
+                        }
+                    } else if (choix.equalsIgnoreCase("non")) {
+                        decisionPrise = true;
                     } else {
-                        System.out.println("Le pouvoir ne peut pas être utilisé sur ce Pokémon.");
+                        System.out.println("Choix invalide. Veuillez entrer 'oui', 'non' ou 'description'.");
                     }
-                } else {
-                    System.out.println("Le pokemon cible n'a pas été trouvé.");
                 }
             }
         }
     }
-}
+
 
     private CartePokemon trouverCarteDansTerrain(String nomCarte) {
         for (CartePokemon carte : joueur1.getTerrain()) {
@@ -652,6 +662,17 @@ public class Jeu {
     }
 
 
+    public int getNumeroTour() {
+        return numeroTour;
+    }
+
+    public void setNumeroTour(int numeroTour) {
+        this.numeroTour = numeroTour;
+    }
+
+    public boolean estTermine() {
+        return false;
+    }
 }
 
 

@@ -31,4 +31,10 @@ public class Resistance extends Pouvoir {
     public TypePouvoir getType() {return m_type;}
 
     public String toString() {return "Resistance";}
+    @Override
+    public String getDescription() {
+        return "Résistance, à utilisation unique : le Pokémon choisit un Pokémon de son camp (éventuellement lui-même). " +
+                "Jusqu'à la fin de la partie ou à la mort du Pokémon choisi, à chaque attaque reçue celui-ci subit subit 10 dégâts de moins."
+        ;
+    }
 }

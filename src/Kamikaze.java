@@ -29,5 +29,9 @@ public class Kamikaze extends Pouvoir{
 
 
     public String toString() {return "Kamikaze";}
+    @Override
+    public String getDescription() {
+        return "Kamikaze, à utilisation unique : le Pokémon choisit un Pokémon du camp adverse. Les deux Pokémons sont alors éliminés.\n";
+    }
 
 }

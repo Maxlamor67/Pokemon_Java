@@ -24,4 +24,5 @@ public class Ether extends Type {
     }
 
     public String toString() {return "Ether";}
+
 }
