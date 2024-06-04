@@ -55,10 +55,6 @@ public class CartePokemon {
         return pouvoir;
     }
 
-    public int getResistance() {
-        return resistance;
-    }
-
     public void setResistance(int resistance) {
         this.resistance = resistance;
     }
@@ -67,9 +63,6 @@ public class CartePokemon {
         return this.aDejaAttaque;
     }
 
-    public void resetAttaque() {
-        this.aDejaAttaque = false; // Réinitialiser l'attribut pour le prochain tour
-    }
 
     public void attaquer(CartePokemon pokemonCible) {
         List<Type> affiniteAvantages = this.affinite.getAvantages();

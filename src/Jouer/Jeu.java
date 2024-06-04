@@ -242,11 +242,7 @@ public class Jeu {
                             info = "  | Pouvoir : None           |";
                         }
                         else {
-                            if (carte.getPouvoir().toString()=="Berserk") {
-                                info = String.format("  | Pouvoir : %-7s        |", carte.getPouvoir().toString());
-                                break;
-                            }
-                            else if (carte.getPouvoir().toString()=="Kamikaze") {
+                            if (carte.getPouvoir().toString()=="Kamikaze") {
                                 info = String.format("  | Pouvoir : %-7s       |", carte.getPouvoir().toString());
                                 break;
                             }
@@ -373,11 +369,7 @@ public class Jeu {
                             info = "  | Pouvoir : None           |";
                         }
                         else {
-                            if (carte.getPouvoir().toString() == "Berserk") {
-                                info = String.format("  | Pouvoir : %-7s        |", carte.getPouvoir().toString());
-
-                            }
-                            else if (carte.getPouvoir().toString()=="Kamikaze") {
+                            if (carte.getPouvoir().toString()=="Kamikaze") {
                                 info = String.format("  | Pouvoir : %-7s       |", carte.getPouvoir().toString());
                                 break;
                             }
@@ -566,11 +558,7 @@ public class Jeu {
                         if (carte.getPouvoir() == null) {
                             info = "  | Pouvoir : None                 |";
                         }else {
-                            if (carte.getPouvoir().toString()=="Berserk") {
-                                info = String.format("  | Pouvoir : %-7s              |", carte.getPouvoir().toString());
-                                break;
-                            }
-                            else if (carte.getPouvoir().toString()=="Peur") {
+                            if (carte.getPouvoir().toString()=="Peur") {
                                 info = String.format("  | Pouvoir : %-7s              |", carte.getPouvoir().toString());
                                 break;
                             }
@@ -672,11 +660,6 @@ public class Jeu {
     public int getNumeroTour() {
         return numeroTour;
     }
-
-    public void setNumeroTour(int numeroTour) {
-        this.numeroTour = numeroTour;
-    }
-
     public boolean estTermine() {
         return false;
     }

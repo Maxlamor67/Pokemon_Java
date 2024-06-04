@@ -25,9 +25,6 @@ public class SoinSimple extends Pouvoir {
         }
     }
 
-    public int getSoin() {
-        return m_soin;
-    }
 
     public int getUtilisation() {
         return m_utilisation;

@@ -24,10 +24,6 @@ public class Kamikaze extends Pouvoir {
         return m_utilisation;
     }
 
-    public void set_utilisation(int utilisation) {
-        m_utilisation = utilisation;
-    }
-
     public TypePouvoir getType() {return m_type;}
 
 

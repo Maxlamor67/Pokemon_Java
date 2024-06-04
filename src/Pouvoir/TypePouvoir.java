@@ -5,13 +5,6 @@ public enum TypePouvoir {
     TOUTCAMP,
     ENNEMI,
     TOUS,
-    RESISTANCE,
-    FERVEUR_GUERRIERE,
-    PEUR,
-    SOIN_TOTAL,
-    SOIN_SIMPLE,
-    KAMIKAZE,
-    AFFINITE_ETHER,
-    AFFINITE_PLOMB
+
 
 }

@@ -19,9 +19,6 @@ public class Resistance extends Pouvoir {
         }
     }
 
-    public int getResistance() {
-        return m_resistance;
-    }
 
     public int getUtilisation() {
         return m_utilisation;
