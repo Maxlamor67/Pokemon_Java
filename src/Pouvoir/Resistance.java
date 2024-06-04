@@ -1,3 +1,6 @@
+package Pouvoir;
+import Joueur.CartePokemon;
+
 public class Resistance extends Pouvoir {
     private int m_resistance;
     private int m_utilisation;

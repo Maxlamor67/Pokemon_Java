@@ -1,3 +1,5 @@
+package Pouvoir;
+import Joueur.CartePokemon;
 
 //public class Berserk extends Pouvoir {
 //    private int m_utilisation;

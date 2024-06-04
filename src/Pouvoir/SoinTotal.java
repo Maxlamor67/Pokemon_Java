@@ -1,3 +1,6 @@
+package Pouvoir;
+import Joueur.CartePokemon;
+
 public class SoinTotal extends Pouvoir {
 
     private int m_utilisation;

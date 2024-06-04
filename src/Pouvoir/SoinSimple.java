@@ -1,4 +1,7 @@
-public class SoinSimple extends Pouvoir{
+package Pouvoir;
+import Joueur.CartePokemon;
+
+public class SoinSimple extends Pouvoir {
     private int m_soin;
     private int m_utilisation;
     private TypePouvoir m_type;

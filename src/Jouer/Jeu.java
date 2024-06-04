@@ -1,3 +1,9 @@
+package Jouer;
+import Element.*;
+import Joueur.*;
+import Pouvoir.*;
+
+
 import javax.sound.sampled.*;
 import javax.swing.*;
 import java.awt.event.KeyAdapter;
@@ -571,7 +577,7 @@ public class Jeu {
                                 info = String.format("  | Pouvoir :%-7s      |", carte.getPouvoir().toString());
                                 break;
                             }
-                            else if (carte.getPouvoir().toString()=="AffinitePlomb" || carte.getPouvoir().toString()=="AffiniteEther") {
+                            else if (carte.getPouvoir().toString()=="AffinitePlomb" || carte.getPouvoir().toString()=="Pouvoir.Pouvoir.AffiniteEther") {
                                 info = String.format("  | Pouvoir : %-7s        |", carte.getPouvoir().toString());
                                 break;
                             }

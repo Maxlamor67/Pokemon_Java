@@ -1,4 +1,7 @@
-public class Kamikaze extends Pouvoir{
+package Pouvoir;
+import Joueur.CartePokemon;
+
+public class Kamikaze extends Pouvoir {
     private int m_utilisation;
     private TypePouvoir m_type;
 

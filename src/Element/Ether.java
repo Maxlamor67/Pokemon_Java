@@ -1,3 +1,5 @@
+package Element;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,6 +25,10 @@ public class Ether extends Type {
         return new Ether();
     }
 
+<<<<<<< HEAD:src/Ether.java
     public String toString() {return "Ether";}
 
+=======
+    public String toString() {return "Element.Ether";}
+>>>>>>> 48cf3df5d936771020fba00572ccd6c3b7d3b577:src/Element/Ether.java
 }

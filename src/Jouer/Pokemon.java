@@ -1,3 +1,9 @@
+package Jouer;
+
+import Joueur.CartePokemon;
+import Joueur.Dresseur;
+import Joueur.JoueurOrdinateur;
+
 public class Pokemon {
   public static void main(String[] args) {
     // Initialisation des joueurs

@@ -1,3 +1,5 @@
+package Element;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,5 +21,5 @@ public class Air extends Type {
         return new Air();
     }
 
-    public String toString() {return "Air";}
+    public String toString() {return "Element.Air";}
 }

@@ -114,7 +114,7 @@ defausse: 0 pokemons
   *--------------------*    *--------------------*    *--------------------*  
   | Attaque: 20        |    | Attaque: 40        |    | Attaque: 20        |  
   | Vie: 50/120        |    | Vie: 50/150        |    | Vie: 50/130        |  
-  | Affinite : Air     |    | Affinite : Air     |    | Affinite : Feu     |  
+  | Affinite : Element.Air     |    | Affinite : Element.Air     |    | Affinite : Element.Feu     |  
   |     Herbizarre     |    |     Florizarre     |    |     Salamèche      |  
   *--------------------*    *--------------------*    *--------------------*  
 
@@ -122,7 +122,7 @@ defausse: 0 pokemons
 
   *--------------------*    *--------------------*    *--------------------*  
   |     Dracaufeu      |    |     Bulbizarre     |    |      Pikachu       |  
-  | Affinite : Feu     |    | Affinite : Eau     |    | Affinite : Terre   |  
+  | Affinite : Element.Feu     |    | Affinite : Element.Eau     |    | Affinite : Element.Terre   |  
   | Vie: 50/180        |    | Vie: 50/150        |    | Vie: 50/100        |  
   | Attaque: 40        |    | Attaque: 30        |    | Attaque: 10        |  
   *--------------------*    *--------------------*    *--------------------*  
@@ -131,11 +131,11 @@ pioche: 12 pokemons
 defausse: 0 pokemons
 
 En main:
-- Reptincel, Feu, Vie: 160, Attaque: 20
-- Carapuce, Eau, Vie: 100, Attaque: 40
-- Tortank, Eau, Vie: 200, Attaque: 20
-- Papilusion, Air, Vie: 120, Attaque: 20
-- Roucool, Air, Vie: 150, Attaque: 30
+- Reptincel, Element.Feu, Vie: 160, Attaque: 20
+- Carapuce, Element.Eau, Vie: 100, Attaque: 40
+- Tortank, Element.Eau, Vie: 200, Attaque: 20
+- Papilusion, Element.Air, Vie: 120, Attaque: 20
+- Roucool, Element.Air, Vie: 150, Attaque: 30
 
                                     Joueur 2
 

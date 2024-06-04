@@ -1,17 +1,20 @@
-public class Peur extends Pouvoir {
+package Pouvoir;
+import Joueur.CartePokemon;
+
+public class FerveurGuerriere extends Pouvoir {
     private int m_utilisation;
     private TypePouvoir m_type;
 
-    public Peur() {
+    public FerveurGuerriere() {
         super();
         this.m_utilisation = 1;
-        this.m_type = TypePouvoir.ENNEMI;
+        this.m_type = TypePouvoir.ALLIE;
     }
 
     @Override
     public void utiliserPouvoir(CartePokemon pokemon) {
         if (m_utilisation > 0) {
-            pokemon.setAttaque(pokemon.getAttaque() - 10);
+            pokemon.setAttaque(pokemon.getAttaque() + 10);
             m_utilisation = 0;
         }
     }
@@ -28,11 +31,11 @@ public class Peur extends Pouvoir {
 
     @Override
     public String toString() {
-        return "Peur";
+        return "FerveurGuerriere";
     }
     @Override
     public String getDescription() {
-        return "Peur, à utilisation unique : le Pokémon choisit un Pokémon du camp adverse. " +
-                "Jusqu'à la fin de la partie ou à la mort du Pokémon choisi, les attaques de celui-ci infligent 10 dégats de moins.\n";
+        return "Ferveur guerrière, à utilisation unique : le Pokémon choisit un Pokémon de son camp (éventuellement lui-même). " +
+                "Jusqu'à la fin de la partie ou à la mort du Pokémon choisi, les attaques de celui-ci infligent 10 dégâts de plus.\n";
     }
 }

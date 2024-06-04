@@ -1,3 +1,8 @@
+package Joueur;
+
+import Pouvoir.*;
+import Jouer.*;
+
 import java.util.List;
 import java.util.Objects;
 import java.util.Random;
@@ -19,7 +24,7 @@ public class JoueurOrdinateur extends Dresseur {
         for (CartePokemon carte : this.getTerrain()) {
             if (carte.getPouvoir() != null && carte.getPouvoir().getUtilisation() > 0) {
                 Pouvoir pouvoir = carte.getPouvoir();
-                if(Objects.equals(pouvoir.toString(), "SoinSimple") || Objects.equals(pouvoir.toString(), "SoinTotal")){
+                if(Objects.equals(pouvoir.toString(), "Pouvoir.Pouvoir.SoinSimple") || Objects.equals(pouvoir.toString(), "Pouvoir.Pouvoir.SoinTotal")){
                     for(CartePokemon carte2 : this.getTerrain()) {
                         if(carte2.getVie() < carte2.getVie()/2 ){
                             carteCible = carte2;
