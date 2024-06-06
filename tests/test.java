@@ -4,6 +4,26 @@ import static org.junit.jupiter.api.Assertions.*;
 import Joueur.CartePokemon;
 import Pouvoir.*;
 
+class attaqueSimpleTest {
+
+
+
+    @Test
+    void testUtiliserAttaque() {
+        CartePokemon pokemon1 = new CartePokemon("test1", new Feu(), null, 190, 200, 10);
+        CartePokemon pokemon = new CartePokemon("test", new Eau(), null, 190, 200, 30);
+        pokemon.attaquer(pokemon1);
+        assertEquals(150, pokemon1.getVie());
+    }
+
+    @Test
+    void testUtiliserAttaqueEnDessousDeZero() {
+        CartePokemon pokemon1 = new CartePokemon("test1", new Feu(), null, 190, 200, 10);
+        CartePokemon pokemon = new CartePokemon("test", new Eau(), null, 190, 200, 30);
+        pokemon1.attaquer(pokemon);
+        assertEquals(190, pokemon.getVie());
+    }
+}
 class SoinSimpleTest {
 
     @Test
