@@ -15,8 +15,8 @@ public class SoinSimple extends Pouvoir {
 
     public void utiliserPouvoir(CartePokemon pokemon) {
         if(m_utilisation > 0){
-            if(pokemon.getVie()+m_soin > pokemon.getVieMax()) {
-                pokemon.setVie(pokemon.getVieMax());
+            if(pokemon.getVie()+m_soin > pokemon.getM_vieMax()) {
+                pokemon.setVie(pokemon.getM_vieMax());
             }
             else{
                 pokemon.setVie(pokemon.getVie()+m_soin);

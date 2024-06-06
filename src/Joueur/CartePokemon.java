@@ -6,57 +6,57 @@ import Pouvoir.Pouvoir;
 import java.util.List;
 
 public class CartePokemon {
-    private String nom;
-    private Type affinite;
-    private Pouvoir pouvoir;
-    private int vie;
-    private int vieMax;
-    private int attaque;
-    private int resistance;
+    private String m_nom;
+    private Type m_affinite;
+    private Pouvoir m_pouvoir;
+    private int m_vie;
+    private int m_vieMax;
+    private int m_attaque;
+    private int m_resistance;
 
     private boolean aDejaAttaque;
 
-    public CartePokemon(String nom, Type affinite, Pouvoir pouvoir, int vie, int vieMax, int attaque) {
-        this.nom = nom;
-        this.affinite = affinite;
-        this.pouvoir = pouvoir;
-        this.vie = vie;
-        this.vieMax = vieMax;
-        this.attaque = attaque;
-        this.resistance = 0;
+    public CartePokemon(String nom, Type affinite, Pouvoir pouvoir, int vie, int m_vieMax, int attaque) {
+        this.m_nom = nom;
+        this.m_affinite = affinite;
+        this.m_pouvoir = pouvoir;
+        this.m_vie = vie;
+        this.m_vieMax = m_vieMax;
+        this.m_attaque = attaque;
+        this.m_resistance = 0;
         this.aDejaAttaque = false;
     }
 
     public String getNom() {
-        return nom;
+        return m_nom;
     }
 
-    public int getVieMax() {
-        return vieMax;
+    public int getM_vieMax() {
+        return m_vieMax;
     }
 
     public int getAttaque() {
-        return attaque;
+        return m_attaque;
     }
 
     public int getVie() {
-        return vie;
+        return m_vie;
     }
 
     public void setVie(int vie) {
-        this.vie = Math.max(0, vie); // Assure que la vie ne peut pas être négative
+        this.m_vie = Math.max(0, vie); // Assure que la vie ne peut pas être négative
     }
 
     public Type getAffinite() {
-        return affinite;
+        return m_affinite;
     }
 
     public Pouvoir getPouvoir() {
-        return pouvoir;
+        return m_pouvoir;
     }
 
     public void setResistance(int resistance) {
-        this.resistance = resistance;
+        this.m_resistance = resistance;
     }
 
     public boolean getADejaAttaque() {
@@ -65,18 +65,18 @@ public class CartePokemon {
 
 
     public void attaquer(CartePokemon pokemonCible) {
-        List<Type> affiniteAvantages = this.affinite.getAvantages();
+        List<Type> affiniteAvantages = this.m_affinite.getAvantages();
         List<Type> cibleAvantages = pokemonCible.getAffinite().getAvantages();
 
         if (affiniteAvantages.contains(pokemonCible.getAffinite())) {
-            pokemonCible.setVie(pokemonCible.getVie() - this.attaque + pokemonCible.resistance - 10);
-            System.out.println(this.nom + " a infligé " + (this.attaque - pokemonCible.resistance + 10) + " dégâts à " + pokemonCible.nom);
+            pokemonCible.setVie(pokemonCible.getVie() - this.m_attaque + pokemonCible.m_resistance - 10);
+            System.out.println(this.m_nom + " a infligé " + (this.m_attaque - pokemonCible.m_resistance + 10) + " dégâts à " + pokemonCible.m_nom);
         } else if (cibleAvantages.contains(this.getAffinite())) {
-            pokemonCible.setVie(pokemonCible.getVie() - this.attaque + pokemonCible.resistance + 10);
-            System.out.println(this.nom + " a infligé " + (this.attaque - pokemonCible.resistance - 10) + " dégâts à " + pokemonCible.nom);
+            pokemonCible.setVie(pokemonCible.getVie() - this.m_attaque + pokemonCible.m_resistance + 10);
+            System.out.println(this.m_nom + " a infligé " + (this.m_attaque - pokemonCible.m_resistance - 10) + " dégâts à " + pokemonCible.m_nom);
         } else {
-            pokemonCible.setVie(pokemonCible.getVie() - this.attaque + pokemonCible.resistance);
-            System.out.println(this.nom + " a infligé " + (this.attaque - pokemonCible.resistance) + " dégâts à " + pokemonCible.nom);
+            pokemonCible.setVie(pokemonCible.getVie() - this.m_attaque + pokemonCible.m_resistance);
+            System.out.println(this.m_nom + " a infligé " + (this.m_attaque - pokemonCible.m_resistance) + " dégâts à " + pokemonCible.m_nom);
         }
     }
 
@@ -84,24 +84,24 @@ public class CartePokemon {
         this.aDejaAttaque = aDejaAttaque;
     }
     public void setAffinite(Type affinite) {
-        this.affinite = affinite;
+        this.m_affinite = affinite;
     }
     public void afficherCarte() {
         System.out.println("  *--------------------*");
-        System.out.printf("  | Attaque: %-2d        |\n", attaque);
-        System.out.printf("  | Vie: %-2d/%-3d       |\n", vie, vieMax);
-        System.out.printf("  | Affinite : %-6s  |\n", affinite.getClass().getSimpleName());
-        if (pouvoir == null) {
+        System.out.printf("  | Attaque: %-2d        |\n", m_attaque);
+        System.out.printf("  | Vie: %-2d/%-3d       |\n", m_vie, m_vieMax);
+        System.out.printf("  | Affinite : %-6s  |\n", m_affinite.getClass().getSimpleName());
+        if (m_pouvoir == null) {
             System.out.printf("  | Pouvoir.Pouvoir : None     |\n");
         } else {
-            System.out.printf("  | Pouvoir.Pouvoir : %-6s  |\n", pouvoir);
+            System.out.printf("  | Pouvoir.Pouvoir : %-6s  |\n", m_pouvoir);
         }
-        System.out.printf("  |     %-10s     |\n", nom);
+        System.out.printf("  |     %-10s     |\n", m_nom);
         System.out.println("  *--------------------*");
     }
 
     public void setAttaque(int attaque) {
-        this.attaque = attaque;
+        this.m_attaque = attaque;
     }
 
 
