@@ -97,16 +97,16 @@ public class JoueurOrdinateur extends Dresseur {
 
 
     private void placerPokemonsSurTerrain() {
-        while (terrain.size() < 3 && pioche.size() !=0) {
-            CartePokemon carte = pioche.remove(0);
-            terrain.add(carte);
+        while (m_terrain.size() < 3 && m_pioche.size() !=0) {
+            CartePokemon carte = m_pioche.remove(0);
+            m_terrain.add(carte);
         }
     }
 
     private void attaquerAdversaire(Jeu jeu) {
         Dresseur adversaire = jeu.getJoueurAdverse(this);
 
-        for (CartePokemon carteAttaque : terrain) {
+        for (CartePokemon carteAttaque : m_terrain) {
             if (!carteAttaque.getADejaAttaque()) {
                 CartePokemon carteCible = choisirCible(adversaire.getTerrain());
 
@@ -114,7 +114,7 @@ public class JoueurOrdinateur extends Dresseur {
                     int vieAvantAttaque = carteCible.getVie();
                     carteAttaque.attaquer(carteCible);
                     int degats = vieAvantAttaque - carteCible.getVie();
-                    System.out.println(nom + " a attaqué " + carteCible.getNom() + " avec " + carteAttaque.getNom() + ". " +
+                    System.out.println(m_nom + " a attaqué " + carteCible.getNom() + " avec " + carteAttaque.getNom() + ". " +
                             "Il reste " + carteCible.getVie() + " points de vie à " + carteCible.getNom() +
                             " (-" + degats + " points)");
 
@@ -129,7 +129,7 @@ public class JoueurOrdinateur extends Dresseur {
             }
         }
 
-        for (CartePokemon carte : terrain) {
+        for (CartePokemon carte : m_terrain) {
             carte.setADejaAttaque(false);
         }
     }

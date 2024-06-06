@@ -4,64 +4,113 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Dresseur {
-    protected String nom;
-    protected List<CartePokemon> main;
-    protected List<CartePokemon> pioche;
-    protected List<CartePokemon> defausse;
+    protected String m_nom;
+    protected List<CartePokemon> m_main;
+    protected List<CartePokemon> m_pioche;
+    protected List<CartePokemon> m_defausse;
 
+<<<<<<< HEAD
     protected List<CartePokemon> terrain;
 
+=======
+    protected List<CartePokemon> m_terrain;
+    private int m_vieRestante = Integer.MAX_VALUE;
+>>>>>>> f23bfc48a57a32167be07ef3188db0f833343a31
 
 
 
     public Dresseur(String nom) {
-        this.nom = nom;
-        this.main = new ArrayList<>();
-        this.pioche = new ArrayList<>();
-        this.defausse = new ArrayList<>();
-        this.terrain = new ArrayList<>();
+        this.m_nom = nom;
+        this.m_main = new ArrayList<>();
+        this.m_pioche = new ArrayList<>();
+        this.m_defausse = new ArrayList<>();
+        this.m_terrain = new ArrayList<>();
 
     }
 
 
     public List<CartePokemon> getTerrain() {
-        return terrain;
+        return m_terrain;
     }
     public void piocher() {
+<<<<<<< HEAD
         while (main.size() < 5 && !pioche.isEmpty()) {
             main.add(pioche.removeFirst());
+=======
+        while (m_main.size() < 5 && !m_pioche.isEmpty()) {
+            m_main.add(m_pioche.remove(0));
+>>>>>>> f23bfc48a57a32167be07ef3188db0f833343a31
         }
     }
 
 
 
     public void afficherPioche() {
-        System.out.println("pioche: " + pioche.size() + " pokemons");
+        System.out.println("pioche: " + m_pioche.size() + " pokemons");
     }
 
     public void afficherDefausse() {
-        System.out.println("defausse: " + defausse.size() + " pokemons");
+        System.out.println("defausse: " + m_defausse.size() + " pokemons");
     }
 
+<<<<<<< HEAD
 
+=======
+    public void afficherMain() {
+        System.out.println("En main:");
+        for (CartePokemon carte : m_main) {
+            carte.afficherCarte();
+            System.out.printf("  - %-10s, %-2s, Vie: %-2d/%-3d, Attaque: %-2d\n", carte.getNom(), carte.getAffinite(), carte.getVie(), carte.getM_vieMax(), carte.getAttaque());
+        }
+    }
+>>>>>>> f23bfc48a57a32167be07ef3188db0f833343a31
     public String getNom() {
-        return nom;
+        return m_nom;
     }
     public List<CartePokemon> getMain() {
-        return main;
+        return m_main;
     }
     public List<CartePokemon> getPioche() {
-        return pioche;
+        return m_pioche;
     }
+<<<<<<< HEAD
 
+=======
+    public void jouerCarte(CartePokemon carte) {
+        if (m_main.contains(carte)) {
+            // Vérifier s'il y a de la place sur le terrain
+            if (m_terrain.size() < 3) {
+                // Placer la carte sur le terrain
+                m_terrain.add(carte);
+                // Retirer la carte de la main
+                m_main.remove(carte);
+                System.out.println("Le pokemon " + carte.getNom() + " a été placé sur le terrain.");
+            } else {
+                System.out.println("Votre terrain est plein, vous ne pouvez pas jouer de nouvelle carte.");
+            }
+        } else {
+            System.out.println("Cette carte n'est pas dans votre main.");
+        }
+    }
+>>>>>>> f23bfc48a57a32167be07ef3188db0f833343a31
     public void ajouterCarteAPioche(CartePokemon carte) {
-        pioche.add(carte);
+        m_pioche.add(carte);
     }
+<<<<<<< HEAD
 
+=======
+    public void ajouterCarte(CartePokemon carte) {
+        if (m_main.size() < 5) {
+            m_main.add(carte);
+        } else {
+            System.out.println("La main du dresseur est pleine. Impossible d'ajouter une nouvelle carte.");
+        }
+    }
+>>>>>>> f23bfc48a57a32167be07ef3188db0f833343a31
     public boolean placerPokemonSurTerrain(CartePokemon carte) {
-        if (terrain.size() < 3) {
-            terrain.add(carte);
-            main.remove(carte);
+        if (m_terrain.size() < 3) {
+            m_terrain.add(carte);
+            m_main.remove(carte);
             return true;
         } else {
             System.out.println("Le terrain est plein. Vous ne pouvez pas placer plus de Pokémon.");
@@ -70,14 +119,14 @@ public class Dresseur {
     }
     public void defausserPokemon(CartePokemon pokemon) {
         // Recherche l'index du Pokémon dans la liste des Pokémons sur le terrain
-        int index = terrain.indexOf(pokemon);
+        int index = m_terrain.indexOf(pokemon);
 
         if (index != -1) {
             // Si le Pokémon est trouvé, on le supprime de la liste des Pokémons sur le terrain
-            terrain.remove(index);
+            m_terrain.remove(index);
 
             // Puis on l'ajoute à la défausse
-            defausse.add(pokemon);
+            m_defausse.add(pokemon);
         }
     }
 
