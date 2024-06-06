@@ -4,9 +4,9 @@ import static org.junit.jupiter.api.Assertions.*;
 import Joueur.CartePokemon;
 import Pouvoir.*;
 
-class attaqueSimpleTest {
 
 
+class AttaqueSimpleTest {
 
     @Test
     void testUtiliserAttaque() {
@@ -133,7 +133,7 @@ class ResistanceTest {
         pokemonB.attaquer(pokemonA);
 
         // La vie enlevée par l'attaque est supérieure de 10 à la résistance
-        assertTrue(pokemonA.getVie() == 140);
+        assertEquals(pokemonA.getVie(), 140);
     }
 }
 

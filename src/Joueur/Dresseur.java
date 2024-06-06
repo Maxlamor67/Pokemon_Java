@@ -10,7 +10,7 @@ public class Dresseur {
     protected List<CartePokemon> defausse;
 
     protected List<CartePokemon> terrain;
-    private int vieRestante = Integer.MAX_VALUE;
+
 
 
 
@@ -29,7 +29,7 @@ public class Dresseur {
     }
     public void piocher() {
         while (main.size() < 5 && !pioche.isEmpty()) {
-            main.add(pioche.remove(0));
+            main.add(pioche.removeFirst());
         }
     }
 
@@ -43,13 +43,7 @@ public class Dresseur {
         System.out.println("defausse: " + defausse.size() + " pokemons");
     }
 
-    public void afficherMain() {
-        System.out.println("En main:");
-        for (CartePokemon carte : main) {
-            carte.afficherCarte();
-            System.out.printf("  - %-10s, %-2s, Vie: %-2d/%-3d, Attaque: %-2d\n", carte.getNom(), carte.getAffinite(), carte.getVie(), carte.getVieMax(), carte.getAttaque());
-        }
-    }
+
     public String getNom() {
         return nom;
     }
@@ -59,32 +53,11 @@ public class Dresseur {
     public List<CartePokemon> getPioche() {
         return pioche;
     }
-    public void jouerCarte(CartePokemon carte) {
-        if (main.contains(carte)) {
-            // Vérifier s'il y a de la place sur le terrain
-            if (terrain.size() < 3) {
-                // Placer la carte sur le terrain
-                terrain.add(carte);
-                // Retirer la carte de la main
-                main.remove(carte);
-                System.out.println("Le pokemon " + carte.getNom() + " a été placé sur le terrain.");
-            } else {
-                System.out.println("Votre terrain est plein, vous ne pouvez pas jouer de nouvelle carte.");
-            }
-        } else {
-            System.out.println("Cette carte n'est pas dans votre main.");
-        }
-    }
+
     public void ajouterCarteAPioche(CartePokemon carte) {
         pioche.add(carte);
     }
-    public void ajouterCarte(CartePokemon carte) {
-        if (main.size() < 5) {
-            main.add(carte);
-        } else {
-            System.out.println("La main du dresseur est pleine. Impossible d'ajouter une nouvelle carte.");
-        }
-    }
+
     public boolean placerPokemonSurTerrain(CartePokemon carte) {
         if (terrain.size() < 3) {
             terrain.add(carte);
