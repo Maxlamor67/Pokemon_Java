@@ -44,7 +44,7 @@ public class Jeu {
                 "Gal", "Must", "Cac", "Lag", "Flame", "Sui",
                 "Psy", "Ti", "Taup", "Ping", "Ryx", "Mana",
                 "Sco", "Ciz", "Yve", "Mew", "Gir"));
-        pouvoirs = new ArrayList<>(Arrays.asList(new SoinTotal(),new SoinTotal(), new Kamikaze(), new Resistance(),new SoinTotal(),new SoinTotal(), new Resistance(),new AffiniteEther(), new AffinitePlomb(),new AffiniteEther(), new AffinitePlomb(),new Peur(),new FerveurGuerriere(),new Peur(),new FerveurGuerriere(),new Peur(),new FerveurGuerriere(),new Peur(),new FerveurGuerriere()));
+        pouvoirs = new ArrayList<>(Arrays.asList( new Kamikaze(), new Kamikaze(), new Kamikaze(), new Kamikaze(), new Kamikaze(), new Resistance(),new SoinTotal(),new SoinTotal(), new Resistance(),new AffiniteEther(), new AffinitePlomb(),new AffiniteEther(), new AffinitePlomb(),new Peur(),new FerveurGuerriere(),new Peur(),new FerveurGuerriere(),new Peur(),new FerveurGuerriere(),new Peur(),new FerveurGuerriere()));
         Collections.shuffle(nomsPokemon);
         this.scanner = new Scanner(System.in);
         playBackgroundMusic("src/son/Pokemon Heart Gold & Soul Silver Musique - Combat ： Champion Arène de Kanto.wav");
@@ -129,7 +129,9 @@ public class Jeu {
 
     private void utilisationDesPouvoirs() {
         afficherCartesSurTerrain();
-        for (CartePokemon carte : this.joueur2.getTerrain()) {
+        Iterator<CartePokemon> iterator = this.joueur2.getTerrain().iterator();
+        while (iterator.hasNext()) {
+            CartePokemon carte = iterator.next();
             if (carte.getPouvoir() != null && carte.getPouvoir().nbrUtilisation() > 0) {
                 System.out.println("Le pokemon " + carte.getNom() + " peut encore utiliser : " + carte.getPouvoir().toString() + "\n");
 
@@ -170,10 +172,11 @@ public class Jeu {
 
                             if (peutUtiliserPouvoir) {
                                 if (pouvoir.toString().equals("Kamikaze")) {
-                                    pouvoir.utiliserPouvoir(carteCible, carte);
+                                    pouvoir.utiliserPouvoir(carte, carteCible);
                                     System.out.println("Les deux pokemons sont morts exploser ");
                                     joueur1.defausserPokemon(carteCible);
-                                    joueur2.defausserPokemon(carte);
+                                    iterator.remove(); // Supprimer le Pokémon kamikaze de la liste du joueur2
+                                    break;
                                 } else {
                                     pouvoir.utiliserPouvoir(carteCible);
                                     System.out.println("Le pouvoir a été utilisé avec succès sur " + carteCible.getNom() + ".");
@@ -193,6 +196,8 @@ public class Jeu {
             }
         }
     }
+
+
 
 
     private CartePokemon trouverCarteDansTerrain(String nomCarte) {
@@ -566,7 +571,7 @@ public class Jeu {
                                 info = String.format("  | Pouvoir :%-7s      |", carte.getPouvoir().toString());
                                 break;
                             }
-                            else if (carte.getPouvoir().toString()=="AffinitePlomb" || carte.getPouvoir().toString()=="Pouvoir.Pouvoir.AffiniteEther") {
+                            else if (carte.getPouvoir().toString()=="AffinitePlomb" || carte.getPouvoir().toString()=="AffiniteEther") {
                                 info = String.format("  | Pouvoir : %-7s        |", carte.getPouvoir().toString());
                                 break;
                             }
@@ -653,6 +658,13 @@ public class Jeu {
             return joueur2;
         } else {
             return joueur1;
+        }
+    }
+    public Dresseur getJoueur(Dresseur joueurActuel) {
+        if (joueurActuel == joueur1) {
+            return joueur1;
+        } else {
+            return joueur2;
         }
     }
 

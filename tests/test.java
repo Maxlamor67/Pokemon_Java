@@ -55,7 +55,7 @@ class KamikazeTest {
     void testUtiliserPouvoir() {
         Kamikaze kamikaze = new Kamikaze();
         CartePokemon pokemon1 = new CartePokemon("test1", new Feu(), kamikaze, 150, 200, 10);
-        CartePokemon pokemon2 = new CartePokemon("test2", new Eau(), kamikaze, 150, 200, 10);
+        CartePokemon pokemon2 = new CartePokemon("test2", new Eau(), null, 150, 200, 10);
         kamikaze.utiliserPouvoir(pokemon1, pokemon2);
         assertEquals(0, pokemon1.getVie());
         assertEquals(0, pokemon2.getVie());
