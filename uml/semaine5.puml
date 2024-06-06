@@ -1,6 +1,6 @@
 @startuml
 
-package Jouer{
+package jouer{
 class Pokemon {
 + main(String[] args: String[])
 }
@@ -12,7 +12,7 @@ class Jeu {
 - joueurActuel : Dresseur
 - numeroTour : int
 - nomsPokemon : String[*]
-- pouvoirs : String[*]
+- pouvoirs : Pouvoir[*]
 - joueurAdverse : JoueurOrdinateur
 - clip : Clip
 + «create» Jeu (joueur1 : Dresseur, joueur2 : Dresseur)
@@ -31,7 +31,7 @@ class Jeu {
 }
 }
 
-package Joueur{
+package joueur{
 
 class Dresseur {
 # nom : String
@@ -76,7 +76,7 @@ class CartePokemon {
 + afficherCarte()
 }
 
-class JoueurOrdinateur extends Dresseur {
+class JoueurOrdinateur {
 + JoueurOrdinateur(nom : String)
 + jouerTour(jeu : Jeu)
 - utilisationDesPouvoirs(jeu : Jeu)
@@ -86,9 +86,9 @@ class JoueurOrdinateur extends Dresseur {
 }
 }
 
-package Element{
+package element{
 
-abstract class Type {
+abstract class Type <<abstract>> {
 #-m_type : String
 + «create» Type ()
 + {abstract} getType() : Type
@@ -135,9 +135,9 @@ class Plomb {
 }
 }
 
-package Pouvoir{
+package pouvoir{
 
-abstract class Pouvoir {
+abstract class Pouvoir <<abstract>> {
 + «create» Pouvoir ()
 + utiliserPouvoir(carte : CartePokemon)
 + utiliserPouvoir(carte : CartePokemon, other CartePokemon)
@@ -146,7 +146,7 @@ abstract class Pouvoir {
 + {abstract} toString () : String
 }
 
-enum TypePouvoir{
+enum TypePouvoir <<enumerate>> {
 ALLIE
 TOUTCAMP
 ENNEMI
@@ -249,12 +249,13 @@ Air --|> Type
 Terre --|> Type
 Eau --|> Type
 Feu --|> Type
+Ether --|> Type
+Plomb --|> Type
 Pouvoir --> TypePouvoir
 SoinSimple --|> Pouvoir
 SoinTotal --|> Pouvoir
 Kamikaze --|> Pouvoir
 Resistance --|> Pouvoir
-Berserk --|> Pouvoir
 FerveurGuerriere --|> Pouvoir
 AffiniteEther --|> Pouvoir
 AffinitePlomb --|> Pouvoir
@@ -263,7 +264,6 @@ SoinSimple *-- TypePouvoir
 SoinTotal *-- TypePouvoir
 Kamikaze *-- TypePouvoir
 Resistance *-- TypePouvoir
-Berserk *-- TypePouvoir
 FerveurGuerriere *-- TypePouvoir
 AffiniteEther *-- TypePouvoir
 AffinitePlomb *-- TypePouvoir
@@ -276,6 +276,7 @@ Pokemon --> Dresseur
 Pokemon --> Jeu
 JoueurOrdinateur --> Jeu : utilise
 JoueurOrdinateur o--> CartePokemon
-JoueurOrdinateur --> Dresseur : hérite
+JoueurOrdinateur --> Dresseur
 Jeu --> CartePokemon
 @enduml
+

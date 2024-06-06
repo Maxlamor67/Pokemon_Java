@@ -10,14 +10,14 @@ public class Ether extends Type {
 
     @Override
     public List<Type> getAvantages(){
-        List<Type> avantages = new ArrayList<>();
-        avantages.add(new Terre());
-        avantages.add(new Eau());
-        avantages.add(new Feu());
-        avantages.add(new Air());
-        avantages.add(new Plomb());
-        avantages.add(new Ether());
-        return avantages;
+        List<Type> m_avantages = new ArrayList<>();
+        m_avantages.add(new Terre());
+        m_avantages.add(new Eau());
+        m_avantages.add(new Feu());
+        m_avantages.add(new Air());
+        m_avantages.add(new Plomb());
+        m_avantages.add(new Ether());
+        return m_avantages;
     }
 
     @Override

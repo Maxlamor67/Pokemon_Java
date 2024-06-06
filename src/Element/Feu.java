@@ -10,10 +10,10 @@ public class Feu extends Type {
 
     @Override
     public List<Type> getAvantages(){
-        List<Type> avantages = new ArrayList<>();
-        avantages.add(new Air());
-        avantages.add(new Plomb());
-        return avantages;
+        List<Type> m_avantages = new ArrayList<>();
+        m_avantages.add(new Air());
+        m_avantages.add(new Plomb());
+        return m_avantages;
     }
 
     @Override
