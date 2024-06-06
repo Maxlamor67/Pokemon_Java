@@ -6,20 +6,15 @@ class Pokemon {
 }
 
 class Jeu {
-- scanner : Scanner
-- joueur1 : Dresseur
-- joueur2 : Dresseur
-- joueurActuel : Dresseur
-- numeroTour : int
-- nomsPokemon : String[*]
-- pouvoirs : Pouvoir[*]
-- joueurAdverse : JoueurOrdinateur
-- clip : Clip
-+ «create» Jeu (joueur1 : Dresseur, joueur2 : Dresseur)
+- m_scanner : Scanner
+- m_numeroTour : int
+- m_nomsPokemon : String[*]
+- m_clip : Clip
++ «create» Jeu (m_joueur1 : Dresseur, m_joueur2 : Dresseur)
 + jouerTour()
 + utilisationDesPouvoirs ()
 + trouverCarteDansTerrain (nomCarte : String)
-+ trouverCarteDansTerrainJoueurAdverse(nomCarte : String, joueurActuel : Dresseur) : CartePokemon
++ trouverCarteDansTerrainJoueurAdverse(nomCarte : String, m_joueurActuel : Dresseur) : CartePokemon
 + afficherCartesTerrainJoueur2() : String
 + trouverCarteDansTerrainJoueur2(nomCarte : String) : CartePokemon
 + prochainTour()
@@ -27,20 +22,16 @@ class Jeu {
 + afficherCarteMainJoueur2() : String
 + trouverCarteDansMainJoueur2(nomCarte : String) : CartePokemon
 + genererPokemon() : CartePokemon
-+ getJoueurAdverse(joueurActuel : Dresseur) : Dresseur
++ getJoueurAdverse(m_joueurActuel : Dresseur) : Dresseur
 }
 }
 
 package joueur{
 
 class Dresseur {
-# nom : String
-# main : String[*]
-# pioche : String[*]
-# defausse : String[*]
-# terrain : String[*]
-- vieRestante : int
-+ «create» Dresseur(nom : String)
+# m_nom : String
+- m_vieRestante : int
++ «create» Dresseur(m_nom : String)
 + getTerrain() : String[*]
 + piocher()
 + afficherPioche()
@@ -56,17 +47,16 @@ class Dresseur {
 + defausserPokemon(pokemon : CartePokemon)
 + afficherCartesTerrainAvecIndex() : String
 + getVieRestante() : Integer
-+ setVieRestante(vieRestante : Integer)
++ setVieRestante(m_vieRestante : Integer)
 
 }
 
 class CartePokemon {
-- nom : String
-- affinite : Type
-- vie : int
-- vieMax : int
-- attaque : int
-+ CartePokemon(nom : String, affinite : Type, vie : int, vieMax : int, attaque : int)
+- m_nom : String
+- m_vie : int
+- m_vieMax : int
+- m_attaque : int
++ CartePokemon(m_nom : String, m_affinite : Type, m_pouvoir:Pouvoir, m_vie : int, m_vieMax : int, m_attaque : int)
 + getNom() : String
 + getVie() : int
 + getVieMax() : int
@@ -77,7 +67,7 @@ class CartePokemon {
 }
 
 class JoueurOrdinateur {
-+ JoueurOrdinateur(nom : String)
++ JoueurOrdinateur(m_nom : String)
 + jouerTour(jeu : Jeu)
 - utilisationDesPouvoirs(jeu : Jeu)
 - placerPokemonsSurTerrain()
@@ -93,31 +83,40 @@ abstract class Type <<abstract>> {
 + «create» Type ()
 + {abstract} getType() : Type
 + {abstract} getAvantage() : Type
-+ {abstract} getType() : Type
++ {abstract} toString(): String
++equals(Other other):Boolean
 }
 
 class Air {
 + «create» Air()
 + getAvantage() : Type
 + getType(): Type
++ toString(): String
+
 }
 
 class Eau {
 + «create» Eau()
 + getAvantage() : Type
 + getType(): Type
++ toString(): String
+
 }
 
 class Feu {
 + «create» Feu()
 + getAvantage() : Type
 + getType(): Type
++ toString(): String
+
 }
 
 class Terre {
 + «create» Terre()
 + getAvantage() : Type
 + getType(): Type
++ toString(): String
+
 }
 
 class Ether {
@@ -125,6 +124,7 @@ class Ether {
 + getAvantages() : String[*]
 + getType(): Type
 + toString(): String
+
 }
 
 class Plomb {
@@ -141,10 +141,13 @@ abstract class Pouvoir <<abstract>> {
 + «create» Pouvoir ()
 + utiliserPouvoir(carte : CartePokemon)
 + utiliserPouvoir(carte : CartePokemon, other CartePokemon)
-+ {abstract} getUtilisation() :Integer
-+ {abstract} getType() : TypePouvoir
-+ {abstract} toString () : String
++ {abstract} nbrUtilisation():Integer
++ {abstract} getTypePouvoir() : TypePouvoir
++ {abstract} getDescription() : String
++ {abstract} toString() : String
+
 }
+
 
 enum TypePouvoir <<enumerate>> {
 ALLIE
@@ -157,9 +160,10 @@ class SoinTotal {
 - m_utilisation: Integer
 + «create» SoinTotal()
 + soignerTotalement(carte : CartePokemon)
-+ getUtilisation() : Integer
++ nbrUtilisation() : Integer
 + setUtilisation(utilisation : Integer)
-+ getType() : TypePouvoir
++ getTypePouvoir() : TypePouvoir
++ getDescription() : String
 + toString(): String
 }
 
@@ -170,10 +174,10 @@ class SoinSimple {
 + utiliserPouvoir(carte : CartePokemon)
 + utiliserPouvoir(carte : CartePokemon, other : CartePokemon)
 + getSoin() : Integer
-+ getUtilisation() : Integer
++ nbrUtilisation() : Integer
 + setUtilisation(utilisation : Integer)
-+ getType() : TypePouvoir
-
++ getTypePouvoir(): TypePouvoir
++ getDescription() : String
 + toString(): String
 }
 
@@ -182,9 +186,10 @@ class Kamikaze {
 + «create» Kamikaze()
 + utiliserPouvoir(carte : CartePokemon)
 + utiliserPouvoir(carte : CartePokemon, other : CartePokemon)
-+ getUtilisation() : Integer
++ nbrUtilisation() : Integer
 + setUtilisation(utilisation : Integer)
-+ getType() : TypePouvoir
++ getTypePouvoir() : TypePouvoir
++ getDescription() : String
 + toString(): String
 }
 
@@ -195,53 +200,54 @@ class Resistance {
 + utiliserPouvoir(carte : CartePokemon)
 + utiliserPouvoir(carte : CartePokemon, other : CartePokemon)
 + getResistance() : Integer
-+ getUtilisation() : Integer
++ nbrUtilisation() : Integer
 + setUtilisation(utilisation : Integer)
-+ getType() : TypePouvoir
++ getTypePouvoir() : TypePouvoir
++ getDescription() : String
 + toString(): String
 }
 
 class AffiniteEther {
-- m_type : TypePouvoir
 - m_utilisation: Integer
 + «create» AffiniteEther()
 + utiliserPouvoir(carte : CartePokemon)
 + utiliserPouvoir(carte : CartePokemon, other : CartePokemon)
-+ getUtilisation() : Integer
++ nbrUtilisation() : Integer
 + setUtilisation(utilisation : Integer)
-+ getType() : TypePouvoir
++ getTypePouvoir() : TypePouvoir
++ getDescription() : String
 + toString(): String
 }
 
 class AffinitePlomb {
-- m_type : TypePouvoir
 - m_utilisation: Integer
 + «create» AffinitePlomb()
 + utiliserPouvoir(carte : CartePokemon)
 + utiliserPouvoir(carte : CartePokemon, other : CartePokemon)
-+ getUtilisation() : Integer
++ nbrUtilisation() : Integer
 + setUtilisation(utilisation : Integer)
-+ getType() : TypePouvoir
++ getTypePouvoir() : TypePouvoir
++ getDescription() : String
 + toString(): String
 }
 
 class FerveurGuerriere {
-- m_type : TypePouvoir
 - m_utilisation: Integer
 + «create» FerveurGuerriere()
 + utiliserPouvoir(carte : CartePokemon)
-+ getUtilisation() : Integer
-+ getType() : TypePouvoir
++ nbrUtilisation() : Integer
++ getTypePouvoir() : TypePouvoir
++ getDescription() : String
 + toString(): String
 }
 
 class Peur {
-- m_type : TypePouvoir
 - m_utilisation: Integer
 + «create» Peur()
 + utiliserPouvoir(carte : CartePokemon)
-+ getUtilisation() : Integer
-+ getType() : TypePouvoir
++ nbrUtilisation() : Integer
++ getTypePouvoir() : TypePouvoir
++ getDescription() : String
 + toString(): String
 }
 }
@@ -251,7 +257,7 @@ Eau --|> Type
 Feu --|> Type
 Ether --|> Type
 Plomb --|> Type
-Pouvoir --> TypePouvoir
+Pouvoir .--> TypePouvoir : utilise
 SoinSimple --|> Pouvoir
 SoinTotal --|> Pouvoir
 Kamikaze --|> Pouvoir
@@ -260,23 +266,27 @@ FerveurGuerriere --|> Pouvoir
 AffiniteEther --|> Pouvoir
 AffinitePlomb --|> Pouvoir
 Peur --|> Pouvoir
-SoinSimple *-- TypePouvoir
-SoinTotal *-- TypePouvoir
-Kamikaze *-- TypePouvoir
-Resistance *-- TypePouvoir
-FerveurGuerriere *-- TypePouvoir
-AffiniteEther *-- TypePouvoir
-AffinitePlomb *-- TypePouvoir
-Peur *-- TypePouvoir
-CartePokemon "1" *-- "1" Pouvoir
-CartePokemon "1" *-- "1" Type : affinite
-Dresseur "1" *-- "0..*" CartePokemon : possède
-Pokemon --> JoueurOrdinateur
-Pokemon --> Dresseur
-Pokemon --> Jeu
-JoueurOrdinateur --> Jeu : utilise
-JoueurOrdinateur o--> CartePokemon
+SoinSimple "1"*--->"\n 1 \n m_type" TypePouvoir
+SoinTotal "1"*--->"\n 1 \n m_type" TypePouvoir
+Kamikaze "1"*--->"\n 1 \n m_type" TypePouvoir
+Resistance "1"*--->"\n 1 \n m_type" TypePouvoir
+FerveurGuerriere "1"*--->"\n 1 \n m_type" TypePouvoir
+AffiniteEther "1"*--->"\n 1 \n m_type" TypePouvoir
+AffinitePlomb "1"*--->"\n 1 \n m_type" TypePouvoir
+Peur "1"*--->"\n 1 \n m_type" TypePouvoir
+CartePokemon "1" *---> "1 m_pouvoir" Pouvoir
+CartePokemon "1" *---> "\n 1 \n m_affinite" Type : affinite
+Dresseur "1" *---> "0..* \n m_pioche :List<CartePokemon>\n m_defausse :List<CartePokemon>\n m_terrain :List<CartePokemon>\n m_main :List<CartePokemon>" CartePokemon : possède
+Pokemon .--> JoueurOrdinateur : utilise
+Pokemon .--> Dresseur : utilise
+Pokemon .--> Jeu : utilise
+Pokemon .--> CartePokemon : utilise
+JoueurOrdinateur .--> Jeu : utilise
+JoueurOrdinateur .--> CartePokemon : utilise
 JoueurOrdinateur --> Dresseur
-Jeu --> CartePokemon
+Jeu "1\n" *----> " 0..* \n List<Pouvoir>" Pouvoir
+Jeu .--> CartePokemon : utilise
+Jeu "1" *---> "1 \n m_joueur1 \n m_joueur2\n m_joueurActuel" Dresseur
+Jeu "1" *---> "1 \n m_joueurAdverse " JoueurOrdinateur
 @enduml
 

@@ -9,13 +9,9 @@ public class Dresseur {
     protected List<CartePokemon> m_pioche;
     protected List<CartePokemon> m_defausse;
 
-<<<<<<< HEAD
-    protected List<CartePokemon> terrain;
 
-=======
     protected List<CartePokemon> m_terrain;
     private int m_vieRestante = Integer.MAX_VALUE;
->>>>>>> f23bfc48a57a32167be07ef3188db0f833343a31
 
 
 
@@ -33,13 +29,10 @@ public class Dresseur {
         return m_terrain;
     }
     public void piocher() {
-<<<<<<< HEAD
-        while (main.size() < 5 && !pioche.isEmpty()) {
-            main.add(pioche.removeFirst());
-=======
+
         while (m_main.size() < 5 && !m_pioche.isEmpty()) {
             m_main.add(m_pioche.remove(0));
->>>>>>> f23bfc48a57a32167be07ef3188db0f833343a31
+
         }
     }
 
@@ -53,9 +46,7 @@ public class Dresseur {
         System.out.println("defausse: " + m_defausse.size() + " pokemons");
     }
 
-<<<<<<< HEAD
 
-=======
     public void afficherMain() {
         System.out.println("En main:");
         for (CartePokemon carte : m_main) {
@@ -63,7 +54,7 @@ public class Dresseur {
             System.out.printf("  - %-10s, %-2s, Vie: %-2d/%-3d, Attaque: %-2d\n", carte.getNom(), carte.getAffinite(), carte.getVie(), carte.getM_vieMax(), carte.getAttaque());
         }
     }
->>>>>>> f23bfc48a57a32167be07ef3188db0f833343a31
+
     public String getNom() {
         return m_nom;
     }
@@ -73,9 +64,7 @@ public class Dresseur {
     public List<CartePokemon> getPioche() {
         return m_pioche;
     }
-<<<<<<< HEAD
 
-=======
     public void jouerCarte(CartePokemon carte) {
         if (m_main.contains(carte)) {
             // Vérifier s'il y a de la place sur le terrain
@@ -92,13 +81,11 @@ public class Dresseur {
             System.out.println("Cette carte n'est pas dans votre main.");
         }
     }
->>>>>>> f23bfc48a57a32167be07ef3188db0f833343a31
+
     public void ajouterCarteAPioche(CartePokemon carte) {
         m_pioche.add(carte);
     }
-<<<<<<< HEAD
 
-=======
     public void ajouterCarte(CartePokemon carte) {
         if (m_main.size() < 5) {
             m_main.add(carte);
@@ -106,7 +93,7 @@ public class Dresseur {
             System.out.println("La main du dresseur est pleine. Impossible d'ajouter une nouvelle carte.");
         }
     }
->>>>>>> f23bfc48a57a32167be07ef3188db0f833343a31
+
     public boolean placerPokemonSurTerrain(CartePokemon carte) {
         if (m_terrain.size() < 3) {
             m_terrain.add(carte);
