@@ -30,20 +30,20 @@ public class Jeu {
         this.m_joueur2 = joueur2;
         this.m_joueurActuel = joueur2;
         this.m_numeroTour = 1;
-//        this.nomsPokemon = new ArrayList<>(Arrays.asList("Herbizarre", "Florizarre", "Celebi", "Dracaufeu", "Bulbizarre", "Pikachu",
-//                "Arceus", "Keunotor", "Entei", "Sharpedo", "Lippoutou", "Fulguris",
-//                "Carchacrok", "Elektor", "Philaly", "Raiku", "Zeraora", "Poussacha",
-//                "Simiabraz", "Roigada", "Tengalice", "Metamorph", "Malamandre", "Altaria",
-//                "Galifeu", "Magmar", "Cacnea", "Laggron", "Flambusard", "Suicune",
-//                "Psykokwak", "Tiplouf", "Taupiqueur", "Jungko", "Roucool", "Manaphy",
-//                "Scorplane", "Cizayox", "Yveltal", "Mewtwo","Giratina"));
-        this.m_nomsPokemon = new ArrayList<>(Arrays.asList("He", "Flo", "Sal", "Dra", "Bul", "Pi",
-                "Arc", "Keu", "Entei", "Shar", "Lip", "Ful",
-                "Car", "Elek", "Phi", "Raiku", "Zer", "Pou",
-                "Si", "Roi", "Tengo", "Meta", "Mala", "Alta",
-                "Gal", "Must", "Cac", "Lag", "Flame", "Sui",
-                "Psy", "Ti", "Taup", "Ping", "Ryx", "Mana",
-                "Sco", "Ciz", "Yve", "Mew", "Gir"));
+        this.nomsPokemon = new ArrayList<>(Arrays.asList("Herbizarre", "Florizarre", "Celebi", "Dracaufeu", "Bulbizarre", "Pikachu",
+                "Arceus", "Keunotor", "Entei", "Sharpedo", "Lippoutou", "Fulguris",
+                "Carchacrok", "Elektor", "Philaly", "Raiku", "Zeraora", "Poussacha",
+                "Simiabraz", "Roigada", "Tengalice", "Metamorph", "Malamandre", "Altaria",
+                "Galifeu", "Magmar", "Cacnea", "Laggron", "Flambusard", "Suicune",
+                "Psykokwak", "Tiplouf", "Taupiqueur", "Jungko", "Roucool", "Manaphy",
+                "Scorplane", "Cizayox", "Yveltal", "Mewtwo","Giratina"));
+//        this.m_nomsPokemon = new ArrayList<>(Arrays.asList("He", "Flo", "Sal", "Dra", "Bul", "Pi",
+//                "Arc", "Keu", "Entei", "Shar", "Lip", "Ful",
+//                "Car", "Elek", "Phi", "Raiku", "Zer", "Pou",
+//                "Si", "Roi", "Tengo", "Meta", "Mala", "Alta",
+//                "Gal", "Must", "Cac", "Lag", "Flame", "Sui",
+//                "Psy", "Ti", "Taup", "Ping", "Ryx", "Mana",
+//                "Sco", "Ciz", "Yve", "Mew", "Gir"));
         m_pouvoirs = new ArrayList<>(Arrays.asList( new Kamikaze(), new Resistance(),new SoinTotal(),new SoinSimple(), new AffiniteEther(), new AffinitePlomb(),new Peur(),new FerveurGuerriere()));
         Collections.shuffle(m_nomsPokemon);
         this.scanner = new Scanner(System.in);

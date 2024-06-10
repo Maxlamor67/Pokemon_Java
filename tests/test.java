@@ -123,7 +123,6 @@ class ResistanceTest {
     @Test
     void testUtiliserPouvoir() {
         Resistance resistance = new Resistance();
-        // Création des deux Pokémon
         CartePokemon pokemonA = new CartePokemon("Pokémon A", new Eau(), resistance, 150, 200, 10);
         CartePokemon pokemonB = new CartePokemon("Pokémon B", new Feu(), null, 150, 200, 30);
 
