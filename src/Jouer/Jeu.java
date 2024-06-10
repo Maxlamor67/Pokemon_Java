@@ -44,7 +44,7 @@ public class Jeu {
                 "Gal", "Must", "Cac", "Lag", "Flame", "Sui",
                 "Psy", "Ti", "Taup", "Ping", "Ryx", "Mana",
                 "Sco", "Ciz", "Yve", "Mew", "Gir"));
-        m_pouvoirs = new ArrayList<>(Arrays.asList( new Kamikaze(), new Kamikaze(), new Kamikaze(), new Kamikaze(), new Kamikaze(), new Resistance(),new SoinTotal(),new SoinTotal(), new Resistance(),new AffiniteEther(), new AffinitePlomb(),new AffiniteEther(), new AffinitePlomb(),new Peur(),new FerveurGuerriere(),new Peur(),new FerveurGuerriere(),new Peur(),new FerveurGuerriere(),new Peur(),new FerveurGuerriere()));
+        m_pouvoirs = new ArrayList<>(Arrays.asList( new Kamikaze(), new Resistance(),new SoinTotal(),new SoinSimple(), new AffiniteEther(), new AffinitePlomb(),new Peur(),new FerveurGuerriere()));
         Collections.shuffle(m_nomsPokemon);
         this.scanner = new Scanner(System.in);
         playBackgroundMusic("src/son/Pokemon Heart Gold & Soul Silver Musique - Combat ： Champion Arène de Kanto.wav");
