@@ -30,7 +30,7 @@ public class Jeu {
         this.m_joueur2 = joueur2;
         this.m_joueurActuel = joueur2;
         this.m_numeroTour = 1;
-        this.nomsPokemon = new ArrayList<>(Arrays.asList("Herbizarre", "Florizarre", "Celebi", "Dracaufeu", "Bulbizarre", "Pikachu",
+        this.m_nomsPokemon = new ArrayList<>(Arrays.asList("Herbizarre", "Florizarre", "Celebi", "Dracaufeu", "Bulbizarre", "Pikachu",
                 "Arceus", "Keunotor", "Entei", "Sharpedo", "Lippoutou", "Fulguris",
                 "Carchacrok", "Elektor", "Philaly", "Raiku", "Zeraora", "Poussacha",
                 "Simiabraz", "Roigada", "Tengalice", "Metamorph", "Malamandre", "Altaria",
