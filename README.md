@@ -7,7 +7,6 @@ C'est un jeu à deux joueurs où les dresseurs s'affrontent en plaçant sur leur
 
 - Travail en binôme au sein d'un même groupe de TP
 - Durée : 5 semaines
-- Nombre de séances : 20h encadrées + 8h tutorées + travail non-encadré
 - Évaluation : rendu final, régularité des rendus, soutenance
 - Sujet dévoilé en deux phases :
   - la phase 1 sur les deux premières semaines
@@ -178,19 +177,3 @@ La structure du dépôt git sera la suivante :
     ├──...
 ```
 
-## Planning indicatif
-- rendu 1 : affichage permettant seulement d'afficher le plateau des Pokémons (terrain et main)
-- rendu 2 : le jeu est jouable : les Pokémons peuvent s'attaquer, il est possible de piocher des Pokémons et de les placer sur le terrain.
-
-
-## Quelques consignes
-
-- Vous veillerez à respecter les [P21 Guidelines](https://moodle.unistra.fr/pluginfile.php/2390971/mod_resource/content/2/p21_guidelines.pdf)
-- Vous veillerez à la bonne conception du code : le code doit être lisible,  facile à corriger, facile à réutiliser, facile à modifier et facile à étendre.
-
-## Quelques conseils
-
-- N'essayez pas d'implémenter toutes les fonctionnalités en une seule fois. Commencez par un programme simple mais fonctionnel et intégrez progressivement les fonctionnalités.
-- Faites des commits très réguliers sur vos branches de travail, dès que vous avez intégré une nouvelle fonctionnalité par exemple.
-- Concevez votre code de façon à ce qu'il soit facile de le modifier et d'y ajouter de nouvelles fonctionnalités, notamment en prévision de la phase 2.
-- La qualité de la conception et du code produit est plus importante que le nombre de fonctionnalités intégrées.
